@@ -141,7 +141,7 @@
 
         .genie-avatar {
             width: 140px;
-            height: 140px;
+            height: 180px;
             background: linear-gradient(45deg, #667eea, #764ba2);
             border-radius: 20px;
             display: flex;
@@ -492,18 +492,18 @@
 
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('wellness')">🏥 Wellness</button>
-                <button class="tab-btn" onclick="switchTab('wealth')">’💰 Wealth</button>
-                <button class="tab-btn" onclick="switchTab('wealth')"> Wealth</button>
-                <button class="tab-btn" onclick="switchTab('games')"> Games</button>
-                <button class="tab-btn" onclick="switchTab('reports')"> Reports</button>
+                <button class="tab-btn active" onclick="switchTab('wellness')">🏥 Wellness</button>
+                <button class="tab-btn" onclick="switchTab('wealth')">💰 Wealth</button>
+                <button class="tab-btn" onclick="switchTab('games')">🎮 Games</button>
+                <button class="tab-btn" onclick="switchTab('reports')">📊 Reports</button>
+                <button class="tab-btn" onclick="switchTab('help')">❓ Help</button>
             </div>
 
             <!-- Tab Content -->
             <div class="tab-content">
                 <!-- Wellness Tab -->
                 <div class="tab-panel active" id="wellness-tab">
-                    <h2 style="margin-bottom: 20px;"> Your Wellness Dashboard</h2>
+                    <h2 style="margin-bottom: 20px;">📊 Your Wellness Dashboard</h2>
                     
                     <div class="metric-grid">
                         <div class="metric-card" onclick="addCoins(10, event)">
@@ -558,7 +558,7 @@
                 <!-- Wealth Tab -->
                 <div class="tab-panel" id="wealth-tab">
                     <div class="wealth-section">
-                        <div class="wealth-title">’° Your Wellness Wealth</div>
+                        <div class="wealth-title">’°  Your Wellness Wealth</div>
                         
                         <div class="coin-stats">
                             <div class="coin-stat">
@@ -581,7 +581,7 @@
                     </div>
 
                     <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px;">’¼ EA Financial Wellness Template</h3>
+                        <h3 style="margin-bottom: 15px;">’¼  EA Financial Wellness Template</h3>
                         <p style="margin-bottom: 15px; color: #666;">Download our comprehensive financial planning template designed for EA employees:</p>
                         
                         <div style="background: #e8f5e8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
@@ -594,7 +594,7 @@
                                     <li>Tips for tracking, reducing costs, and planning coverage</li>
                                 </ul>
                                 
-                                <p><strong>Sheet 2 â€” Financial Health Tips</strong></p>
+                                <p><strong>Sheet 2 â€”  Financial Health Tips</strong></p>
                                 <ul style="margin: 10px 0 0 20px;">
                                     <li>7 actionable rules for maintaining financial wellness</li>
                                     <li>The 50-30-20 budgeting principle</li>
@@ -607,21 +607,21 @@
                         
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
                             <button class="play-button" onclick="downloadFinancialTemplate()" style="background: linear-gradient(45deg, #28a745, #20c997);">
-                                “Š Download CSV Template
+                                “Š  Download CSV Template
                             </button>
                             <button class="play-button" onclick="downloadExcelTemplate()" style="background: linear-gradient(45deg, #007acc, #0099cc);">
-                                “ˆ Download Excel File
+                                “ˆ  Download Excel File
                             </button>
                         </div>
                     </div>
 
-                    <!-- Financial Health Tips Section -->
+                    <!--  Financial Health Tips Section -->
                     <div style="background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #28a745;">
-                        <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">’¡ Financial Health Tips & Best Practices</h3>
+                        <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">’¡  Financial Health Tips & Best Practices</h3>
                         
-                        <!-- General Usage Tips -->
+                        <!--  General Usage Tips -->
                         <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">Ž¯ General Usage Tips</h4>
+                            <h4 style="color: #2e7d32; margin-bottom: 15px;">Ž¯  General Usage Tips</h4>
                             
                             <div style="margin-bottom: 15px;">
                                 <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Keep Data Entry Consistent</h5>
@@ -928,19 +928,19 @@
                                 </button>
                                 <button onclick="setAuraVoice('neutral')" 
                                         style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ¤– Neutral AI
+                                    ¤–  Neutral AI
                                 </button>
                             </div>
                             
-                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">”Š Voice Controls</h4>
+                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">”Š  Voice Controls</h4>
                             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                                 <button onclick="toggleAuraVoice()" 
                                         style="background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    Ž™ï¸ Toggle Voice On/Off
+                                    Ž™ï¸  Toggle Voice On/Off
                                 </button>
                                 <button onclick="testAuraVoiceInApp()" 
                                         style="background: #f59e0b; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ”Š Test Voice
+                                    ”Š  Test Voice
                                 </button>
                             </div>
                             
@@ -957,7 +957,7 @@
         <div class="genie-sidebar">
             <div class="genie-character">
                 <div class="genie-avatar" onclick="interactWithAura()">
-                    <img src="Aura_Image.png" alt="Aura AI Assistant" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" onerror="this.outerHTML='🤖';">
+                    <img src="Aura_Image.png" alt="Aura AI Assistant" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;" onerror="this.outerHTML='🤖';">
                 </div>
                 <div class="genie-name" id="genieName">Aura</div>
                 <div class="genie-role">Your AI Wellness Assistant</div>
@@ -1347,7 +1347,6 @@
                     updateAuraMessage(`🚀 Launched ${gameName}! If the game doesn't open automatically, navigate to the games folder and run it manually with Python.`);
                 }
             } catch (error) {
-                console.log('Direct launch failed, using simulation:', error);
                 simulateGameLaunch(gameKey);
                 updateAuraMessage('💡 Tip: For direct game launching, ensure Python is installed and .py files are associated with Python on your system.');
             }
@@ -1405,7 +1404,6 @@
                     localStorage.removeItem('pythonGameCoins');
                 }
             } catch (error) {
-                console.log('No Python game coins to process');
             }
         }
 
@@ -1490,7 +1488,7 @@
 
         function downloadFinancialTemplate() {
             // Create Excel-compatible CSV content
-            const csvContent = `EA Financial Wellness Template - Wealth Summary
+            const csvContent = ` EA Financial Wellness Template - Wealth Summary
 
 Category,Suggested %,Monthly Budget,Actual Amount,Notes
 Living Expenses,50%,$2500,,Rent/Mortgage Housing Utilities Food Transportation
@@ -1557,7 +1555,7 @@ Generated by EA Aura Wellness Hub,,,,`;
 
             downloadFile(csvContent, 'EA_Financial_Wellness_Template.csv', 'text/csv');
             addCoins(30, event);
-            updateGenieMessage("’¼ Excellent! Downloaded your EA Financial Wellness Template. This comprehensive guide will help you achieve financial wellness with the proven 50/20/20/10 allocation strategy!");
+            updateGenieMessage("’¼ Excellent! Downloaded your  EA Financial Wellness Template. This comprehensive guide will help you achieve financial wellness with the proven 50/20/20/10 allocation strategy!");
         }
 
         function downloadExcelTemplate() {
@@ -1612,7 +1610,7 @@ Generated by EA Aura Wellness Hub,,,,`;
                            style="background: #007acc; color: white; text-decoration: none; padding: 12px 24px; 
                                   border-radius: 25px; font-size: 16px; display: inline-block;"
                            onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">
-                            “ˆ Download Excel File
+                            “ˆ  Download Excel File
                         </a>
                     </div>
                     
@@ -1730,3 +1728,4 @@ Generated by EA Aura Wellness Hub - Financial Health Module`;
 
 
 
+                <button class="tab-btn" onclick="switchTab('help')"> Help</button>
