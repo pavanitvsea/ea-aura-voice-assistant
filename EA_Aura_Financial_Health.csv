@@ -1,0 +1,48 @@
+Income Category,Monthly Amount,Annual Amount,Notes
+Base Salary,7500,90000,Primary employment income
+Bonus/Incentives,1000,12000,Performance-based rewards
+Side Projects,500,6000,Freelance or consulting work
+Investment Returns,300,3600,Dividends and interest
+Other Income,200,2400,Miscellaneous income sources
+TOTAL INCOME,9500,114000,Total monthly and annual income
+
+Expense Category,Monthly Amount,Annual Amount,Budget %,Notes
+Housing (Rent/EMI),3800,45600,40.0%,Rent or mortgage payments
+Utilities & Bills,400,4800,4.2%,Electricity water internet phone
+Transportation,600,7200,6.3%,Fuel public transport maintenance
+Food & Groceries,1200,14400,12.6%,Daily meals and household items
+Healthcare,300,3600,3.2%,Medical insurance checkups
+Entertainment,400,4800,4.2%,Movies dining out hobbies
+Clothing,200,2400,2.1%,Apparel and accessories
+Education,300,3600,3.2%,Courses books training
+Emergency Fund,500,6000,5.3%,Monthly emergency savings
+Miscellaneous,300,3600,3.2%,Other unexpected expenses
+TOTAL EXPENSES,8000,96000,84.2%,Total monthly and annual expenses
+
+Investment Type,Monthly Amount,Annual Amount,Risk Level,Expected Return
+PPF/EPF,1000,12000,Low,7-8%
+Mutual Funds SIP,800,9600,Medium,10-12%
+Stocks/Equity,400,4800,High,12-15%
+Fixed Deposits,200,2400,Low,5-6%
+Gold/Commodities,100,1200,Medium,6-8%
+TOTAL INVESTMENTS,2500,30000,21.9%,Total investment allocation
+
+Financial Goal,Target Amount,Time Frame,Monthly Saving Required,Current Progress
+Emergency Fund,50000,12 months,4167,25%
+Home Down Payment,500000,60 months,8333,10%
+Vacation Fund,100000,24 months,4167,15%
+Retirement Corpus,5000000,360 months,2778,5%
+Child Education,1000000,180 months,5556,8%
+
+Financial Ratio,Current Value,Ideal Range,Status
+Savings Rate,15.8%,20-30%,Needs Improvement
+Debt-to-Income,40.0%,<30%,High
+Emergency Fund Ratio,1.5 months,3-6 months,Low
+Investment Rate,26.3%,20-30%,Good
+
+Monthly Budget Allocation (50/20/20/10 Rule)
+Category,Recommended %,Recommended Amount,Current Amount,Variance
+Needs (Essential),50%,4750,5400,-650
+Wants (Lifestyle),20%,1900,1400,500
+Savings,20%,1900,1500,400
+Investments,10%,950,1200,-250
