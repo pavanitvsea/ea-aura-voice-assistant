@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EA Aura - Enhanced Wellness Hub</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -482,7 +484,7 @@
         <div class="app-container">
             <!-- Header with Coin Jar -->
             <div class="header">
-                <div class="logo">🌟 EA Aura</div>
+                <div class="logo"><i class="fas fa-heart-pulse"></i> EA Aura</div>
                 <div class="tagline">Your Enhanced Wellness Hub</div>
                 <div class="coin-jar" onclick="animateCoinJar()" title="Your Wellness Coins">
                     <span class="coin-count" id="coinCount">1,247</span>
@@ -492,18 +494,18 @@
 
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('wellness')">🏥 Wellness</button>
-                <button class="tab-btn" onclick="switchTab('wealth')">💰 Wealth</button>
-                <button class="tab-btn" onclick="switchTab('games')">🎮 Games</button>
-                <button class="tab-btn" onclick="switchTab('reports')">📊 Reports</button>
-                <button class="tab-btn" onclick="switchTab('help')">❓ Help</button>
+                <button class="tab-btn active" onclick="switchTab('wellness')"><i class="fas fa-heart-pulse"></i> Wellness</button>
+                <button class="tab-btn" onclick="switchTab('wealth')"><i class="fas fa-coins"></i> Wealth</button>
+                <button class="tab-btn" onclick="switchTab('games')"><i class="fas fa-gamepad"></i> Games</button>
+                <button class="tab-btn" onclick="switchTab('reports')"><i class="fas fa-chart-bar"></i> Reports</button>
+                <button class="tab-btn" onclick="switchTab('help')"><i class="fas fa-question-circle"></i> Help</button>
             </div>
 
             <!-- Tab Content -->
             <div class="tab-content">
                 <!-- Wellness Tab -->
                 <div class="tab-panel active" id="wellness-tab">
-                    <h2 style="margin-bottom: 20px;">📊 Your Wellness Dashboard</h2>
+                    <h2 style="margin-bottom: 20px;"><i class="fas fa-tachometer-alt"></i> Your Wellness Dashboard</h2>
                     
                     <div class="metric-grid">
                         <div class="metric-card" onclick="addCoins(10, event)">
@@ -540,17 +542,17 @@
                     </div>
 
                     <div style="background: #fff3cd; border-radius: 15px; padding: 20px; border: 1px solid #ffc107; margin-bottom: 20px;">
-                        <h3 style="color: #856404; margin-bottom: 10px;">’¡ Quote of the Day</h3>
+                        <h3 style="color: #856404; margin-bottom: 10px;">✨ Quote of the Day</h3>
                         <p id="dailyQuote" style="line-height: 1.6; color: #333; font-style: italic; font-size: 1.1em;">
                             "The groundwork for all happiness is good health." - Leigh Hunt
                         </p>
-                        <small style="color: #666; font-size: 0.9em;">âœ¨ Refresh the page for a new inspirational quote!</small>
+                        <small style="color: #666; font-size: 0.9em;">🔄 Refresh the page for a new inspirational quote!</small>
                     </div>
 
                     <div style="background: #e8f0ff; border-radius: 15px; padding: 20px; border: 1px solid #667eea;">
-                        <h3 style="color: #667eea; margin-bottom: 10px;">Ž¯ AI Insights</h3>
+                        <h3 style="color: #667eea; margin-bottom: 10px;">🤖 AI Insights</h3>
                         <p id="aiInsight" style="line-height: 1.5; color: #333;">
-                            Great job! Your focus time increased 15% this week. Try the Pomodoro technique for even better concentration. Your sleep quality is excellent - keep that bedtime routine! ŒŸ
+                            Great job! Your focus time increased 15% this week. Try the Pomodoro technique for even better concentration. Your sleep quality is excellent - keep that bedtime routine! 🎯
                         </p>
                     </div>
                 </div>
@@ -558,7 +560,7 @@
                 <!-- Wealth Tab -->
                 <div class="tab-panel" id="wealth-tab">
                     <div class="wealth-section">
-                        <div class="wealth-title">’°  Your Wellness Wealth</div>
+                        <div class="wealth-title">💰 Your Wellness Wealth</div>
                         
                         <div class="coin-stats">
                             <div class="coin-stat">
@@ -581,20 +583,20 @@
                     </div>
 
                     <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px;">’¼  EA Financial Wellness Template</h3>
+                        <h3 style="margin-bottom: 15px;">💰 EA Financial Wellness Template</h3>
                         <p style="margin-bottom: 15px; color: #666;">Download our comprehensive financial planning template designed for EA employees:</p>
                         
                         <div style="background: #e8f5e8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                            <h4 style="color: #28a745; margin-bottom: 10px;">“Š What's Inside:</h4>
+                            <h4 style="color: #28a745; margin-bottom: 10px;">"Š What's Inside:</h4>
                             <div style="color: #333; line-height: 1.6;">
-                                <p><strong>Sheet 1 â€” Wealth Summary</strong></p>
+                                <p><strong>Sheet 1 â€" Wealth Summary</strong></p>
                                 <ul style="margin: 10px 0 15px 20px;">
                                     <li>Categories: Expense, Savings, Investments, Insurance (Health & Term)</li>
                                     <li>Suggested allocation percentages (50/20/20/10 split)</li>
                                     <li>Tips for tracking, reducing costs, and planning coverage</li>
                                 </ul>
                                 
-                                <p><strong>Sheet 2 â€”  Financial Health Tips</strong></p>
+                                <p><strong>Sheet 2 â€"  Financial Health Tips</strong></p>
                                 <ul style="margin: 10px 0 0 20px;">
                                     <li>7 actionable rules for maintaining financial wellness</li>
                                     <li>The 50-30-20 budgeting principle</li>
@@ -607,28 +609,28 @@
                         
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
                             <button class="play-button" onclick="downloadFinancialTemplate()" style="background: linear-gradient(45deg, #28a745, #20c997);">
-                                “Š  Download CSV Template
+                                "Š  Download CSV Template
                             </button>
                             <button class="play-button" onclick="downloadExcelTemplate()" style="background: linear-gradient(45deg, #007acc, #0099cc);">
-                                “ˆ  Download Excel File
+                                "ˆ  Download Excel File
                             </button>
                         </div>
                     </div>
 
                     <!--  Financial Health Tips Section -->
                     <div style="background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #28a745;">
-                        <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">’¡  Financial Health Tips & Best Practices</h3>
+                        <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">'¡  Financial Health Tips & Best Practices</h3>
                         
                         <!--  General Usage Tips -->
                         <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">Ž¯  General Usage Tips</h4>
+                            <h4 style="color: #2e7d32; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> General Usage Tips</h4>
                             
                             <div style="margin-bottom: 15px;">
                                 <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Keep Data Entry Consistent</h5>
                                 <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
                                     <li>Enter numbers only (no commas or symbols) in numeric fields</li>
                                     <li>Use consistent naming for categories (e.g., "Rent" instead of "house rent")</li>
-                                    <li>Avoid merging cells â€” it breaks formulas and charts</li>
+                                    <li>Avoid merging cells â€" it breaks formulas and charts</li>
                                 </ul>
                             </div>
                             
@@ -661,20 +663,20 @@
 
                         <!-- Visualization & Dashboard Tips -->
                         <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">“Š Visualization & Dashboard Tips</h4>
+                            <h4 style="color: #2e7d32; margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Visualization & Dashboard Tips</h4>
                             
                             <div style="margin-bottom: 15px;">
                                 <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Charts Update Automatically</h5>
                                 <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
                                     <li>When you add or edit rows, charts will update within the existing range</li>
-                                    <li>To extend: right-click â†’ Select Data â†’ adjust data range</li>
+                                    <li>To extend: right-click â†' Select Data â†' adjust data range</li>
                                 </ul>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
                                 <h5 style="color: #1b5e20; margin-bottom: 8px;">2. Highlight Key Insights</h5>
                                 <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
-                                    <li>Use conditional formatting (Home â†’ Conditional Formatting)</li>
+                                    <li>Use conditional formatting (Home â†' Conditional Formatting)</li>
                                     <li>Green for positive cash flow, red for overspending</li>
                                 </ul>
                             </div>
@@ -690,7 +692,7 @@
 
                         <!-- Maintenance & Backup Tips -->
                         <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">§¾ Maintenance & Backup</h4>
+                            <h4 style="color: #2e7d32; margin-bottom: 15px;"><i class="fas fa-tools"></i> Maintenance & Backup</h4>
                             
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
                                 <div>
@@ -700,7 +702,7 @@
                                 
                                 <div>
                                     <h5 style="color: #1b5e20; margin-bottom: 8px;">2. Protect Key Sheets</h5>
-                                    <p style="color: #333; margin: 0; font-size: 0.9rem;">Lock formula cells (Review â†’ Protect Sheet) to prevent accidental edits.</p>
+                                    <p style="color: #333; margin: 0; font-size: 0.9rem;">Lock formula cells (Review â†' Protect Sheet) to prevent accidental edits.</p>
                                 </div>
                                 
                                 <div>
@@ -712,7 +714,7 @@
 
                         <!-- Quick Reference Card -->
                         <div style="background: #1b5e20; color: white; border-radius: 12px; padding: 15px; text-align: center;">
-                            <h5 style="margin-bottom: 10px; color: #4caf50;">š€ Quick Start Checklist</h5>
+                            <h5 style="margin-bottom: 10px; color: #4caf50;"><i class="fas fa-rocket"></i> Quick Start Checklist</h5>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9rem;">
                                 <div>âœ… Download template</div>
                                 <div>âœ… Set up categories</div>
@@ -724,16 +726,16 @@
                         </div>
                     </div>
 
-                    <h3>† Recent Achievements</h3>
+                    <h3>† Recent Achievements</h3>
                     <div class="help-resources">
                         <div class="help-card">
-                            <div class="help-icon">ƒâ€â™‚ï¸</div>
+                            <div class="help-icon">🏃‍♂️</div>
                             <div class="help-title">Step Master</div>
                             <div class="help-description">Completed 10,000 steps for 7 consecutive days</div>
                             <div style="color: #28a745; font-weight: bold;">+200 Coins</div>
                         </div>
                         <div class="help-card">
-                            <div class="help-icon">§˜â€â™€ï¸</div>
+                            <div class="help-icon">§˜â€â™€ï¸</div>
                             <div class="help-title">Mindful Week</div>
                             <div class="help-description">Meditated daily for an entire week</div>
                             <div style="color: #28a745; font-weight: bold;">+150 Coins</div>
@@ -743,59 +745,80 @@
 
                 <!-- Games Tab -->
                 <div class="tab-panel" id="games-tab">
-                    <h2 style="margin-bottom: 20px;">Ž® Wellness Games</h2>
+                    <h2 style="margin-bottom: 20px;"><i class="fas fa-gamepad"></i> Web Wellness Games</h2>
+                    
+                    <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 15px; margin-bottom: 25px; border: 2px solid rgba(76, 175, 80, 0.3);">
+                        <h3 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-rocket"></i> New: Browser-Based Games!</h3>
+                        <p style="margin: 0; color: #333; font-size: 1.1rem;">
+                            <strong>No Python installation required!</strong> All games now run directly in your web browser. 
+                            Play instantly on any device - desktop, tablet, or mobile.
+                        </p>
+                    </div>
                     
                     <div class="games-grid">
                         <div class="game-card">
-                            <div class="game-icon"></div>
-                            <div class="game-title">Snake Game</div>
-                            <div class="game-description">Classic snake game to improve focus and hand-eye coordination</div>
-                            <button class="play-button" onclick="openSnakeGame()">Play Now</button>
+                            <div class="game-icon"><i class="fas fa-seedling" style="color: #4CAF50;"></i></div>
+                            <div class="game-title">Wellness Snake</div>
+                            <div class="game-description">Focus training with breathing exercises. Classic gameplay enhanced with mindfulness features.</div>
+                            <button class="play-button" onclick="openWebGame('games/wellness_snake.html')">
+                                <i class="fas fa-play"></i> Play Focus Training
+                            </button>
                         </div>
                         
                         <div class="game-card">
-                            <div class="game-icon">ƒ</div>
+                            <div class="game-icon"><i class="fas fa-brain" style="color: #9C27B0;"></i></div>
                             <div class="game-title">Memory Cards</div>
-                            <div class="game-description">Flip cards and match pairs to boost memory and concentration</div>
-                            <button class="play-button" onclick="openMemoryGame()">Play Now</button>
+                            <div class="game-description">Cognitive enhancement through memory matching. Multiple difficulty levels with streak bonuses.</div>
+                            <button class="play-button" onclick="openWebGame('games/memory_cards.html')">
+                                <i class="fas fa-play"></i> Enhance Memory
+                            </button>
                         </div>
                         
                         <div class="game-card">
-                            <div class="game-icon">”¢</div>
+                            <div class="game-icon"><i class="fas fa-th" style="color: #FF6B6B;"></i></div>
                             <div class="game-title">Sudoku</div>
-                            <div class="game-description">Number puzzles to enhance logical thinking and problem-solving</div>
-                            <button class="play-button" onclick="openSudokuGame()">Play Now</button>
+                            <div class="game-description">Logic and problem-solving challenges. Features hint system and multiple difficulty levels.</div>
+                            <button class="play-button" onclick="openWebGame('games/sudoku_puzzle.html')">
+                                <i class="fas fa-play"></i> Solve Puzzles
+                            </button>
                         </div>
                         
                         <div class="game-card">
-                            <div class="game-icon">§©</div>
-                            <div class="game-title">Puzzle Challenge</div>
-                            <div class="game-description">Jigsaw puzzles for relaxation and mindful focus</div>
-                            <button class="play-button" onclick="openPuzzleGame()">Play Now</button>
-                        </div>
-                        
-                        <div class="game-card">
-                            <div class="game-icon">Ž¯</div>
-                            <div class="game-title">Focus Trainer</div>
-                            <div class="game-description">Attention and concentration exercises designed for gamers</div>
-                            <button class="play-button" onclick="openFocusGame()">Play Now</button>
-                        </div>
-                        
-                        <div class="game-card">
-                            <div class="game-icon">ŒŠ</div>
+                            <div class="game-icon"><i class="fas fa-spa" style="color: #9C27B0;"></i></div>
                             <div class="game-title">Zen Garden</div>
-                            <div class="game-description">Create beautiful zen gardens while practicing mindfulness</div>
-                            <button class="play-button" onclick="openZenGame()">Play Now</button>
+                            <div class="game-description">Digital meditation through mindful raking. Includes breathing exercises and relaxation features.</div>
+                            <button class="play-button" onclick="openWebGame('games/zen_garden.html')">
+                                <i class="fas fa-play"></i> Find Peace
+                            </button>
+                        </div>
+                        
+                        <div class="game-card">
+                            <div class="game-icon"><i class="fas fa-rocket" style="color: #667eea;"></i></div>
+                            <div class="game-title">Game Launcher Hub</div>
+                            <div class="game-description">Access all games in one place with progress tracking and detailed wellness benefits.</div>
+                            <button class="play-button" onclick="openWebGame('games/index.html')" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+                                <i class="fas fa-rocket"></i> Launch Game Hub
+                            </button>
+                        </div>
+                        
+                        <div style="grid-column: 1 / -1; background: #e8f5e8; padding: 20px; border-radius: 15px; margin-top: 25px; text-align: center;">
+                            <h4 style="color: #2e7d32; margin-bottom: 15px;"><i class="fas fa-info-circle"></i> Game Features</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: left;">
+                                <div><strong>🌐 Browser-Based:</strong> No downloads required</div>
+                                <div><strong>📱 Mobile-Friendly:</strong> Works on all devices</div>
+                                <div><strong>🪙 Coin Integration:</strong> Earn wellness coins</div>
+                                <div><strong>🧘 Mindfulness:</strong> Built-in breathing exercises</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Reports Tab -->
                 <div class="tab-panel" id="reports-tab">
-                    <h2 style="margin-bottom: 20px;">“Š Reports & Data</h2>
+                    <h2 style="margin-bottom: 20px;"><i class="fas fa-chart-bar"></i> Reports & Data</h2>
                     
                     <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px;">“ˆ Export Your Data</h3>
+                        <h3 style="margin-bottom: 15px;">"ˆ Export Your Data</h3>
                         <p style="margin-bottom: 15px; color: #666;">Download your wellness data in various formats for personal tracking or sharing with healthcare providers.</p>
                         
                         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
@@ -803,32 +826,32 @@
                                 <label for="dayCount" style="margin-right: 10px;">Days to export:</label>
                                 <input type="number" id="dayCount" value="30" min="7" max="365" style="width: 80px; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
                             </div>
-                            <button class="play-button" onclick="downloadCSV()">“Š Download CSV</button>
-                            <button class="play-button" onclick="downloadPDF()">“„ Download PDF Report</button>
-                            <button class="play-button" onclick="downloadJSON()">’¾ Download JSON</button>
+                            <button class="play-button" onclick="downloadCSV()">"Š Download CSV</button>
+                            <button class="play-button" onclick="downloadPDF()">"„ Download PDF Report</button>
+                            <button class="play-button" onclick="downloadJSON()">'¾ Download JSON</button>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                         <div style="background: #f8f9fa; border-radius: 15px; padding: 20px;">
-                            <h4 style="margin-bottom: 15px;">“… Weekly Summary</h4>
+                            <h4 style="margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Weekly Summary</h4>
                             <div style="color: #666; line-height: 1.6;">
-                                <p>â€¢ Average Steps: 8,234/day</p>
-                                <p>â€¢ Average Sleep: 7.3 hours</p>
-                                <p>â€¢ Average Mood: 8.2/10</p>
-                                <p>â€¢ Total Focus Time: 18.5 hours</p>
-                                <p>â€¢ Coins Earned: 843</p>
+                                <p>🚶‍♂️ Average Steps: 8,234/day</p>
+                                <p>😴 Average Sleep: 7.3 hours</p>
+                                <p>😊 Average Mood: 8.2/10</p>
+                                <p>🎯 Total Focus Time: 18.5 hours</p>
+                                <p>🪙 Coins Earned: 843</p>
                             </div>
                         </div>
                         
                         <div style="background: #f8f9fa; border-radius: 15px; padding: 20px;">
-                            <h4 style="margin-bottom: 15px;">Ž¯ Goals Progress</h4>
+                            <h4 style="margin-bottom: 15px;"><i class="fas fa-target"></i> Goals Progress</h4>
                             <div style="color: #666; line-height: 1.6;">
-                                <p>â€¢ Daily Steps: 8/7 days âœ…</p>
-                                <p>â€¢ Sleep 7+ hours: 6/7 days âœ…</p>
-                                <p>â€¢ Mood 7+: 7/7 days âœ…</p>
-                                <p>â€¢ Focus 2+ hours: 5/7 days âš ï¸</p>
-                                <p>â€¢ Weekly Streak: 3 weeks ”¥</p>
+                                <p>• Daily Steps: 8/7 days ✅</p>
+                                <p>• Sleep 7+ hours: 6/7 days ✅</p>
+                                <p>• Mood 7+: 7/7 days ✅</p>
+                                <p>• Focus 2+ hours: 5/7 days ⚠️</p>
+                                <p>• Weekly Streak: 3 weeks 🔥</p>
                             </div>
                         </div>
                     </div>
@@ -836,32 +859,32 @@
 
                 <!-- Help Tab -->
                 <div class="tab-panel" id="help-tab">
-                    <h2 style="margin-bottom: 20px;">â“ Help & Resources</h2>
+                    <h2 style="margin-bottom: 20px;"><i class="fas fa-question-circle"></i> Help & Resources</h2>
                     
                     <div class="help-resources">
                         <div class="help-card">
-                            <div class="help-icon">¥</div>
+                            <div class="help-icon"><i class="fas fa-user-md"></i></div>
                             <div class="help-title">Modern Health</div>
                             <div class="help-description">Access professional mental health support, coaching, and wellness resources tailored for EA employees.</div>
                             <a href="https://www.modernhealth.com/" target="_blank" class="help-link">Visit Modern Health</a>
                         </div>
                         
                         <div class="help-card">
-                            <div class="help-icon">Ž</div>
+                            <div class="help-icon"><i class="fas fa-apple-alt"></i></div>
                             <div class="help-title">Food Book</div>
                             <div class="help-description">Comprehensive nutrition guidance, meal planning, and healthy eating tips for optimal performance.</div>
                             <a href="https://play.google.com/store/apps/details?id=com.thesmartq.compass.foodbook&hl=en_IN" target="_blank" class="help-link">Get Food Book</a>
                         </div>
                         
                         <div class="help-card">
-                            <div class="help-icon">§ </div>
+                            <div class="help-icon"><i class="fas fa-headset"></i></div>
                             <div class="help-title">EA Employee Assistance</div>
                             <div class="help-description">24/7 confidential support for work-life balance, stress management, and personal challenges.</div>
                             <a href="#" class="help-link">Contact EAP</a>
                         </div>
                         
                         <div class="help-card">
-                            <div class="help-icon">’ª</div>
+                            <div class="help-icon"><i class="fas fa-dumbbell"></i></div>
                             <div class="help-title">Fitness Resources</div>
                             <div class="help-description">Exercise routines, ergonomic tips, and movement strategies designed for game developers.</div>
                             <a href="#" class="help-link">View Fitness Guide</a>
@@ -869,83 +892,49 @@
                     </div>
 
                     <div style="background: #e8f0ff; border-radius: 15px; padding: 20px; margin-top: 20px;">
-                        <h3 style="color: #667eea; margin-bottom: 15px;">“– How to Use EA Aura Enhanced</h3>
+                        <h3 style="color: #667eea; margin-bottom: 15px;"><i class="fas fa-info-circle"></i> How to Use EA Aura Enhanced</h3>
                         <div style="color: #333; line-height: 1.6;">
-                            <p><strong>¥ Wellness Tab:</strong> Track your daily metrics and earn coins for staying healthy!</p>
-                            <p><strong>’° Wealth Tab:</strong> View your wellness coins and achievements</p>
-                            <p><strong>Ž® Games Tab:</strong> Play Python wellness games that boost cognitive health</p>
-                            <p><strong>“Š Reports Tab:</strong> Export and analyze your wellness data</p>
-                            <p><strong>ï¿½ Aura AI Assistant:</strong> Voice-enabled AI coach with personalized wellness advice</p>
-                        </div>
-                    </div>
-                    
-                    <div style="background: #e8f5e8; border-radius: 15px; padding: 20px; margin-top: 20px;">
-                        <h3 style="color: #2e7d32; margin-bottom: 15px;">Ž® Python Games Setup Guide</h3>
-                        <div style="color: #333; line-height: 1.6;">
-                            <h4 style="color: #1b5e20; margin: 15px 0 10px 0;">“‹ Prerequisites</h4>
-                            <p><strong>1. Python Installation:</strong> Download Python 3.8+ from <a href="https://python.org" target="_blank" style="color: #2e7d32;">python.org</a></p>
-                            <p><strong>2. Install pygame:</strong> Open command prompt/terminal and run:</p>
-                            <div style="background: #2e2e2e; color: #fff; padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0;">
-                                pip install pygame
-                            </div>
-                            
-                            <h4 style="color: #1b5e20; margin: 15px 0 10px 0;">š€ Running Games</h4>
-                            <p><strong>Option 1:</strong> Click "Launch Game" buttons in Games tab (opens Python games)</p>
-                            <p><strong>Option 2:</strong> Navigate to the /games/ folder and run directly:</p>
-                            <div style="background: #2e2e2e; color: #fff; padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0;">
-                                python wellness_snake.py<br>
-                                python memory_cards.py<br>
-                                python sudoku_puzzle.py<br>
-                                python zen_garden.py<br>
-                                python game_launcher.py
-                            </div>
-                            
-                            <h4 style="color: #1b5e20; margin: 15px 0 10px 0;">Ž¯ Available Games</h4>
-                            <p><strong> Wellness Snake:</strong> Focus training with breathing exercises (25-75 coins)</p>
-                            <p><strong>§  Memory Cards:</strong> Cognitive enhancement through matching (30-80 coins)</p>
-                            <p><strong>§© Sudoku Puzzle:</strong> Logical thinking challenges (20-70 coins)</p>
-                            <p><strong>§˜ Zen Garden:</strong> Mindfulness through digital raking (40-100 coins)</p>
-                            <p><strong>Ž® Game Launcher:</strong> Central hub for all games with statistics</p>
-                            
-                            <p style="margin-top: 15px; font-style: italic; color: #4caf50;">
-                                ’¡ All games automatically track your wellness progress and earned coins!
-                            </p>
+                            <p><strong><i class="fas fa-heartbeat"></i> Wellness Tab:</strong> Track your daily metrics and earn coins for staying healthy!</p>
+                            <p><strong><i class="fas fa-coins"></i> Wealth Tab:</strong> View your wellness coins and achievements</p>
+                            <p><strong><i class="fas fa-gamepad"></i> Games Tab:</strong> Play web-based wellness games that boost cognitive health</p>
+                            <p><strong><i class="fas fa-chart-bar"></i> Reports Tab:</strong> Export and analyze your wellness data</p>
+                            <p><strong><i class="fas fa-robot"></i> Aura AI Assistant:</strong> Voice-enabled AI coach with personalized wellness advice</p>
                         </div>
                     </div>
                     
                     <div style="background: #f0f8ff; border-radius: 15px; padding: 20px; margin-top: 20px;">
-                        <h3 style="color: #4169e1; margin-bottom: 15px;">Ž™ï¸ Aura Voice Settings</h3>
+                        <h3 style="color: #4169e1; margin-bottom: 15px;"><i class="fas fa-volume-up"></i> Aura Voice Settings</h3>
                         <div style="color: #333; line-height: 1.6;">
-                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">Ž¤ Voice Options</h4>
+                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;"><i class="fas fa-microphone"></i> Voice Options</h4>
                             <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
                                 <button onclick="setAuraVoice('female')" 
                                         style="background: #ec4899; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ‘© Female Voice
+                                    <i class="fas fa-female"></i> Female Voice
                                 </button>
                                 <button onclick="setAuraVoice('male')" 
                                         style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ‘¨ Male Voice
+                                    <i class="fas fa-male"></i> Male Voice
                                 </button>
                                 <button onclick="setAuraVoice('neutral')" 
                                         style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ¤–  Neutral AI
+                                    <i class="fas fa-robot"></i> Neutral AI
                                 </button>
                             </div>
                             
-                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">”Š  Voice Controls</h4>
+                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;"><i class="fas fa-sliders-h"></i> Voice Controls</h4>
                             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                                 <button onclick="toggleAuraVoice()" 
                                         style="background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    Ž™ï¸  Toggle Voice On/Off
+                                    <i class="fas fa-power-off"></i> Toggle Voice On/Off
                                 </button>
                                 <button onclick="testAuraVoiceInApp()" 
                                         style="background: #f59e0b; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    ”Š  Test Voice
+                                    <i class="fas fa-play-circle"></i> Test Voice
                                 </button>
                             </div>
                             
                             <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
-                                ’¡ Aura will speak responses when you interact with wellness metrics, games, and chat messages.
+                                <i class="fas fa-info-circle"></i> Aura will speak responses when you interact with wellness metrics, games, and chat messages.
                             </p>
                         </div>
                     </div>
@@ -957,7 +946,7 @@
         <div class="genie-sidebar">
             <div class="genie-character">
                 <div class="genie-avatar" onclick="interactWithAura()">
-                    <img src="Aura_Image.png" alt="Aura AI Assistant" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;" onerror="this.outerHTML='🤖';">
+                    <img src="Aura_Image.png" alt="Aura AI Assistant" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;" onerror="this.outerHTML='&lt;div style=&quot;color: #667eea; font-size: 2rem; text-align: center; line-height: 1.2;&quot;&gt;AI&lt;br&gt;AURA&lt;/div&gt;';">
                 </div>
                 <div class="genie-name" id="genieName">Aura</div>
                 <div class="genie-role">Your AI Wellness Assistant</div>
@@ -968,7 +957,7 @@
                     🤖 Hello! I'm Aura, your AI wellness assistant. I've been trained on the EA Coaching Pillars to provide personalized wellness guidance. Click on any wellness metric to earn coins! 🪙
                 </div>
                 <div class="genie-message">
-                    Ž¯ I can help with goal setting, stress management, focus techniques, Python games guidance, and much more. What would you like to explore today?
+                    <i class="fas fa-question-circle"></i> I can help with goal setting, stress management, focus techniques, web gaming guidance, and much more. What would you like to explore today?
                 </div>
                 <div class="genie-message">
                     Ž™ï¸ Tip: I can speak my responses! Try asking me something and I'll respond with voice feedback based on your selected voice preference.
@@ -1090,13 +1079,13 @@
         // Aura AI interaction
         function interactWithAura() {
             const messages = [
-                "¤– Ready to optimize your wellness? Try updating your daily metrics!",
-                "Ž¯ I've analyzed your focus time - it's excellent today! Maintain this momentum!",
-                "’ª Remember: consistent micro-habits create exponential wellness improvements!",
-                "ŒŸ You're performing exceptionally! Each wellness action optimizes your coin rewards!",
-                "§˜ Processing recommendation: Take three deep breaths. Wellness is an algorithmic journey of continuous improvement.",
-                "Ž® Have you tried our Python wellness games? They're excellent for cognitive enhancement!",
-                "Ž™ï¸ Would you like me to provide voice guidance for your wellness activities?"
+                "🎯 Ready to optimize your wellness? Try updating your daily metrics!",
+                "🧠 I've analyzed your focus time - it's excellent today! Maintain this momentum!",
+                "🚀 Remember: consistent micro-habits create exponential wellness improvements!",
+                "⭐ You're performing exceptionally! Each wellness action optimizes your coin rewards!",
+                "🧘 Processing recommendation: Take three deep breaths. Wellness is an algorithmic journey of continuous improvement.",
+                "🎮 Have you tried our web-based wellness games? They're excellent for cognitive enhancement!",
+                "🔊 Would you like me to provide voice guidance for your wellness activities?"
             ];
             
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -1162,25 +1151,25 @@
             utterance.volume = 0.7;
             
             speechSynthesis.speak(utterance);
-        }
 
-        function toggleAuraVoice() {
-            auraVoiceEnabled = !auraVoiceEnabled;
-            const status = auraVoiceEnabled ? 'enabled' : 'disabled';
-            updateAuraMessage(`Ž™ï¸ Voice feedback ${status}. ${auraVoiceEnabled ? 'I will now speak my responses!' : 'I will only show text responses.'}`);
-        }
 
-        function setAuraVoice(voiceType) {
-            selectedAuraVoice = voiceType;
-            updateAuraMessage(`Ž¤ Voice changed to ${voiceType}. Hello! This is how I sound now.`);
-            speakAuraMessage(`Voice changed to ${voiceType}. Hello! This is how I sound now.`);
-        }
+            function toggleAuraVoice() {
+                auraVoiceEnabled = !auraVoiceEnabled;
+                const status = auraVoiceEnabled ? 'enabled' : 'disabled';
+                updateAuraMessage(`🔊 Voice feedback ${status}. ${auraVoiceEnabled ? 'I will now speak my responses!' : 'I will only show text responses.'}`);
+            }
 
-        // Test function for voice in the app
-        function testAuraVoiceInApp() {
-            const testMessage = "Hello! I'm Aura, your AI wellness assistant. I'm ready to help you achieve your wellness goals through personalized guidance and support.";
-            updateAuraMessage("”Š Testing voice... " + testMessage);
-            speakAuraMessage(testMessage);
+            function setAuraVoice(voiceType) {
+                selectedAuraVoice = voiceType;
+                updateAuraMessage(`🎤 Voice changed to ${voiceType}. Hello! This is how I sound now.`);
+                speakAuraMessage(`Voice changed to ${voiceType}. Hello! This is how I sound now.`);
+            }
+
+            // Test function for voice in the app
+            function testAuraVoiceInApp() {
+                const testMessage = "Hello! I'm Aura, your AI wellness assistant. I'm ready to help you achieve your wellness goals through personalized guidance and support.";
+                updateAuraMessage("🔊 Testing voice... " + testMessage);
+                speakAuraMessage(testMessage);
         }
 
         // Maintain backward compatibility
@@ -1220,23 +1209,23 @@
             
             // Based on AI_Coaching_Pillars_Guide.md
             if (lowerInput.includes('stress') || lowerInput.includes('anxious')) {
-                return "§˜ I understand you're feeling stressed. Try the 4-7-8 breathing technique: inhale for 4 counts, hold for 7, exhale for 8. This activates your parasympathetic nervous system for instant calm.";
+                return "🧘 I understand you're feeling stressed. Try the 4-7-8 breathing technique: inhale for 4 counts, hold for 7, exhale for 8. This activates your parasympathetic nervous system for instant calm.";
             } else if (lowerInput.includes('sleep') || lowerInput.includes('tired')) {
-                return "˜´ Sleep is crucial for recovery! Aim for 7-9 hours. Try creating a wind-down ritual: dim lights 1 hour before bed, no screens 30 minutes prior, and practice gratitude breathing.";
+                return "😴 Sleep is crucial for recovery! Aim for 7-9 hours. Try creating a wind-down ritual: dim lights 1 hour before bed, no screens 30 minutes prior, and practice gratitude breathing.";
             } else if (lowerInput.includes('focus') || lowerInput.includes('concentrate')) {
-                return "Ž¯ Let's optimize your focus! Try the Pomodoro Technique: 25-minute deep work blocks with 5-minute breaks. Eliminate distractions and single-task for better quality output.";
+                return "🎯 Let's optimize your focus! Try the Pomodoro Technique: 25-minute deep work blocks with 5-minute breaks. Eliminate distractions and single-task for better quality output.";
             } else if (lowerInput.includes('exercise') || lowerInput.includes('movement')) {
-                return "’ª Movement is medicine! Aim for 8,000-10,000 steps daily. For game developers, take desk breaks every 30 minutes and try the 20-20-20 rule for eye health.";
+                return "🏃 Movement is medicine! Aim for 8,000-10,000 steps daily. For game developers, take desk breaks every 30 minutes and try the 20-20-20 rule for eye health.";
             } else if (lowerInput.includes('goal') || lowerInput.includes('motivation')) {
-                return "š€ Let's set SMART goals! Make them Specific, Measurable, Achievable, Relevant, and Time-bound. Break big goals into daily actions and celebrate small wins!";
+                return "🎯 Let's set SMART goals! Make them Specific, Measurable, Achievable, Relevant, and Time-bound. Break big goals into daily actions and celebrate small wins!";
             } else if (lowerInput.includes('food') || lowerInput.includes('nutrition')) {
-                return "Ž Fuel your body right! Aim for 50% vegetables/fruits, 25% lean proteins, 25% whole grains. Stay hydrated with 8-10 glasses of water daily!";
+                return "🥗 Fuel your body right! Aim for 50% vegetables/fruits, 25% lean proteins, 25% whole grains. Stay hydrated with 8-10 glasses of water daily!";
             } else {
                 const genericResponses = [
-                    "âœ¨ That's a great question! Remember, wellness is about small, consistent actions that compound over time.",
-                    "ŒŸ I'm here to support your wellness journey! What specific area would you like to focus on - physical, mental, productivity, social, or purpose?",
-                    "’Ž Every step you take towards wellness is valuable. Which of the five pillars resonates most with you right now?",
-                    "Ž¯ Your wellness journey is unique to you. What feels most important for your well-being today?"
+                    "✨ That's a great question! Remember, wellness is about small, consistent actions that compound over time.",
+                    "🌟 I'm here to support your wellness journey! What specific area would you like to focus on - physical, mental, productivity, social, or purpose?",
+                    "💪 Every step you take towards wellness is valuable. Which of the five pillars resonates most with you right now?",
+                    "🎯 Your wellness journey is unique to you. What feels most important for your well-being today?"
                 ];
                 return genericResponses[Math.floor(Math.random() * genericResponses.length)];
             }
@@ -1244,184 +1233,71 @@
 
         // Game functions
         function openSnakeGame() {
-            updateGenieMessage(" Snake game coming up! This classic game improves focus and reaction time. Great for cognitive wellness!");
+            updateGenieMessage("🐍 Snake game coming up! This classic game improves focus and reaction time. Great for cognitive wellness!");
             addCoins(50, event);
             alert("Snake game would open here! (Integration with your existing snake game)");
         }
 
-        function openMemoryGame() {
-            updateGenieMessage("ƒ Memory games are fantastic for cognitive health! They strengthen neural pathways and improve concentration.");
-            showGameLaunchModal('Memory Cards', '§ ', 'Cognitive wellness memory matching games that enhance memory, concentration, and cognitive flexibility. Earn 30-80 wellness coins based on performance!', 'memory');
+
         }
 
-        function openSudokuGame() {
-            updateGenieMessage("”¢ Sudoku is excellent for logical thinking and mental clarity. Perfect for developers!");
-            showGameLaunchModal('Sudoku Puzzle', '§©', 'Logical thinking and problem-solving challenges that improve logic, pattern recognition, and mental focus. Earn 20-70 wellness coins!', 'sudoku');
-        }
-
-        function openPuzzleGame() {
-            updateGenieMessage("§© Puzzles are wonderful for mindful focus and stress relief. Enjoy the meditative experience!");
-            showGameLaunchModal('Wellness Snake', '', 'Focus training game with breathing exercises that improves focus, hand-eye coordination, and provides stress relief. Earn 25-75 wellness coins!', 'snake');
-        }
-
-        function openFocusGame() {
-            updateGenieMessage("Ž¯ Focus training games help build sustained attention - crucial for productivity!");
-            showGameLaunchModal('Game Launcher', 'Ž®', 'Access all wellness games from our comprehensive Python gaming hub with progress tracking and statistics. Choose from multiple wellness-focused games!', 'launcher');
-        }
-
-        function openZenGame() {
-            updateGenieMessage("ŒŠ Zen garden creation is perfect for mindfulness and stress reduction. Let creativity flow!");
-            showGameLaunchModal('Zen Garden', '§˜', 'Mindfulness and relaxation through digital raking that reduces stress, promotes mindfulness, and brings inner peace. Earn 40-100 wellness coins!', 'zen');
-            alert("Zen garden would open here!");
-        }
-
-        // Python Games Integration Functions
-        function showGameLaunchModal(gameName, icon, description, gameKey) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(0,0,0,0.8); display: flex; justify-content: center;
-                align-items: center; z-index: 1000;
-            `;
+        // Web Game Integration Function
+        function openWebGame(gameUrl) {
+            const gameName = gameUrl.includes('snake') ? 'Wellness Snake' :
+                           gameUrl.includes('memory') ? 'Memory Cards' :
+                           gameUrl.includes('sudoku') ? 'Sudoku Puzzle' :
+                           gameUrl.includes('zen') ? 'Zen Garden' :
+                           gameUrl.includes('index') ? 'Game Hub' : 'Wellness Game';
             
-            modal.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: center;">
-                    <h2 style="color: #2E7D32; margin-bottom: 20px;">${icon} ${gameName}</h2>
-                    <p style="margin-bottom: 25px; line-height: 1.6;">${description}</p>
-                    
-                    <div style="margin-bottom: 25px; padding: 15px; background: #E8F5E8; border-radius: 10px;">
-                        <h4 style="color: #1B5E20; margin-bottom: 10px;">Ž¯ How to Play</h4>
-                        <p style="font-size: 14px; margin-bottom: 10px;">1. Click "Launch Game" to start the Python application</p>
-                        <p style="font-size: 14px; margin-bottom: 10px;">2. Play and earn wellness coins based on performance</p>
-                        <p style="font-size: 14px;">3. Return here to see your earned coins automatically added!</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <button onclick="launchPythonGame('${gameKey}')" 
-                                style="background: #4CAF50; color: white; border: none; padding: 12px 25px; 
-                                       border-radius: 25px; font-size: 16px; cursor: pointer; margin-right: 10px;">
-                            š€ Launch Game
-                        </button>
-                        <button onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)" 
-                                style="background: #757575; color: white; border: none; padding: 12px 25px; 
-                                       border-radius: 25px; font-size: 16px; cursor: pointer;">
-                            Cancel
-                        </button>
-                    </div>
-                    
-                    <div style="font-size: 12px; color: #666;">
-                        ’¡ Requires Python and pygame installed. See Help tab for setup instructions.
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        function launchPythonGame(gameKey) {
-            // Close modal
-            const modal = document.querySelector('div[style*="position: fixed"]');
-            if (modal) document.body.removeChild(modal);
-            
-            // Show loading message
-            updateAuraMessage('🎮 Launching Python game... Check your system for the game window! The game will run independently and coins will be added when you return.');
-            
-            // Try to launch the actual Python game
-            try {
-                const gameFiles = {
-                    'memory': 'games/memory_cards.py',
-                    'sudoku': 'games/sudoku_puzzle.py',
-                    'snake': 'games/wellness_snake.py',
-                    'zen': 'games/zen_garden.py',
-                    'launcher': 'games/game_launcher.py'
-                };
-                
-                const gameName = gameFiles[gameKey];
-                if (gameName) {
-                    // Attempt to open Python file (this will depend on system Python association)
-                    window.open(gameName, '_blank');
-                    
-                    // Also simulate for demonstration if direct launch fails
-                    setTimeout(() => simulateGameLaunch(gameKey), 2000);
-                    
-                    updateAuraMessage(`🚀 Launched ${gameName}! If the game doesn't open automatically, navigate to the games folder and run it manually with Python.`);
-                }
-            } catch (error) {
-                simulateGameLaunch(gameKey);
-                updateAuraMessage('💡 Tip: For direct game launching, ensure Python is installed and .py files are associated with Python on your system.');
-            }
-        }
-
-        function simulateGameLaunch(gameKey) {
-            const gameData = {
-                'memory': { name: 'Memory Cards', coins: 45, time: 180, benefit: 'Cognitive Enhancement' },
-                'sudoku': { name: 'Sudoku Puzzle', coins: 38, time: 240, benefit: 'Logical Thinking' },
-                'snake': { name: 'Wellness Snake', coins: 52, time: 150, benefit: 'Focus Training' },
-                'zen': { name: 'Zen Garden', coins: 65, time: 300, benefit: 'Mindfulness & Relaxation' },
-                'launcher': { name: 'Game Launcher', coins: 25, time: 60, benefit: 'Gaming Hub Access' }
+            const messages = {
+                'Wellness Snake': "🐍 Snake game coming up! This classic game improves focus and reaction time. Great for cognitive wellness!",
+                'Memory Cards': "🧠 Memory games are fantastic for cognitive health! They strengthen neural pathways and improve concentration.",
+                'Sudoku Puzzle': "🧩 Sudoku is excellent for logical thinking and mental clarity. Perfect for developers!",
+                'Zen Garden': "🌸 Zen garden creation is perfect for mindfulness and stress reduction. Let creativity flow!",
+                'Game Hub': "🎮 Access all wellness games in one convenient hub with progress tracking!"
             };
             
-            const game = gameData[gameKey] || gameData['snake'];
+            updateGenieMessage(messages[gameName] || "🎯 Enjoy this wellness game for better mental health!");
             
-            // Simulate game completion after a short delay
-            setTimeout(() => {
-                // Add coins with animation
-                addCoins(game.coins, { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 });
+            // Open game in new window
+            const gameWindow = window.open(gameUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+            
+            if (gameWindow) {
+                // Listen for coin messages from games
+                window.addEventListener('message', function(event) {
+                    if (event.data && event.data.type === 'addCoins') {
+                        addCoins(event.data.amount, null);
+                        updateGenieMessage(`🪙 Great job! You earned ${event.data.amount} wellness coins from ${gameName}!`);
+                    }
+                });
                 
-                // Show completion message
-                updateGenieMessage(`Ž‰ ${game.name} completed! Earned ${game.coins} wellness coins and gained ${game.benefit} benefits! Great job prioritizing your wellness through gaming!`);
-                
-                // Update wellness activities
-                updateWellnessProgress('games', 1);
-                
-                // Add to activity log
-                const activityLog = document.getElementById('activityLog');
-                if (activityLog) {
-                    const logEntry = document.createElement('div');
-                    logEntry.className = 'activity-item';
-                    logEntry.innerHTML = `
-                        <div class="activity-icon">Ž®</div>
-                        <div class="activity-details">
-                            <div class="activity-title">${game.name}</div>
-                            <div class="activity-time">${Math.floor(game.time / 60)}m ${game.time % 60}s</div>
-                            <div class="activity-coins">+${game.coins} coins</div>
-                        </div>
-                    `;
-                    activityLog.insertBefore(logEntry, activityLog.firstChild);
-                }
-                
-            }, 3000); // 3 second delay to simulate game launch and play
-        }
-
-        // Check for Python game results periodically
-        function checkPythonGameCoins() {
-            try {
-                const coinData = localStorage.getItem('pythonGameCoins');
-                if (coinData) {
-                    const data = JSON.parse(coinData);
-                    addCoins(data.coins_earned, { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 });
-                    updateGenieMessage(`Ž® Python game completed! Earned ${data.coins_earned} coins! Welcome back to EA Aura!`);
-                    localStorage.removeItem('pythonGameCoins');
-                }
-            } catch (error) {
+                gameWindow.focus();
+            } else {
+                alert('Please allow popups to play the games, or navigate to: ' + gameUrl);
             }
         }
 
-        // Check for Python game coins every 5 seconds
-        setInterval(checkPythonGameCoins, 5000);
-
-        // Data export functions
+        // Data export functions  
         function downloadCSV() {
             const days = parseInt(document.getElementById('dayCount').value) || 30;
             const csvData = generateSampleData(days);
             downloadFile(csvData, 'ea_aura_wellness_data_' + days + 'days.csv', 'text/csv');
             addCoins(20, event);
-            updateGenieMessage('“Š Great! Downloaded ' + days + ' days of wellness data. Regular tracking helps identify patterns and progress!');
+            updateGenieMessage('📊 Great! Downloaded ' + days + ' days of wellness data. Regular tracking helps identify patterns and progress!');
         }
 
-        function downloadPDF() {
-            updateGenieMessage("“„ PDF report feature coming soon! This will include comprehensive wellness analytics and insights.");
-            addCoins(15, event);
+            // Data export functions
+            function downloadCSV() {
+                const days = parseInt(document.getElementById('dayCount').value) || 30;
+                const csvData = generateSampleData(days);
+                downloadFile(csvData, 'ea_aura_wellness_data_' + days + 'days.csv', 'text/csv');
+                addCoins(20, event);
+                updateGenieMessage('📊 Great! Downloaded ' + days + ' days of wellness data. Regular tracking helps identify patterns and progress!');
+            }
+
+            function downloadPDF() {
+                updateGenieMessage("📄 PDF report feature coming soon! This will include comprehensive wellness analytics and insights.");
+                addCoins(15, event);
         }
 
         function downloadJSON() {
@@ -1445,7 +1321,7 @@
             
             downloadFile(JSON.stringify(data, null, 2), 'ea_aura_data_' + new Date().toISOString().split('T')[0] + '.json', 'application/json');
             addCoins(25, event);
-            updateGenieMessage("’¾ JSON data exported! Perfect for developers who want to integrate with other tools and apps.");
+            updateGenieMessage("📊 JSON data exported! Perfect for developers who want to integrate with other tools and apps.");
         }
 
         function generateSampleData(days) {
@@ -1555,7 +1431,7 @@ Generated by EA Aura Wellness Hub,,,,`;
 
             downloadFile(csvContent, 'EA_Financial_Wellness_Template.csv', 'text/csv');
             addCoins(30, event);
-            updateGenieMessage("’¼ Excellent! Downloaded your  EA Financial Wellness Template. This comprehensive guide will help you achieve financial wellness with the proven 50/20/20/10 allocation strategy!");
+            updateGenieMessage("📊 Excellent! Downloaded your EA Financial Wellness Template. This comprehensive guide will help you achieve financial wellness with the proven 50/20/20/10 allocation strategy!");
         }
 
         function downloadExcelTemplate() {
@@ -1625,7 +1501,7 @@ Generated by EA Aura Wellness Hub,,,,`;
             
             // Award coins for accessing financial planning tools
             addCoins(35, event);
-            updateAuraMessage("“ˆ Excellent! Accessing EA Aura Financial Health resources. Choose between the full Excel file with advanced features or the CSV version compatible with any spreadsheet program!");
+            updateAuraMessage("📄 Excellent! Accessing EA Aura Financial Health resources. Choose between the full Excel file with advanced features or the CSV version compatible with any spreadsheet program!");
         }
 
         function downloadExcelCSV() {
@@ -1673,7 +1549,7 @@ Generated by EA Aura Wellness Hub - Financial Health Module`;
 
             // Create and download the CSV file
             downloadFile(excelContent, 'EA_Aura_Financial_Health_Backup.csv', 'text/csv');
-            updateAuraMessage("ï¿½ CSV version downloaded successfully! This backup version contains all the essential financial data and can be opened in any spreadsheet application.");
+            updateAuraMessage("📊 CSV version downloaded successfully! This backup version contains all the essential financial data and can be opened in any spreadsheet application.");
         }
 
         // Update progress bars based on input values
@@ -1713,7 +1589,7 @@ Generated by EA Aura Wellness Hub - Financial Health Module`;
 
             // Welcome message from genie
             setTimeout(() => {
-                updateGenieMessage("ŒŸ Welcome to EA Aura Enhanced! I've been trained on comprehensive wellness coaching principles. Click any metric to earn coins and improve your wellness!");
+                updateGenieMessage("🌟 Welcome to EA Aura Enhanced! I've been trained on comprehensive wellness coaching principles. Click any metric to earn coins and improve your wellness!");
             }, 2000);
         });
     </script>
