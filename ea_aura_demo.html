@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EA Aura - Original Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 20px;
+            background: rgba(52, 152, 219, 0.3);
+            border: 1px solid #3498db;
+        }
+
+        .persona-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .persona-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .persona-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .persona-btn.active {
+            border-color: #ffeaa7;
+            background: rgba(255, 234, 167, 0.2);
+        }
+
+        .persona-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .persona-desc {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: rgba(116, 75, 162, 0.4);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .text-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .text-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .text-input:focus {
+            border-color: #ffeaa7;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 234, 167, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .quote-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        .dev-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dev-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .dev-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .comparison-note {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .persona-selector {
+                gap: 10px;
+            }
+            
+            .persona-btn {
+                min-width: 80px;
+                padding: 10px 15px;
+            }
+            
+            .action-buttons {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🌟 EA Aura</div>
+            <div class="tagline">Your Wellness Companion</div>
+            <div class="version-badge">
+                📝 Original Demo (Text Only)
+            </div>
+        </div>
+
+        <div class="comparison-note">
+            ℹ️ This is the original EA Aura demo without voice features. Compare with the voice-enabled version!
+        </div>
+
+        <div class="instructions">
+            <p>💡 Type your messages or use the quick action buttons below</p>
+        </div>
+
+        <div class="persona-selector">
+            <div class="persona-btn active" data-persona="nova">
+                <div class="persona-name">🚀 Nova</div>
+                <div class="persona-desc">Habits & Growth</div>
+            </div>
+            <div class="persona-btn" data-persona="kai">
+                <div class="persona-name">🧘 Kai</div>
+                <div class="persona-desc">Calm & Balance</div>
+            </div>
+            <div class="persona-btn" data-persona="veda">
+                <div class="persona-name">🎯 Veda</div>
+                <div class="persona-desc">Focus & Productivity</div>
+            </div>
+            <div class="persona-btn" data-persona="iris">
+                <div class="persona-name">🌙 Iris</div>
+                <div class="persona-desc">Rest & Recovery</div>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message bot-message">
+                👋 Hello! I'm your EA Aura assistant. Ask me for wellness tips, quotes, breathing exercises, or focus strategies. Choose your preferred persona above!
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" class="text-input" id="textInput" placeholder="Type your message...">
+            <button class="btn" onclick="sendMessage()">Send</button>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn" onclick="quickAction('quote')">💬 Get Quote</button>
+            <button class="btn" onclick="quickAction('breathing')">🫁 Breathing</button>
+            <button class="btn" onclick="quickAction('focus')">🎯 Focus Tip</button>
+            <button class="btn" onclick="quickAction('movement')">🚶 Movement</button>
+        </div>
+
+        <div class="quote-section" id="quoteSection">
+            <div class="quote-text" id="quoteText">
+                "The journey of a thousand miles begins with one step."
+            </div>
+            <div class="quote-author" id="quoteAuthor">— Lao Tzu</div>
+        </div>
+
+        <div class="dev-section">
+            <div class="dev-title">🔧 Dev Data Download</div>
+            <div class="dev-controls">
+                <input type="number" id="dayCount" value="30" min="7" max="365" style="width: 80px; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                <label>days</label>
+                <button class="btn" onclick="downloadCSV()">📊 Download CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPersona = 'nova';
+
+        // Persona configurations
+        const personas = {
+            nova: {
+                name: 'Nova',
+                emoji: '🚀',
+                traits: ['energetic', 'motivational', 'goal-oriented'],
+                greetings: ['Ready to crush your goals?', 'Time to level up!', 'What challenge shall we tackle?'],
+                responses: {
+                    quote: 'Here\'s some rocket fuel for your journey',
+                    breathing: 'Let\'s energize with some power breathing',
+                    focus: 'Time to laser-focus on what matters',
+                    rest: 'Even rockets need fuel stops - let\'s recharge',
+                    movement: 'Motion creates energy - let\'s get moving!'
+                }
+            },
+            kai: {
+                name: 'Kai',
+                emoji: '🧘',
+                traits: ['peaceful', 'mindful', 'balanced'],
+                greetings: ['Peace be with you', 'How can we find balance today?', 'Let\'s center ourselves'],
+                responses: {
+                    quote: 'Here\'s some wisdom for inner peace',
+                    breathing: 'Let\'s find our breath and center',
+                    focus: 'Mindful focus brings clarity',
+                    rest: 'Rest is where healing happens',
+                    movement: 'Gentle movement, like water flowing'
+                }
+            },
+            veda: {
+                name: 'Veda',
+                emoji: '🎯',
+                traits: ['analytical', 'strategic', 'efficient'],
+                greetings: ['Ready to optimize your day?', 'Let\'s strategize for success', 'What\'s the target?'],
+                responses: {
+                    quote: 'Strategic wisdom for peak performance',
+                    breathing: 'Optimize your oxygen for better focus',
+                    focus: 'Let\'s engineer some deep focus',
+                    rest: 'Strategic rest maximizes performance',
+                    movement: 'Efficient movement for optimal results'
+                }
+            },
+            iris: {
+                name: 'Iris',
+                emoji: '🌙',
+                traits: ['gentle', 'restorative', 'nurturing'],
+                greetings: ['Time to unwind?', 'Let\'s embrace some gentle healing', 'How can we restore you?'],
+                responses: {
+                    quote: 'Gentle wisdom for your soul',
+                    breathing: 'Soft, healing breaths',
+                    focus: 'Gentle attention, like moonlight',
+                    rest: 'Sweet dreams and deep restoration',
+                    movement: 'Gentle movement for self-care'
+                }
+            }
+        };
+
+        // Daily quotes database
+        const dailyQuotes = [
+            { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu" },
+            { text: "Wellness is not a destination, it is a way of life.", author: "Unknown" },
+            { text: "Take care of your body. It's the only place you have to live.", author: "Jim Rohn" },
+            { text: "The groundwork for all happiness is good health.", author: "Leigh Hunt" },
+            { text: "To keep the body in good health is a duty... otherwise we shall not be able to keep our mind strong and clear.", author: "Buddha" },
+            { text: "Health is a state of complete harmony of the body, mind and spirit.", author: "B.K.S. Iyengar" },
+            { text: "Your body hears everything your mind says. Stay positive.", author: "Unknown" },
+            { text: "A healthy outside starts from the inside.", author: "Robert Urich" },
+            { text: "The greatest wealth is health.", author: "Virgil" },
+            { text: "Rest when you're weary. Refresh and renew yourself, your body, your mind, your spirit.", author: "Ralph Marston" }
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            getDailyQuote();
+            
+            // Enter key to send message
+            document.getElementById('textInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('textInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Process the message
+            setTimeout(() => {
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+
+        function quickAction(action) {
+            const actions = {
+                quote: "Give me a motivational quote",
+                breathing: "Help me with a breathing exercise",
+                focus: "Give me a focus tip",
+                movement: "Suggest some movement"
+            };
+            
+            document.getElementById('textInput').value = actions[action];
+            sendMessage();
+        }
+
+        function addMessage(text, sender) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function generateResponse(message) {
+            const persona = personas[currentPersona];
+            const lowerMessage = message.toLowerCase();
+
+            // Intent recognition (simple rule-based for demo)
+            if (lowerMessage.includes('quote') || lowerMessage.includes('inspiration') || lowerMessage.includes('motivat')) {
+                const quote = getRandomQuote();
+                return `${persona.emoji} ${persona.responses.quote}: "${quote.text}" - ${quote.author}`;
+            } else if (lowerMessage.includes('breath') || lowerMessage.includes('relax') || lowerMessage.includes('calm')) {
+                return `${persona.emoji} ${persona.responses.breathing}. Try this: Breathe in for 4 counts, hold for 4, exhale for 6. Repeat 3 times. Focus on the rhythm and let tension melt away.`;
+            } else if (lowerMessage.includes('focus') || lowerMessage.includes('concentrate') || lowerMessage.includes('productiv')) {
+                return `${persona.emoji} ${persona.responses.focus}. Try the 25-minute focus sprint: Set a timer, eliminate distractions, put your phone in another room, and dive deep into one task. Single-tasking is a superpower!`;
+            } else if (lowerMessage.includes('sleep') || lowerMessage.includes('rest') || lowerMessage.includes('tired')) {
+                return `${persona.emoji} ${persona.responses.rest}. Create a wind-down ritual: dim lights 1 hour before bed, no screens 30 minutes before, try gentle stretches, and practice gratitude breathing.`;
+            } else if (lowerMessage.includes('step') || lowerMessage.includes('walk') || lowerMessage.includes('move') || lowerMessage.includes('movement')) {
+                return `${persona.emoji} ${persona.responses.movement}. Try: Take a 5-minute walk around your space, do 10 desk stretches, dance to your favorite song, or do 20 jumping jacks. Movement boosts mood instantly!`;
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return `${persona.emoji} ${persona.greetings[Math.floor(Math.random() * persona.greetings.length)]} I'm ${persona.name}, here to support your wellness journey!`;
+            } else if (lowerMessage.includes('stress') || lowerMessage.includes('anxious') || lowerMessage.includes('worry')) {
+                return `${persona.emoji} I understand. Try the 5-4-3-2-1 grounding technique: Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste. This brings you back to the present moment.`;
+            } else if (lowerMessage.includes('water') || lowerMessage.includes('hydrat')) {
+                return `${persona.emoji} Hydration is foundation! Aim for 8 glasses daily. Try: Start each morning with a glass of water, set hourly reminders, or add lemon/cucumber for flavor. Your body will thank you!`;
+            } else {
+                // Generic wellness response
+                const responses = [
+                    `${persona.emoji} That's interesting! Remember, small consistent actions create big changes over time. What wellness area would you like to focus on today?`,
+                    `${persona.emoji} I hear you! Wellness is a journey of self-discovery and gentle progress. Every step counts, no matter how small.`,
+                    `${persona.emoji} Thanks for sharing! Would you like a breathing exercise, motivational quote, focus tip, or movement suggestion?`,
+                    `${persona.emoji} Every step forward counts! What aspect of wellness feels most important for you right now - mind, body, or spirit?`
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        }
+
+        function getRandomQuote() {
+            return dailyQuotes[Math.floor(Math.random() * dailyQuotes.length)];
+        }
+
+        function getDailyQuote() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const quoteIndex = dayOfYear % dailyQuotes.length;
+            const quote = dailyQuotes[quoteIndex];
+
+            document.getElementById('quoteText').textContent = `"${quote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `— ${quote.author}`;
+
+            return quote;
+        }
+
+        function downloadCSV() {
+            const days = parseInt(document.getElementById('dayCount').value) || 30;
+            
+            // Generate sample wellness data
+            const csvData = generateSampleData(days);
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ea_aura_sample_data_${days}days.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            addMessage(`📊 Downloaded ${days} days of sample wellness data`, 'bot');
+        }
+
+        function generateSampleData(days) {
+            let csv = 'Date,Steps,Sleep_Hours,Mood_Score,Stress_Level,Focus_Minutes,Gratitude_Entries,Water_Glasses,Exercise_Minutes,Screen_Time_Hours,Meditation_Minutes\n';
+            
+            const today = new Date();
+            
+            for (let i = days - 1; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                const steps = Math.floor(Math.random() * 5000) + 5000; // 5000-10000 steps
+                const sleep = (Math.random() * 3 + 6).toFixed(1); // 6-9 hours
+                const mood = Math.floor(Math.random() * 3) + 8; // 8-10 score
+                const stress = Math.floor(Math.random() * 4) + 1; // 1-4 level
+                const focus = Math.floor(Math.random() * 120) + 60; // 60-180 minutes
+                const gratitude = Math.floor(Math.random() * 4); // 0-3 entries
+                const water = Math.floor(Math.random() * 4) + 6; // 6-9 glasses
+                const exercise = Math.floor(Math.random() * 60) + 20; // 20-80 minutes
+                const screenTime = (Math.random() * 4 + 4).toFixed(1); // 4-8 hours
+                const meditation = Math.floor(Math.random() * 20) + 5; // 5-25 minutes
+                
+                csv += `${date.toISOString().split('T')[0]},${steps},${sleep},${mood},${stress},${focus},${gratitude},${water},${exercise},${screenTime},${meditation}\n`;
+            }
+            
+            return csv;
+        }
+
+        // Persona selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.persona-btn')) {
+                const btn = e.target.closest('.persona-btn');
+                const persona = btn.dataset.persona;
+                
+                // Update active state
+                document.querySelectorAll('.persona-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                currentPersona = persona;
+                
+                // Greet with new persona
+                const personaData = personas[currentPersona];
+                const greeting = `${personaData.emoji} Hi! I'm ${personaData.name}. ${personaData.greetings[Math.floor(Math.random() * personaData.greetings.length)]}`;
+                addMessage(greeting, 'bot');
+            }
+        });
+    </script>
+</body>
+</html>

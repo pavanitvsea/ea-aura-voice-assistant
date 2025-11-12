@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EA Aura - Voice Assistant Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .voice-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .voice-supported {
+            background: rgba(46, 204, 113, 0.3);
+            border: 1px solid #2ecc71;
+        }
+
+        .voice-not-supported {
+            background: rgba(231, 76, 60, 0.3);
+            border: 1px solid #e74c3c;
+        }
+
+        .persona-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .persona-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .persona-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .persona-btn.active {
+            border-color: #ffeaa7;
+            background: rgba(255, 234, 167, 0.2);
+        }
+
+        .persona-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .persona-desc {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: rgba(116, 75, 162, 0.4);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .text-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .text-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .text-input:focus {
+            border-color: #ffeaa7;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 234, 167, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .voice-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mic-btn {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            position: relative;
+        }
+
+        .mic-btn.listening {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(225, 112, 85, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(225, 112, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(225, 112, 85, 0); }
+        }
+
+        .voice-settings {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .voice-select {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .voice-select option {
+            background: #333;
+            color: white;
+        }
+
+        .quote-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        .dev-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dev-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .dev-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .data-visualization {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .viz-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .wellness-trend {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trend-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        .mini-chart {
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            height: 100%;
+            padding: 5px;
+            gap: 2px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #ffeaa7, #fab1a0);
+            border-radius: 2px;
+            min-height: 5px;
+            transition: height 0.3s ease;
+        }
+
+        .data-insights {
+            background: rgba(74, 144, 226, 0.2);
+            border: 1px solid #4a90e2;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .insight-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #87ceeb;
+        }
+
+        .insight-text {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .persona-selector {
+                gap: 10px;
+            }
+            
+            .persona-btn {
+                min-width: 80px;
+                padding: 10px 15px;
+            }
+            
+            .voice-controls {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🌟 EA Aura</div>
+            <div class="tagline">Your Voice-Enabled Wellness Companion</div>
+            <div class="voice-status" id="voiceStatus">
+                🎤 Checking voice support...
+            </div>
+        </div>
+
+        <div class="instructions">
+            <p>💡 <strong>Desktop:</strong> Hold <kbd>Space</kbd> for push-to-talk | <strong>Mobile:</strong> Use mic button</p>
+        </div>
+
+        <div class="persona-selector">
+            <div class="persona-btn active" data-persona="nova">
+                <div class="persona-name">🚀 Nova</div>
+                <div class="persona-desc">Habits & Growth</div>
+            </div>
+            <div class="persona-btn" data-persona="kai">
+                <div class="persona-name">🧘 Kai</div>
+                <div class="persona-desc">Calm & Balance</div>
+            </div>
+            <div class="persona-btn" data-persona="veda">
+                <div class="persona-name">🎯 Veda</div>
+                <div class="persona-desc">Focus & Productivity</div>
+            </div>
+            <div class="persona-btn" data-persona="iris">
+                <div class="persona-name">🌙 Iris</div>
+                <div class="persona-desc">Rest & Recovery</div>
+            </div>
+        </div>
+
+        <div class="voice-settings">
+            <select class="voice-select" id="voiceSelect">
+                <option>Loading voices...</option>
+            </select>
+            <label style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="autoSpeak" checked>
+                Auto-speak responses
+            </label>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message bot-message">
+                👋 Hello! I'm your EA Aura assistant. Try saying "Give me a motivational quote" or "Help me with a breathing exercise". Choose your preferred persona above!
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" class="text-input" id="textInput" placeholder="Type your message or use voice...">
+            <button class="btn" onclick="sendMessage()">Send</button>
+        </div>
+
+        <div class="voice-controls">
+            <button class="btn mic-btn" id="micBtn" onclick="toggleVoiceRecording()">
+                🎤
+            </button>
+            <button class="btn" onclick="stopSpeaking()">🔇 Stop</button>
+            <button class="btn" onclick="getDailyQuote()">💬 Daily Quote</button>
+        </div>
+
+        <div class="quote-section" id="quoteSection">
+            <div class="quote-text" id="quoteText">
+                "The journey of a thousand miles begins with one step."
+            </div>
+            <div class="quote-author" id="quoteAuthor">— Lao Tzu</div>
+        </div>
+
+        <div class="data-visualization">
+            <div class="viz-title">📊 Your Wellness Dashboard</div>
+            
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value" id="todaySteps">8,247</div>
+                    <div class="metric-label">Steps Today</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%; background: linear-gradient(45deg, #2ecc71, #27ae60);"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="todaySleep">7.2h</div>
+                    <div class="metric-label">Sleep Last Night</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%; background: linear-gradient(45deg, #3498db, #2980b9);"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="todayMood">9/10</div>
+                    <div class="metric-label">Mood Score</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%; background: linear-gradient(45deg, #f39c12, #e67e22);"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="todayFocus">145m</div>
+                    <div class="metric-label">Focus Time</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 72%; background: linear-gradient(45deg, #9b59b6, #8e44ad);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-card">
+                    <div class="chart-header">📈 Weekly Trends</div>
+                    <div class="wellness-trend">
+                        <div class="trend-item">
+                            <span class="trend-icon">🚶</span>
+                            <span>Steps</span>
+                        </div>
+                        <span>↗️ +12%</span>
+                    </div>
+                    <div class="wellness-trend">
+                        <div class="trend-item">
+                            <span class="trend-icon">😴</span>
+                            <span>Sleep</span>
+                        </div>
+                        <span>↗️ +8%</span>
+                    </div>
+                    <div class="wellness-trend">
+                        <div class="trend-item">
+                            <span class="trend-icon">🎯</span>
+                            <span>Focus</span>
+                        </div>
+                        <span>↗️ +15%</span>
+                    </div>
+                    <div class="wellness-trend">
+                        <div class="trend-item">
+                            <span class="trend-icon">😊</span>
+                            <span>Mood</span>
+                        </div>
+                        <span>→ Stable</span>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">📊 Last 7 Days Activity</div>
+                    <div class="mini-chart" id="stepsChart">
+                        <div class="chart-bars">
+                            <div class="chart-bar" style="height: 65%;"></div>
+                            <div class="chart-bar" style="height: 45%;"></div>
+                            <div class="chart-bar" style="height: 85%;"></div>
+                            <div class="chart-bar" style="height: 70%;"></div>
+                            <div class="chart-bar" style="height: 40%;"></div>
+                            <div class="chart-bar" style="height: 80%;"></div>
+                            <div class="chart-bar" style="height: 75%;"></div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.8em; opacity: 0.7; text-align: center;">Steps per day</div>
+                </div>
+            </div>
+
+            <div class="data-insights">
+                <div class="insight-title">🎯 AI Insights</div>
+                <div class="insight-text" id="aiInsight">
+                    Great job! Your focus time increased 15% this week. Nova suggests: Try the Pomodoro technique for even better concentration. Your sleep quality is excellent - keep that bedtime routine! 🌟
+                </div>
+            </div>
+        </div>
+
+        <div class="dev-section">
+            <div class="dev-title">🔧 Dev Data Download</div>
+            <div class="dev-controls">
+                <input type="number" id="dayCount" value="30" min="7" max="365" style="width: 80px; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                <label>days</label>
+                <button class="btn" onclick="downloadCSV()">📊 Download CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-indicator" id="statusIndicator"></div>
+
+    <script>
+        let recognition;
+        let isListening = false;
+        let currentPersona = 'nova';
+        let voices = [];
+        let currentUtterance = null;
+
+        // Persona configurations
+        const personas = {
+            nova: {
+                name: 'Nova',
+                emoji: '🚀',
+                traits: ['energetic', 'motivational', 'goal-oriented'],
+                greetings: ['Ready to crush your goals?', 'Time to level up!', 'What challenge shall we tackle?'],
+                responses: {
+                    quote: 'Here\'s some rocket fuel for your journey',
+                    breathing: 'Let\'s energize with some power breathing',
+                    focus: 'Time to laser-focus on what matters',
+                    rest: 'Even rockets need fuel stops - let\'s recharge'
+                }
+            },
+            kai: {
+                name: 'Kai',
+                emoji: '🧘',
+                traits: ['peaceful', 'mindful', 'balanced'],
+                greetings: ['Peace be with you', 'How can we find balance today?', 'Let\'s center ourselves'],
+                responses: {
+                    quote: 'Here\'s some wisdom for inner peace',
+                    breathing: 'Let\'s find our breath and center',
+                    focus: 'Mindful focus brings clarity',
+                    rest: 'Rest is where healing happens'
+                }
+            },
+            veda: {
+                name: 'Veda',
+                emoji: '🎯',
+                traits: ['analytical', 'strategic', 'efficient'],
+                greetings: ['Ready to optimize your day?', 'Let\'s strategize for success', 'What\'s the target?'],
+                responses: {
+                    quote: 'Strategic wisdom for peak performance',
+                    breathing: 'Optimize your oxygen for better focus',
+                    focus: 'Let\'s engineer some deep focus',
+                    rest: 'Strategic rest maximizes performance'
+                }
+            },
+            iris: {
+                name: 'Iris',
+                emoji: '🌙',
+                traits: ['gentle', 'restorative', 'nurturing'],
+                greetings: ['Time to unwind?', 'Let\'s embrace some gentle healing', 'How can we restore you?'],
+                responses: {
+                    quote: 'Gentle wisdom for your soul',
+                    breathing: 'Soft, healing breaths',
+                    focus: 'Gentle attention, like moonlight',
+                    rest: 'Sweet dreams and deep restoration'
+                }
+            }
+        };
+
+        // Daily quotes database
+        const dailyQuotes = [
+            { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu" },
+            { text: "Wellness is not a destination, it is a way of life.", author: "Unknown" },
+            { text: "Take care of your body. It's the only place you have to live.", author: "Jim Rohn" },
+            { text: "The groundwork for all happiness is good health.", author: "Leigh Hunt" },
+            { text: "To keep the body in good health is a duty... otherwise we shall not be able to keep our mind strong and clear.", author: "Buddha" },
+            { text: "Health is a state of complete harmony of the body, mind and spirit.", author: "B.K.S. Iyengar" },
+            { text: "Your body hears everything your mind says. Stay positive.", author: "Unknown" },
+            { text: "A healthy outside starts from the inside.", author: "Robert Urich" },
+            { text: "The greatest wealth is health.", author: "Virgil" },
+            { text: "Rest when you're weary. Refresh and renew yourself, your body, your mind, your spirit.", author: "Ralph Marston" }
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            checkVoiceSupport();
+            loadVoices();
+            setupKeyboardShortcuts();
+            getDailyQuote();
+            
+            // Load voices when they become available
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = loadVoices;
+            }
+        });
+
+        function checkVoiceSupport() {
+            const voiceStatus = document.getElementById('voiceStatus');
+            
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                voiceStatus.textContent = '🎤 Voice support detected';
+                voiceStatus.className = 'voice-status voice-supported';
+                initializeSpeechRecognition();
+            } else {
+                voiceStatus.textContent = '❌ Voice not supported (text only)';
+                voiceStatus.className = 'voice-status voice-not-supported';
+                document.getElementById('micBtn').disabled = true;
+            }
+        }
+
+        function initializeSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('listening');
+                showStatus('🎤 Listening...');
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('textInput').value = transcript;
+                sendMessage();
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                showStatus('❌ Voice recognition error');
+                stopListening();
+            };
+
+            recognition.onend = function() {
+                stopListening();
+            };
+        }
+
+        function loadVoices() {
+            voices = speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voiceSelect');
+            
+            voiceSelect.innerHTML = '';
+            
+            if (voices.length === 0) {
+                voiceSelect.innerHTML = '<option>No voices available</option>';
+                return;
+            }
+
+            voices.forEach((voice, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelect.appendChild(option);
+            });
+
+            // Try to select a natural sounding voice by default
+            const preferredVoices = ['Google', 'Microsoft', 'Alex', 'Samantha', 'Karen'];
+            for (let i = 0; i < voices.length; i++) {
+                if (preferredVoices.some(pref => voices[i].name.includes(pref))) {
+                    voiceSelect.value = i;
+                    break;
+                }
+            }
+        }
+
+        function setupKeyboardShortcuts() {
+            let spacePressed = false;
+
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' && !spacePressed && document.activeElement.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    spacePressed = true;
+                    if (!isListening) {
+                        startListening();
+                    }
+                }
+                
+                if (e.code === 'Enter' && document.activeElement.id === 'textInput') {
+                    sendMessage();
+                }
+            });
+
+            document.addEventListener('keyup', function(e) {
+                if (e.code === 'Space') {
+                    spacePressed = false;
+                    if (isListening) {
+                        stopListening();
+                    }
+                }
+            });
+        }
+
+        function toggleVoiceRecording() {
+            if (isListening) {
+                stopListening();
+            } else {
+                startListening();
+            }
+        }
+
+        function startListening() {
+            if (recognition && !isListening) {
+                recognition.start();
+            }
+        }
+
+        function stopListening() {
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('listening');
+            hideStatus();
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('textInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show processing status
+            showStatus('🤔 Processing...');
+
+            // Process the message
+            setTimeout(() => {
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+                
+                // Auto-speak if enabled
+                if (document.getElementById('autoSpeak').checked) {
+                    speak(response);
+                }
+                
+                hideStatus();
+            }, 500);
+        }
+
+        function addMessage(text, sender) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function generateResponse(message) {
+            const persona = personas[currentPersona];
+            const lowerMessage = message.toLowerCase();
+
+            // Intent recognition (simple rule-based for demo)
+            if (lowerMessage.includes('quote') || lowerMessage.includes('inspiration') || lowerMessage.includes('motivat')) {
+                return `${persona.emoji} ${persona.responses.quote}: "${getDailyQuote(false)}"`;
+            } else if (lowerMessage.includes('breath') || lowerMessage.includes('relax') || lowerMessage.includes('calm')) {
+                return `${persona.emoji} ${persona.responses.breathing}. Try this: Breathe in for 4 counts, hold for 4, exhale for 6. Repeat 3 times.`;
+            } else if (lowerMessage.includes('focus') || lowerMessage.includes('concentrate') || lowerMessage.includes('productiv')) {
+                return `${persona.emoji} ${persona.responses.focus}. Try the 25-minute focus sprint: Set a timer, eliminate distractions, and dive deep into one task.`;
+            } else if (lowerMessage.includes('sleep') || lowerMessage.includes('rest') || lowerMessage.includes('tired')) {
+                return `${persona.emoji} ${persona.responses.rest}. Create a wind-down ritual: dim lights, no screens, gentle stretches, and deep breathing.`;
+            } else if (lowerMessage.includes('step') || lowerMessage.includes('walk') || lowerMessage.includes('move')) {
+                return `${persona.emoji} Movement is medicine! Try taking a 5-minute walk, do some desk stretches, or dance to your favorite song.`;
+            } else if (lowerMessage.includes('data') || lowerMessage.includes('stats') || lowerMessage.includes('metrics') || lowerMessage.includes('dashboard')) {
+                updateDashboardData();
+                return `${persona.emoji} I've updated your wellness dashboard! You're doing great - ${Math.floor(Math.random() * 3) === 0 ? 'your steps are up 12% this week!' : Math.floor(Math.random() * 2) === 0 ? 'your focus time improved 15%!' : 'your sleep quality is excellent!'}`;
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return `${persona.emoji} ${persona.greetings[Math.floor(Math.random() * persona.greetings.length)]} I'm ${persona.name}, here to support your wellness journey!`;
+            } else {
+                // Generic wellness response
+                const responses = [
+                    `${persona.emoji} That's interesting! Remember, small consistent actions create big changes over time.`,
+                    `${persona.emoji} I hear you! Wellness is a journey of self-discovery and gentle progress.`,
+                    `${persona.emoji} Thanks for sharing! Would you like a breathing exercise, motivational quote, or focus tip?`,
+                    `${persona.emoji} Every step forward counts! What aspect of wellness would you like to explore today?`
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        }
+
+        function speak(text) {
+            // Stop any current speech
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voiceSelect = document.getElementById('voiceSelect');
+            
+            if (voices.length > 0 && voiceSelect.value) {
+                utterance.voice = voices[voiceSelect.value];
+            }
+            
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            utterance.volume = 0.8;
+
+            utterance.onstart = function() {
+                showStatus('🔊 Speaking...');
+                currentUtterance = utterance;
+            };
+
+            utterance.onend = function() {
+                hideStatus();
+                currentUtterance = null;
+            };
+
+            utterance.onerror = function(e) {
+                console.error('Speech synthesis error:', e);
+                hideStatus();
+                currentUtterance = null;
+            };
+
+            speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeaking() {
+            speechSynthesis.cancel();
+            hideStatus();
+            currentUtterance = null;
+        }
+
+        function getDailyQuote(speak = true) {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const quoteIndex = dayOfYear % dailyQuotes.length;
+            const quote = dailyQuotes[quoteIndex];
+
+            document.getElementById('quoteText').textContent = `"${quote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `— ${quote.author}`;
+
+            if (speak) {
+                const persona = personas[currentPersona];
+                const response = `${persona.emoji} Today's wisdom: ${quote.text}`;
+                addMessage(response, 'bot');
+                
+                if (document.getElementById('autoSpeak').checked) {
+                    speak(response);
+                }
+            }
+
+            return quote.text;
+        }
+
+        function downloadCSV() {
+            const days = parseInt(document.getElementById('dayCount').value) || 30;
+            
+            // Generate sample wellness data
+            const csvData = generateSampleData(days);
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ea_aura_sample_data_${days}days.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            addMessage(`📊 Downloaded ${days} days of sample wellness data`, 'bot');
+        }
+
+        function generateSampleData(days) {
+            let csv = 'Date,Steps,Sleep_Hours,Mood_Score,Stress_Level,Focus_Minutes,Gratitude_Entries,Water_Glasses,Exercise_Minutes,Screen_Time_Hours,Meditation_Minutes\n';
+            
+            const today = new Date();
+            
+            for (let i = days - 1; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                const steps = Math.floor(Math.random() * 5000) + 5000; // 5000-10000 steps
+                const sleep = (Math.random() * 3 + 6).toFixed(1); // 6-9 hours
+                const mood = Math.floor(Math.random() * 3) + 8; // 8-10 score
+                const stress = Math.floor(Math.random() * 4) + 1; // 1-4 level
+                const focus = Math.floor(Math.random() * 120) + 60; // 60-180 minutes
+                const gratitude = Math.floor(Math.random() * 4); // 0-3 entries
+                const water = Math.floor(Math.random() * 4) + 6; // 6-9 glasses
+                const exercise = Math.floor(Math.random() * 60) + 20; // 20-80 minutes
+                const screenTime = (Math.random() * 4 + 4).toFixed(1); // 4-8 hours
+                const meditation = Math.floor(Math.random() * 20) + 5; // 5-25 minutes
+                
+                csv += `${date.toISOString().split('T')[0]},${steps},${sleep},${mood},${stress},${focus},${gratitude},${water},${exercise},${screenTime},${meditation}\n`;
+            }
+            
+            return csv;
+        }
+
+        function showStatus(message) {
+            const status = document.getElementById('statusIndicator');
+            status.textContent = message;
+            status.style.display = 'block';
+        }
+
+        function hideStatus() {
+            document.getElementById('statusIndicator').style.display = 'none';
+        }
+
+        function updateDashboardData() {
+            // Simulate real-time data updates
+            const steps = Math.floor(Math.random() * 3000) + 7000;
+            const sleep = (Math.random() * 2 + 6.5).toFixed(1);
+            const mood = Math.floor(Math.random() * 3) + 8;
+            const focus = Math.floor(Math.random() * 60) + 120;
+
+            document.getElementById('todaySteps').textContent = steps.toLocaleString();
+            document.getElementById('todaySleep').textContent = sleep + 'h';
+            document.getElementById('todayMood').textContent = mood + '/10';
+            document.getElementById('todayFocus').textContent = focus + 'm';
+
+            // Update AI insight based on current persona
+            const persona = personas[currentPersona];
+            const insights = [
+                `${persona.emoji} Your wellness journey is looking great! Focus time is up ${Math.floor(Math.random() * 10) + 10}% this week.`,
+                `${persona.emoji} Excellent progress! Your sleep consistency has improved significantly.`,
+                `${persona.emoji} You're building momentum! ${Math.floor(Math.random() * 5) + 3} days of hitting your step goal.`,
+                `${persona.emoji} Your mood tracking shows positive trends. Keep up the great work!`
+            ];
+            
+            document.getElementById('aiInsight').textContent = insights[Math.floor(Math.random() * insights.length)];
+
+            // Animate the progress bars
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-fill');
+                progressBars.forEach(bar => {
+                    const currentWidth = parseFloat(bar.style.width);
+                    const newWidth = Math.max(20, Math.min(100, currentWidth + (Math.random() * 10 - 5)));
+                    bar.style.width = newWidth + '%';
+                });
+            }, 300);
+        }
+
+        function animateCharts() {
+            // Animate the chart bars with new data
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach(bar => {
+                const newHeight = Math.random() * 70 + 20;
+                bar.style.height = newHeight + '%';
+            });
+        }
+
+        // Auto-update data every 30 seconds for demo purposes
+        setInterval(() => {
+            updateDashboardData();
+            animateCharts();
+        }, 30000);
+
+        // Persona selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.persona-btn')) {
+                const btn = e.target.closest('.persona-btn');
+                const persona = btn.dataset.persona;
+                
+                // Update active state
+                document.querySelectorAll('.persona-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                currentPersona = persona;
+                
+                // Update AI insight for new persona
+                updateDashboardData();
+                
+                // Greet with new persona
+                const personaData = personas[currentPersona];
+                const greeting = `${personaData.emoji} Hi! I'm ${personaData.name}. ${personaData.greetings[Math.floor(Math.random() * personaData.greetings.length)]}`;
+                addMessage(greeting, 'bot');
+                
+                if (document.getElementById('autoSpeak').checked) {
+                    speak(greeting);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
