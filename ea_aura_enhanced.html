@@ -140,9 +140,9 @@
         }
 
         .genie-avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -152,6 +152,9 @@
             animation: float 3s ease-in-out infinite;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            border: 4px solid white;
+            overflow: hidden;
         }
 
         .genie-avatar:hover {
@@ -479,11 +482,11 @@
         <div class="app-container">
             <!-- Header with Coin Jar -->
             <div class="header">
-                <div class="logo">ðŸŒŸ EA Aura</div>
+                <div class="logo">🌟 EA Aura</div>
                 <div class="tagline">Your Enhanced Wellness Hub</div>
                 <div class="coin-jar" onclick="animateCoinJar()" title="Your Wellness Coins">
                     <span class="coin-count" id="coinCount">1,247</span>
-                    <span style="font-size: 1.5em;">ðŸª™</span>
+                    <span style="font-size: 1.5em;">🪙</span>
                 </div>
             </div>
 
@@ -962,7 +965,7 @@
 
             <div class="genie-chat" id="genieChat">
                 <div class="genie-message">
-                    ðŸ¤– Hello! I'm Aura, your AI wellness assistant. I've been trained on the EA Coaching Pillars to provide personalized wellness guidance. Click on any wellness metric to earn coins! ðŸª™
+                    🤖 Hello! I'm Aura, your AI wellness assistant. I've been trained on the EA Coaching Pillars to provide personalized wellness guidance. Click on any wellness metric to earn coins! 🪙
                 </div>
                 <div class="genie-message">
                     ðŸŽ¯ I can help with goal setting, stress management, focus techniques, Python games guidance, and much more. What would you like to explore today?
@@ -1321,10 +1324,33 @@
             if (modal) document.body.removeChild(modal);
             
             // Show loading message
-            updateGenieMessage('ðŸŽ® Launching Python game... Check your system for the game window! The game will run independently and coins will be added when you return.');
+            updateAuraMessage('🎮 Launching Python game... Check your system for the game window! The game will run independently and coins will be added when you return.');
             
-            // For demonstration, simulate game launch
-            simulateGameLaunch(gameKey);
+            // Try to launch the actual Python game
+            try {
+                const gameFiles = {
+                    'memory': 'games/memory_cards.py',
+                    'sudoku': 'games/sudoku_puzzle.py',
+                    'snake': 'games/wellness_snake.py',
+                    'zen': 'games/zen_garden.py',
+                    'launcher': 'games/game_launcher.py'
+                };
+                
+                const gameName = gameFiles[gameKey];
+                if (gameName) {
+                    // Attempt to open Python file (this will depend on system Python association)
+                    window.open(gameName, '_blank');
+                    
+                    // Also simulate for demonstration if direct launch fails
+                    setTimeout(() => simulateGameLaunch(gameKey), 2000);
+                    
+                    updateAuraMessage(`🚀 Launched ${gameName}! If the game doesn't open automatically, navigate to the games folder and run it manually with Python.`);
+                }
+            } catch (error) {
+                console.log('Direct launch failed, using simulation:', error);
+                simulateGameLaunch(gameKey);
+                updateAuraMessage('💡 Tip: For direct game launching, ensure Python is installed and .py files are associated with Python on your system.');
+            }
         }
 
         function simulateGameLaunch(gameKey) {
