@@ -13,9 +13,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
             min-height: 100vh;
-            color: #fff;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,14 +23,13 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            background: #ffffff;
             border-radius: 20px;
             padding: 30px;
             max-width: 800px;
             width: 100%;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
         }
 
         .header {
@@ -42,7 +41,7 @@
             font-size: 2.5em;
             font-weight: bold;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -50,8 +49,9 @@
 
         .tagline {
             font-size: 1.1em;
-            opacity: 0.9;
+            opacity: 0.7;
             margin-bottom: 20px;
+            color: #666;
         }
 
         .voice-status {
@@ -82,11 +82,11 @@
         }
 
         .persona-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid transparent;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
             border-radius: 15px;
             padding: 15px 20px;
-            color: white;
+            color: #333;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
@@ -94,12 +94,14 @@
         }
 
         .persona-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: #e9ecef;
+            border-color: #667eea;
         }
 
         .persona-btn.active {
-            border-color: #ffeaa7;
-            background: rgba(255, 234, 167, 0.2);
+            border-color: #667eea;
+            background: #e8f0ff;
+            color: #667eea;
         }
 
         .persona-name {
@@ -113,13 +115,13 @@
         }
 
         .chat-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f8f9fa;
             border-radius: 15px;
             height: 300px;
             overflow-y: auto;
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #e9ecef;
         }
 
         .message {
@@ -131,13 +133,15 @@
         }
 
         .user-message {
-            background: rgba(116, 75, 162, 0.4);
+            background: #667eea;
             margin-left: auto;
             text-align: right;
+            color: white;
         }
 
         .bot-message {
-            background: rgba(255, 255, 255, 0.2);
+            background: #e9ecef;
+            color: #333;
         }
 
         .input-area {
@@ -148,23 +152,24 @@
 
         .text-input {
             flex: 1;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: #ffffff;
+            border: 1px solid #e9ecef;
             border-radius: 25px;
             padding: 12px 20px;
-            color: white;
+            color: #333;
             font-size: 16px;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .text-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: #6c757d;
         }
 
         .text-input:focus {
-            border-color: #ffeaa7;
-            background: rgba(255, 255, 255, 0.3);
+            border-color: #667eea;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .btn {
@@ -243,12 +248,12 @@
         }
 
         .quote-section {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f8f9fa;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #e9ecef;
         }
 
         .quote-text {
@@ -264,10 +269,10 @@
         }
 
         .dev-section {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f8f9fa;
             border-radius: 15px;
             padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #e9ecef;
         }
 
         .dev-title {
@@ -285,11 +290,12 @@
         }
 
         .data-visualization {
-            background: rgba(255, 255, 255, 0.1);
+            background: #ffffff;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .viz-title {
@@ -329,22 +335,49 @@
         }
 
         .metric-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f8f9fa;
             border-radius: 10px;
             padding: 15px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .metric-value {
             font-size: 1.8em;
             font-weight: bold;
             margin-bottom: 5px;
+            background: none;
+            border: none;
+            text-align: center;
+            color: #333;
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+        }
+
+        .metric-value:hover {
+            background: #ffffff;
+            border: 1px solid #667eea;
+            border-radius: 5px;
+            padding: 2px 5px;
+        }
+
+        .metric-value:focus {
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            padding: 2px 5px;
         }
 
         .metric-label {
             font-size: 0.8em;
-            opacity: 0.8;
+            opacity: 0.7;
+            color: #666;
         }
 
         .progress-bar {
@@ -541,34 +574,34 @@
             
             <div class="metric-grid">
                 <div class="metric-card">
-                    <div class="metric-value" id="todaySteps">8,247</div>
+                    <input type="text" class="metric-value" id="todaySteps" value="8247" placeholder="Enter steps" title="Click to edit your daily steps">
                     <div class="metric-label">Steps Today</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 82%; background: linear-gradient(45deg, #2ecc71, #27ae60);"></div>
+                        <div class="progress-fill" id="stepsProgress" style="width: 82%; background: linear-gradient(45deg, #2ecc71, #27ae60);"></div>
                     </div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value" id="todaySleep">7.2h</div>
-                    <div class="metric-label">Sleep Last Night</div>
+                    <input type="text" class="metric-value" id="todaySleep" value="7.2" placeholder="Hours" title="Click to edit your sleep hours">
+                    <div class="metric-label">Sleep Last Night (hours)</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 90%; background: linear-gradient(45deg, #3498db, #2980b9);"></div>
+                        <div class="progress-fill" id="sleepProgress" style="width: 90%; background: linear-gradient(45deg, #3498db, #2980b9);"></div>
                     </div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value" id="todayMood">9/10</div>
-                    <div class="metric-label">Mood Score</div>
+                    <input type="number" class="metric-value" id="todayMood" value="9" min="1" max="10" placeholder="1-10" title="Click to edit your mood score (1-10)">
+                    <div class="metric-label">Mood Score (1-10)</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 90%; background: linear-gradient(45deg, #f39c12, #e67e22);"></div>
+                        <div class="progress-fill" id="moodProgress" style="width: 90%; background: linear-gradient(45deg, #f39c12, #e67e22);"></div>
                     </div>
                 </div>
                 
                 <div class="metric-card">
-                    <div class="metric-value" id="todayFocus">145m</div>
-                    <div class="metric-label">Focus Time</div>
+                    <input type="number" class="metric-value" id="todayFocus" value="145" placeholder="Minutes" title="Click to edit your focus time in minutes">
+                    <div class="metric-label">Focus Time (minutes)</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: 72%; background: linear-gradient(45deg, #9b59b6, #8e44ad);"></div>
+                        <div class="progress-fill" id="focusProgress" style="width: 72%; background: linear-gradient(45deg, #9b59b6, #8e44ad);"></div>
                     </div>
                 </div>
             </div>
@@ -722,6 +755,8 @@
             loadVoices();
             setupKeyboardShortcuts();
             getDailyQuote();
+            setupEditableMetrics();
+            updateProgressBars();
             
             // Load voices when they become available
             if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -1036,38 +1071,58 @@
             document.getElementById('statusIndicator').style.display = 'none';
         }
 
-        function updateDashboardData() {
-            // Simulate real-time data updates
-            const steps = Math.floor(Math.random() * 3000) + 7000;
-            const sleep = (Math.random() * 2 + 6.5).toFixed(1);
-            const mood = Math.floor(Math.random() * 3) + 8;
-            const focus = Math.floor(Math.random() * 60) + 120;
+        function updateProgressBars() {
+            // Update progress bars based on actual values
+            const steps = parseInt(document.getElementById('todaySteps').value) || 0;
+            const sleep = parseFloat(document.getElementById('todaySleep').value) || 0;
+            const mood = parseInt(document.getElementById('todayMood').value) || 0;
+            const focus = parseInt(document.getElementById('todayFocus').value) || 0;
 
-            document.getElementById('todaySteps').textContent = steps.toLocaleString();
-            document.getElementById('todaySleep').textContent = sleep + 'h';
-            document.getElementById('todayMood').textContent = mood + '/10';
-            document.getElementById('todayFocus').textContent = focus + 'm';
+            // Calculate percentages (with reasonable maximums)
+            const stepsPercent = Math.min(100, (steps / 10000) * 100); // 10k steps = 100%
+            const sleepPercent = Math.min(100, (sleep / 9) * 100);      // 9 hours = 100%
+            const moodPercent = (mood / 10) * 100;                      // 10 = 100%
+            const focusPercent = Math.min(100, (focus / 200) * 100);    // 200 min = 100%
 
-            // Update AI insight based on current persona
+            document.getElementById('stepsProgress').style.width = stepsPercent + '%';
+            document.getElementById('sleepProgress').style.width = sleepPercent + '%';
+            document.getElementById('moodProgress').style.width = moodPercent + '%';
+            document.getElementById('focusProgress').style.width = focusPercent + '%';
+
+            // Update AI insight based on current persona and data
             const persona = personas[currentPersona];
-            const insights = [
-                `${persona.emoji} Your wellness journey is looking great! Focus time is up ${Math.floor(Math.random() * 10) + 10}% this week.`,
-                `${persona.emoji} Excellent progress! Your sleep consistency has improved significantly.`,
-                `${persona.emoji} You're building momentum! ${Math.floor(Math.random() * 5) + 3} days of hitting your step goal.`,
-                `${persona.emoji} Your mood tracking shows positive trends. Keep up the great work!`
-            ];
+            let insight = `${persona.emoji} `;
             
-            document.getElementById('aiInsight').textContent = insights[Math.floor(Math.random() * insights.length)];
+            if (steps >= 8000) insight += "Great job on your steps! ";
+            if (sleep >= 7) insight += "Your sleep is on track. ";
+            if (mood >= 8) insight += "Your mood is excellent! ";
+            if (focus >= 120) insight += "Fantastic focus time today!";
+            
+            if (!insight.includes("Great") && !insight.includes("Your")) {
+                insight += "Every small step counts towards your wellness journey!";
+            }
+            
+            document.getElementById('aiInsight').textContent = insight;
+        }
 
-            // Animate the progress bars
-            setTimeout(() => {
-                const progressBars = document.querySelectorAll('.progress-fill');
-                progressBars.forEach(bar => {
-                    const currentWidth = parseFloat(bar.style.width);
-                    const newWidth = Math.max(20, Math.min(100, currentWidth + (Math.random() * 10 - 5)));
-                    bar.style.width = newWidth + '%';
+        function setupEditableMetrics() {
+            // Add event listeners to all metric inputs
+            const metricInputs = document.querySelectorAll('.metric-value');
+            metricInputs.forEach(input => {
+                input.addEventListener('input', updateProgressBars);
+                input.addEventListener('blur', updateProgressBars);
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                        updateProgressBars();
+                    }
                 });
-            }, 300);
+            });
+        }
+
+        function updateDashboardData() {
+            // This function now just updates the AI insight
+            updateProgressBars();
         }
 
         function animateCharts() {
