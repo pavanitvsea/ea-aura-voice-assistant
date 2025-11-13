@@ -179,6 +179,53 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
+        /* Coin Jar Animations */
+        @keyframes coinDrop {
+            0% { 
+                transform: translateY(-100px) scale(1.5) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateY(150px) scale(0.8) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes jarShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        @keyframes jarGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6)); }
+            100% { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3)); }
+        }
+
+        .flying-coin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('aura_coin.png') center/cover;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+            animation: coinDrop 1.5s ease-in forwards;
+        }
+
+        .jar-shake {
+            animation: jarShake 0.6s ease-in-out;
+        }
+
+        .jar-glow {
+            animation: jarGlow 1s ease-in-out;
+        }
+
         .genie-name {
             font-size: 1.3em;
             font-weight: bold;
@@ -619,6 +666,51 @@
                         <p id="aiInsight" style="line-height: 1.5; color: #333;">
                             Great job! Your focus time increased 15% this week. Try the Pomodoro technique for even better concentration. Your sleep quality is excellent - keep that bedtime routine! 🎯
                         </p>
+                    </div>
+
+                    <!-- Animated Coin Jar Section -->
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 25px; margin-top: 25px; align-items: center;">
+                        <!-- Coin Jar Animation -->
+                        <div style="text-align: center; position: relative;">
+                            <div id="coinJarContainer" style="position: relative; display: inline-block;">
+                                <img id="coinJarImage" src="aura_jar.png" alt="Wellness Coin Jar" 
+                                     style="width: 200px; height: auto; transition: all 0.3s ease;" 
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display: none; font-size: 4em; color: #667eea;">🏺</div>
+                                
+                                <!-- Coin Count Display -->
+                                <div id="jarCoinCount" style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); background: linear-gradient(45deg, #ffd700, #ffed4e); color: #8b7d00; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); border: 2px solid #ffd700;">
+                                    1,247 Coins
+                                </div>
+                                
+                                <!-- Flying Coins Container -->
+                                <div id="flyingCoinsContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Play It Forward Message -->
+                        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 25px; position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%; opacity: 0.5;"></div>
+                            <div style="position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; opacity: 0.3;"></div>
+                            
+                            <h3 style="margin-bottom: 15px; color: white; position: relative; z-index: 2;">
+                                🎯 Wellness Rewards
+                            </h3>
+                            <p style="margin-bottom: 20px; font-size: 1.1em; line-height: 1.6; position: relative; z-index: 2; opacity: 0.95;">
+                                Fill the jar to earn <strong>Play It Forward</strong> points! Every wellness activity adds coins to your jar and contributes to your overall wellbeing score.
+                            </p>
+                            
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; position: relative; z-index: 2;">
+                                <a href="https://playitforward.work.ea.com/" target="_blank" 
+                                   style="background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 8px;">
+                                    🚀 Visit Play It Forward
+                                </a>
+                                <button onclick="showJarProgress()" 
+                                        style="background: rgba(255,255,255,0.15); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                                    📊 View Progress
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1444,21 +1536,128 @@
             
             // Update displays
             document.getElementById('coinCount').textContent = currentCoins.toLocaleString();
-            document.getElementById('totalCoins').textContent = currentCoins.toLocaleString();
-            document.getElementById('todayCoins').textContent = todayCoins;
-            document.getElementById('weeklyCoins').textContent = weeklyCoins;
+            if (document.getElementById('totalCoins')) {
+                document.getElementById('totalCoins').textContent = currentCoins.toLocaleString();
+            }
+            if (document.getElementById('todayCoins')) {
+                document.getElementById('todayCoins').textContent = todayCoins;
+            }
+            if (document.getElementById('weeklyCoins')) {
+                document.getElementById('weeklyCoins').textContent = weeklyCoins;
+            }
+            
+            // Update jar coin count
+            updateJarCoinCount();
             
             // Save wellness data when metrics are updated
             saveDailyWellnessData();
             
-            // Play coin sound
+            // Play coin sound and animate jar
             playCoinSound();
-            
-            // Animate coin
-            animateCoin(event);
+            animateJarCoin(amount, event);
             
             // Update genie message
-            updateGenieMessage('Ž‰ Great job! You earned ' + amount + ' coins! Keep up the excellent wellness work!');
+            updateGenieMessage('🎉 Great job! You earned ' + amount + ' coins! Keep up the excellent wellness work!');
+        }
+
+        function updateJarCoinCount() {
+            const jarCoinDisplay = document.getElementById('jarCoinCount');
+            if (jarCoinDisplay) {
+                jarCoinDisplay.textContent = currentCoins.toLocaleString() + ' Coins';
+                
+                // Update jar image based on coin count
+                updateJarImage();
+            }
+        }
+
+        function updateJarImage() {
+            const jarImage = document.getElementById('coinJarImage');
+            if (jarImage && currentCoins > 500) {
+                // Show jar with coins when user has collected enough
+                jarImage.src = 'aura_jar_with_coins.png';
+            }
+        }
+
+        function animateJarCoin(amount, event) {
+            const jarContainer = document.getElementById('coinJarContainer');
+            const flyingCoinsContainer = document.getElementById('flyingCoinsContainer');
+            
+            if (!jarContainer || !flyingCoinsContainer) return;
+            
+            // Create multiple flying coins based on amount
+            const coinCount = Math.min(Math.floor(amount / 5), 6); // Max 6 coins
+            
+            for (let i = 0; i < coinCount; i++) {
+                setTimeout(() => {
+                    createFlyingCoin(flyingCoinsContainer, i);
+                }, i * 150);
+            }
+            
+            // Shake and glow jar
+            const jarImage = document.getElementById('coinJarImage');
+            if (jarImage) {
+                jarImage.classList.add('jar-shake', 'jar-glow');
+                setTimeout(() => {
+                    jarImage.classList.remove('jar-shake', 'jar-glow');
+                }, 1000);
+            }
+        }
+
+        function createFlyingCoin(container, index) {
+            const coin = document.createElement('div');
+            coin.className = 'flying-coin';
+            
+            // Random starting position from top
+            coin.style.left = (30 + Math.random() * 40) + '%';
+            coin.style.top = '-50px';
+            
+            // Slight delay for staggered effect
+            coin.style.animationDelay = (index * 0.1) + 's';
+            
+            container.appendChild(coin);
+            
+            // Remove coin after animation
+            setTimeout(() => {
+                if (coin && coin.parentNode) {
+                    coin.parentNode.removeChild(coin);
+                }
+            }, 1500);
+        }
+
+        function playCoinSound() {
+            // Create audio context for coin sound effect
+            if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+                try {
+                    const audioContext = new (AudioContext || webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                } catch (e) {
+                    // Fallback for browsers that don't support Web Audio API
+                    console.log('Coin sound played (audio not available)');
+                }
+            }
+        }
+
+        function showJarProgress() {
+            const currentLevel = Math.floor(currentCoins / 100);
+            const nextMilestone = (currentLevel + 1) * 100;
+            const progress = ((currentCoins % 100) / 100 * 100).toFixed(1);
+            
+            const message = `🏆 Jar Progress Report\n\n💰 Current Coins: ${currentCoins.toLocaleString()}\n🎯 Next Milestone: ${nextMilestone} coins\n📊 Progress: ${progress}%\n\n🌟 Keep filling your wellness jar!`;
+            
+            updateAuraMessage(message);
         }
 
         // Save daily wellness data to localStorage for reports
