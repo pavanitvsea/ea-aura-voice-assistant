@@ -1168,7 +1168,7 @@
             downloadFile(JSON.stringify(data, null, 2), 'ea_aura_wellness_data.json', 'application/json');
         }
 
-        function downloadExcelTemplate() {
+                function downloadExcelTemplate() {
             // Show information modal for the comprehensive Excel file
             const modal = document.createElement('div');
             modal.style.cssText = `
@@ -1178,55 +1178,53 @@
             `;
             
             modal.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 20px; max-width: 700px; max-height: 90vh; overflow-y: auto; position: relative;">
+                <div style="background: white; padding: 30px; border-radius: 20px; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative;">
                     <button onclick="document.body.removeChild(this.parentElement.parentElement)" 
                             style="position: absolute; top: 15px; right: 15px; background: #f44336; color: white; 
-                                   border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px;">Ã—</button>
+                                   border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px;">×</button>
                     
-                    <h2 style="color: #28a745; margin-bottom: 20px; text-align: center;">“ˆ EA Aura Financial Health Excel File</h2>
+                    <h2 style="color: #007acc; margin-bottom: 25px; text-align: center;">📊 EA Financial Wellness Excel Template</h2>
                     
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                        <h4 style="color: #1b5e20; margin-bottom: 10px;">“Š Complete Excel Workbook Features:</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                            <div>âœ… Income Tracking Sheet</div>
-                            <div>âœ… Expense Analysis Sheet</div>
-                            <div>âœ… Investment Portfolio Sheet</div>
-                            <div>âœ… Financial Goals Sheet</div>
-                            <div>âœ… Health Ratios Sheet</div>
-                            <div>âœ… Budget Allocation Sheet</div>
-                            <div>âœ… Financial Tips Sheet</div>
-                            <div>âœ… Auto-calculating Formulas</div>
+                    <div style="background: #e8f5e8; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                        <h4 style="color: #28a745; margin-bottom: 15px; text-align: center;">📋 Complete Excel Workbook Features:</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem;">
+                            <div>✅ Income Tracking Sheet</div>
+                            <div>✅ Expense Analysis Sheet</div>
+                            <div>✅ Investment Portfolio Sheet</div>
+                            <div>✅ Financial Goals Sheet</div>
+                            <div>✅ Health Ratios Sheet</div>
+                            <div>✅ Budget Allocation Sheet</div>
+                            <div>✅ Financial Tips Sheet</div>
+                            <div>✅ Auto-calculating Formulas</div>
                         </div>
                     </div>
                     
-                    <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-                        <h4 style="color: #856404; margin-bottom: 10px;">“‚ File Access Options:</h4>
-                        <p style="margin-bottom: 15px; color: #333;">The comprehensive Excel file (EA_Aura_Financial_Health.xlsx) contains 7 sheets with:</p>
-                        <ul style="color: #333; margin-left: 20px; line-height: 1.6;">
-                            <li>Pre-built formulas and calculations</li>
-                            <li>Professional formatting and structure</li>
-                            <li>Sample data to guide your entries</li>
-                            <li>Comprehensive financial wellness tips</li>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #007acc;">
+                        <h4 style="color: #007acc; margin-bottom: 10px; text-align: center;">🎯 Professional Template Benefits</h4>
+                        <ul style="color: #555; margin-left: 20px; line-height: 1.8; list-style: none;">
+                            <li>💡 <strong>50/30/20 Budget Framework</strong> - Proven allocation strategy</li>
+                            <li>🔢 <strong>Automated Calculations</strong> - No manual math required</li>
+                            <li>🎨 <strong>Professional Formatting</strong> - Ready for presentations</li>
+                            <li>📝 <strong>Sample Data Included</strong> - Easy to understand and customize</li>
                         </ul>
                     </div>
                     
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <button onclick="downloadExcelCSV(); document.body.removeChild(this.parentElement.parentElement)" 
-                                style="background: #28a745; color: white; border: none; padding: 12px 24px; 
-                                       border-radius: 25px; font-size: 16px; cursor: pointer; margin-right: 10px;">
-                            “Š Download CSV Version
-                        </button>
                         <a href="EA_Aura_Financial_Health.xlsx" download 
-                           style="background: #007acc; color: white; text-decoration: none; padding: 12px 24px; 
-                                  border-radius: 25px; font-size: 16px; display: inline-block;"
-                           onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">
-                            “ˆ  Download Excel File
+                           style="background: linear-gradient(45deg, #007acc, #0099cc); color: white; text-decoration: none; padding: 18px 40px; 
+                                  border-radius: 30px; font-size: 18px; display: inline-block; font-weight: bold; 
+                                  box-shadow: 0 4px 12px rgba(0,122,204,0.3); transition: all 0.3s ease;"
+                           onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)"
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,122,204,0.4)'"
+                           onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 4px 12px rgba(0,122,204,0.3)'">
+                            📊 Download Excel Template
                         </a>
                     </div>
                     
-                    <div style="font-size: 0.9rem; color: #666; text-align: center; line-height: 1.5;">
-                        ’¡ The Excel file includes advanced formulas, conditional formatting, and professional structure<br>
-                        The CSV version works in any spreadsheet program and contains the same comprehensive data
+                    <div style="font-size: 0.9rem; color: #555; text-align: center; line-height: 1.6; background: #f0f8ff; padding: 15px; border-radius: 8px;">
+                        <strong>🚀 Ready to use professional Excel template</strong><br>
+                        Advanced formulas • Multiple worksheets • Conditional formatting<br>
+                        Professional charts • Budget frameworks • Financial guidance
                     </div>
                 </div>
             `;
@@ -1235,7 +1233,7 @@
             
             // Award coins for accessing financial planning tools
             addCoins(35, event);
-            updateAuraMessage("📄 Excellent! Accessing EA Aura Financial Health resources. Choose between the full Excel file with advanced features or the CSV version compatible with any spreadsheet program!");
+            updateAuraMessage("📊 Excellent! Accessing EA Aura Financial Health Excel template. This comprehensive workbook includes multiple worksheets with advanced formulas and professional formatting!");
         }
 
         function downloadExcelCSV() {
