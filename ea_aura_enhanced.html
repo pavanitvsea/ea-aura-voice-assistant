@@ -601,84 +601,7 @@
                     </div>
                 </div>
 
-                <!-- Games Tab -->
-
-                                    <li>When you add or edit rows, charts will update within the existing range</li>
-                                    <li>To extend: right-click â†' Select Data â†' adjust data range</li>
-                                </ul>
-                            </div>
-                            
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">2. Highlight Key Insights</h5>
-                                <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
-                                    <li>Use conditional formatting (Home â†' Conditional Formatting)</li>
-                                    <li>Green for positive cash flow, red for overspending</li>
-                                </ul>
-                            </div>
-                            
-                            <div>
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">3. Add a Summary Dashboard</h5>
-                                <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
-                                    <li>Combine total income, expenses, net savings in one sheet</li>
-                                    <li>Use formulas like <code style="background: #f5f5f5; padding: 2px 4px; border-radius: 3px;">=SUM(B2:B10)</code> for automatic updates</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Maintenance & Backup Tips -->
-                        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">🔧 Maintenance & Backup</h4>
-                            
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-                                <div>
-                                    <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Version Control</h5>
-                                    <p style="color: #333; margin: 0; font-size: 0.9rem;">Keep dated copies (e.g., "Financial_Plan_Nov2025.xlsx") to track progress over time.</p>
-                                </div>
-                                
-                                <div>
-                                    <h5 style="color: #1b5e20; margin-bottom: 8px;">2. Protect Key Sheets</h5>
-                                    <p style="color: #333; margin: 0; font-size: 0.9rem;">Lock formula cells (Review â†' Protect Sheet) to prevent accidental edits.</p>
-                                </div>
-                                
-                                <div>
-                                    <h5 style="color: #1b5e20; margin-bottom: 8px;">3. Backup Regularly</h5>
-                                    <p style="color: #333; margin: 0; font-size: 0.9rem;">Save on cloud storage or external drive for safety and accessibility.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Quick Reference Card -->
-                        <div style="background: #1b5e20; color: white; border-radius: 12px; padding: 15px; text-align: center;">
-                            <h5 style="margin-bottom: 10px; color: #4caf50;">🚀 Quick Start Checklist</h5>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9rem;">
-                                <div>âœ… Download template</div>
-                                <div>âœ… Set up categories</div>
-                                <div>âœ… Enter initial data</div>
-                                <div>âœ… Create dashboard</div>
-                                <div>âœ… Set up backups</div>
-                                <div>âœ… Review monthly</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>† Recent Achievements</h3>
-                    <div class="help-resources">
-                        <div class="help-card">
-                            <div class="help-icon">🏃‍♂️</div>
-                            <div class="help-title">Step Master</div>
-                            <div class="help-description">Completed 10,000 steps for 7 consecutive days</div>
-                            <div style="color: #28a745; font-weight: bold;">+200 Coins</div>
-                        </div>
-                        <div class="help-card">
-                            <div class="help-icon">§˜â€â™€ï¸</div>
-                            <div class="help-title">Mindful Week</div>
-                            <div class="help-description">Meditated daily for an entire week</div>
-                            <div style="color: #28a745; font-weight: bold;">+150 Coins</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Games Tab -->
+                
                 <div class="tab-panel" id="games-tab">
                     <h2 style="margin-bottom: 20px;">🎮 Web Wellness Games</h2>
                     
@@ -1241,6 +1164,9 @@
                     }
                 }
             };
+            
+            downloadFile(JSON.stringify(data, null, 2), 'ea_aura_wellness_data.json', 'application/json');
+        }
 
         function downloadExcelTemplate() {
             // Show information modal for the comprehensive Excel file
