@@ -149,7 +149,8 @@
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         
         <div class="controls">
-            <p><strong>Controls:</strong> Arrow Keys or WASD to move</p>
+            <p id="gameStatus"><strong>Status:</strong> <span style="color: #4CAF50;">Game Ready</span></p>
+            <p><strong>Controls:</strong> Arrow Keys or WASD to move. Click Start Game first!</p>
             <button class="btn" onclick="startGame()">Start Game</button>
             <button class="btn" onclick="pauseGame()">Pause</button>
             <button class="btn" onclick="resetGame()">Reset</button>
@@ -167,8 +168,8 @@
 
     <script>
         // Game variables
-        let canvas = document.getElementById('gameCanvas');
-        let ctx = canvas.getContext('2d');
+        let canvas;
+        let ctx;
         let gameRunning = false;
         let gameLoop = null;
         
@@ -185,21 +186,51 @@
         
         // Initialize game
         function init() {
+            canvas = document.getElementById('gameCanvas');
+            if (!canvas) {
+                console.error('Canvas not found!');
+                updateGameStatus('Error: Canvas not found', '#FF6B6B');
+                return;
+            }
+            
+            ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Canvas context not available!');
+                updateGameStatus('Error: Canvas context not available', '#FF6B6B');
+                return;
+            }
+            
             placeFood();
             draw();
+            updateGameStatus('Game Ready - Click Start Game!', '#4CAF50');
+            console.log('Snake game initialized successfully!');
+        }
+        
+        function updateGameStatus(message, color) {
+            const statusElement = document.getElementById('gameStatus');
+            if (statusElement) {
+                statusElement.innerHTML = `<strong>Status:</strong> <span style="color: ${color};">${message}</span>`;
+            }
         }
         
         function startGame() {
-            if (!gameRunning) {
+            if (!gameRunning && ctx) {
                 gameRunning = true;
+                // Set initial direction if not set
+                if (direction.x === 0 && direction.y === 0) {
+                    direction = {x: gridSize, y: 0}; // Start moving right
+                }
                 gameLoop = setInterval(update, 150);
                 document.getElementById('score').textContent = score;
+                updateGameStatus('Game Running - Use arrow keys to control snake!', '#2196F3');
+                console.log('Game started!');
             }
         }
         
         function pauseGame() {
             gameRunning = false;
             clearInterval(gameLoop);
+            updateGameStatus('Game Paused - Click Start to resume', '#FF9800');
         }
         
         function resetGame() {
@@ -257,6 +288,11 @@
         }
         
         function draw() {
+            if (!ctx || !canvas) {
+                console.error('Canvas or context not available for drawing');
+                return;
+            }
+            
             // Clear canvas
             ctx.fillStyle = '#1a1a1a';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -304,7 +340,13 @@
         
         // Keyboard controls
         document.addEventListener('keydown', (e) => {
-            if (!gameRunning) return;
+            if (!gameRunning) {
+                console.log('Game not running, key ignored:', e.key);
+                return;
+            }
+            
+            console.log('Key pressed:', e.key);
+            e.preventDefault(); // Prevent default browser behavior
             
             switch(e.key) {
                 case 'ArrowUp':
@@ -312,6 +354,7 @@
                 case 'W':
                     if (direction.y === 0) {
                         direction = {x: 0, y: -gridSize};
+                        console.log('Direction set to UP');
                     }
                     break;
                 case 'ArrowDown':
@@ -319,6 +362,7 @@
                 case 'S':
                     if (direction.y === 0) {
                         direction = {x: 0, y: gridSize};
+                        console.log('Direction set to DOWN');
                     }
                     break;
                 case 'ArrowLeft':
@@ -326,6 +370,7 @@
                 case 'A':
                     if (direction.x === 0) {
                         direction = {x: -gridSize, y: 0};
+                        console.log('Direction set to LEFT');
                     }
                     break;
                 case 'ArrowRight':
@@ -333,6 +378,7 @@
                 case 'D':
                     if (direction.x === 0) {
                         direction = {x: gridSize, y: 0};
+                        console.log('Direction set to RIGHT');
                     }
                     break;
             }
@@ -385,8 +431,17 @@
             breathingPhase = 'prepare';
         }
         
-        // Initialize game on load
-        init();
+        // Initialize game when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+        
+        // Fallback initialization if DOM is already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
