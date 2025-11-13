@@ -476,6 +476,56 @@
                 gap: 15px;
             }
         }
+
+        /* Journal Tab Styles */
+        .mood-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .mood-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .mood-btn.selected {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .gratitude-input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .reflection-input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .prompt-card:hover {
+            background: rgba(255,255,255,0.5) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .journal-entry {
+            transition: all 0.3s ease;
+        }
+
+        .journal-entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -496,6 +546,7 @@
             <div class="tab-navigation">
                 <button class="tab-btn active" onclick="switchTab('wellness')">❤️ Wellness</button>
                 <button class="tab-btn" onclick="switchTab('wealth')">🪙 Wealth</button>
+                <button class="tab-btn" onclick="switchTab('journal')">📝 Journal</button>
                 <button class="tab-btn" onclick="switchTab('games')">🎮 Games</button>
                 <button class="tab-btn" onclick="switchTab('reports')">📊 Reports</button>
                 <button class="tab-btn" onclick="switchTab('help')">❓ Help</button>
@@ -597,6 +648,129 @@
                         
                         <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
                             ℹ️ Compatible with Excel 2016+ and Google Sheets
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Tab -->
+                <div class="tab-panel" id="journal-tab">
+                    <h2 style="margin-bottom: 20px;">📝 Wellness Journal</h2>
+                    
+                    <!-- Quick Stats -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2em; font-weight: bold;" id="journalStreak">7</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">Day Streak</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2em; font-weight: bold;" id="totalEntries">23</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">Total Entries</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2em; font-weight: bold;" id="avgMoodScore">8.2</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">Avg Mood</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #fa709a, #fee140); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 2em; font-weight: bold;" id="coinsEarned">340</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">Coins Earned</div>
+                        </div>
+                    </div>
+
+                    <!-- Today's Entry Section -->
+                    <div style="background: #f8f9fa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 2px solid #e9ecef;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3 style="color: #333; margin: 0;">📅 Today's Entry</h3>
+                            <span style="color: #666; font-size: 0.9em;" id="todayDate"></span>
+                        </div>
+
+                        <!-- Mood Selector -->
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: #555; margin-bottom: 10px;">🎭 How are you feeling today?</h4>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="mood-btn" data-mood="5" onclick="selectMood(5, this)">😁 Amazing</button>
+                                <button class="mood-btn" data-mood="4" onclick="selectMood(4, this)">😊 Great</button>
+                                <button class="mood-btn" data-mood="3" onclick="selectMood(3, this)">🙂 Good</button>
+                                <button class="mood-btn" data-mood="2" onclick="selectMood(2, this)">😐 Okay</button>
+                                <button class="mood-btn" data-mood="1" onclick="selectMood(1, this)">😟 Tough</button>
+                            </div>
+                        </div>
+
+                        <!-- Gratitude Section -->
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: #555; margin-bottom: 10px;">🙏 Three things I'm grateful for:</h4>
+                            <div style="display: grid; gap: 10px;">
+                                <input type="text" class="gratitude-input" placeholder="1. Something that made you smile today..." style="padding: 12px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1em;">
+                                <input type="text" class="gratitude-input" placeholder="2. A person who positively impacted your day..." style="padding: 12px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1em;">
+                                <input type="text" class="gratitude-input" placeholder="3. An accomplishment or moment of growth..." style="padding: 12px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1em;">
+                            </div>
+                        </div>
+
+                        <!-- Reflection Prompts -->
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: #555; margin-bottom: 15px;">💭 Quick Reflection</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                <div style="background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef;">
+                                    <label style="display: block; font-weight: 500; margin-bottom: 8px; color: #333;">🎯 Today's biggest win:</label>
+                                    <textarea class="reflection-input" id="todayWin" placeholder="What achievement are you most proud of today?" style="width: 100%; height: 80px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; resize: vertical;"></textarea>
+                                </div>
+                                <div style="background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef;">
+                                    <label style="display: block; font-weight: 500; margin-bottom: 8px; color: #333;">📚 Lesson learned:</label>
+                                    <textarea class="reflection-input" id="lessonLearned" placeholder="What insight or lesson did you gain?" style="width: 100%; height: 80px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; resize: vertical;"></textarea>
+                                </div>
+                                <div style="background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #e9ecef;">
+                                    <label style="display: block; font-weight: 500; margin-bottom: 8px; color: #333;">🌟 Tomorrow's focus:</label>
+                                    <textarea class="reflection-input" id="tomorrowFocus" placeholder="What's your main priority for tomorrow?" style="width: 100%; height: 80px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; resize: vertical;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Save Entry Button -->
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button onclick="saveJournalEntry()" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 1.1em; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); transition: all 0.3s ease;">
+                                💾 Save Today's Entry
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Journal Prompts -->
+                    <div style="background: linear-gradient(135deg, #ffeaa7, #fab1a0); border-radius: 20px; padding: 25px; margin-bottom: 25px;">
+                        <h3 style="color: #333; margin-bottom: 20px; text-align: center;">💡 Daily Wellness Prompts</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                            <div class="prompt-card" style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;" onclick="usePrompt(this)">
+                                <h5 style="color: #2d3748; margin-bottom: 8px;">🧘 Mindfulness Check</h5>
+                                <p style="color: #4a5568; font-size: 0.9em; margin: 0;">"What sensations do I notice in my body right now?"</p>
+                            </div>
+                            <div class="prompt-card" style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;" onclick="usePrompt(this)">
+                                <h5 style="color: #2d3748; margin-bottom: 8px;">🎯 Goal Reflection</h5>
+                                <p style="color: #4a5568; font-size: 0.9em; margin: 0;">"How did I move closer to my wellness goals today?"</p>
+                            </div>
+                            <div class="prompt-card" style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;" onclick="usePrompt(this)">
+                                <h5 style="color: #2d3748; margin-bottom: 8px;">❤️ Self-Compassion</h5>
+                                <p style="color: #4a5568; font-size: 0.9em; margin: 0;">"What would I tell a friend who had my day?"</p>
+                            </div>
+                            <div class="prompt-card" style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;" onclick="usePrompt(this)">
+                                <h5 style="color: #2d3748; margin-bottom: 8px;">🌱 Growth Mindset</h5>
+                                <p style="color: #4a5568; font-size: 0.9em; margin: 0;">"What challenge helped me grow today?"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Entries -->
+                    <div style="background: #fff; border-radius: 20px; padding: 25px; border: 2px solid #e9ecef;">
+                        <h3 style="color: #333; margin-bottom: 20px;">📖 Recent Entries</h3>
+                        <div id="recentEntries" style="display: grid; gap: 15px;">
+                            <!-- Sample entries will be populated by JavaScript -->
+                            <div class="journal-entry" style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-weight: bold; color: #333;">November 12, 2025</span>
+                                    <span style="font-size: 1.5em;">😊</span>
+                                </div>
+                                <p style="color: #555; margin-bottom: 8px; font-style: italic;">"Grateful for completing the wellness tracker project and helping the team stay healthy!"</p>
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#productivity</span>
+                                    <span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#teamwork</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -850,6 +1024,233 @@
             "The doctor of the future will give no medicines, but will interest his patients in the care of the human frame, in diet, and in the cause and prevention of disease. - Thomas Edison"
         ];
 
+        // Journal functionality
+        let journalData = {
+            streak: 7,
+            totalEntries: 23,
+            avgMood: 8.2,
+            coinsEarned: 340,
+            selectedMood: null,
+            todayEntry: null
+        };
+
+        // Initialize journal when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeJournal();
+        });
+
+        function initializeJournal() {
+            // Set today's date
+            const today = new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('todayDate').textContent = today;
+
+            // Load saved journal data
+            loadJournalData();
+        }
+
+        function selectMood(mood, element) {
+            // Remove selected class from all mood buttons
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked button
+            element.classList.add('selected');
+            journalData.selectedMood = mood;
+            
+            // Provide encouraging feedback
+            const moodMessages = {
+                5: "🌟 Amazing! You're radiating positive energy today!",
+                4: "😊 Great to hear you're feeling fantastic!",
+                3: "🙂 A good day is a gift. Embrace the positive moments!",
+                2: "💙 It's okay to have neutral days. Be gentle with yourself.",
+                1: "🤗 Tough days help us appreciate the good ones. You're stronger than you think."
+            };
+            
+            updateAuraMessage(moodMessages[mood]);
+            addCoins(mood * 2, null); // Award 2-10 coins based on mood
+        }
+
+        function usePrompt(promptElement) {
+            const promptText = promptElement.querySelector('p').textContent;
+            
+            // Find an empty reflection textarea and fill it with the prompt
+            const reflectionInputs = document.querySelectorAll('.reflection-input');
+            for (let input of reflectionInputs) {
+                if (!input.value.trim()) {
+                    input.focus();
+                    input.placeholder = promptText;
+                    break;
+                }
+            }
+            
+            // Highlight the prompt card temporarily
+            promptElement.style.background = 'rgba(102, 126, 234, 0.3)';
+            setTimeout(() => {
+                promptElement.style.background = 'rgba(255,255,255,0.3)';
+            }, 1000);
+            
+            updateAuraMessage("💭 Great prompt choice! Reflection is a powerful tool for personal growth and wellness.");
+            addCoins(5, null);
+        }
+
+        function saveJournalEntry() {
+            // Validate that at least mood is selected
+            if (!journalData.selectedMood) {
+                alert('Please select your mood before saving your entry! 😊');
+                return;
+            }
+
+            // Collect gratitude entries
+            const gratitudeInputs = document.querySelectorAll('.gratitude-input');
+            const gratitudeEntries = Array.from(gratitudeInputs).map(input => input.value.trim()).filter(val => val);
+
+            // Collect reflection entries
+            const todayWin = document.getElementById('todayWin').value.trim();
+            const lessonLearned = document.getElementById('lessonLearned').value.trim();
+            const tomorrowFocus = document.getElementById('tomorrowFocus').value.trim();
+
+            // Create entry object
+            const entry = {
+                date: new Date().toDateString(),
+                mood: journalData.selectedMood,
+                gratitude: gratitudeEntries,
+                reflections: {
+                    win: todayWin,
+                    lesson: lessonLearned,
+                    focus: tomorrowFocus
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            let savedEntries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+            savedEntries.unshift(entry); // Add to beginning of array
+            localStorage.setItem('journalEntries', JSON.stringify(savedEntries.slice(0, 50))); // Keep only last 50 entries
+
+            // Update journal stats
+            journalData.totalEntries++;
+            journalData.coinsEarned += 50;
+            updateJournalStats();
+
+            // Award coins for journaling
+            addCoins(50, null);
+            
+            // Success message
+            updateAuraMessage("📝 Wonderful! Your journal entry has been saved. Consistent journaling improves mental health and self-awareness. You've earned 50 wellness coins!");
+            
+            // Show success animation
+            showSaveSuccess();
+            
+            // Clear form for next entry
+            clearJournalForm();
+        }
+
+        function showSaveSuccess() {
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '✅ Saved Successfully!';
+            button.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+            }, 2000);
+        }
+
+        function clearJournalForm() {
+            // Reset mood selection
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            journalData.selectedMood = null;
+
+            // Clear gratitude inputs
+            document.querySelectorAll('.gratitude-input').forEach(input => {
+                input.value = '';
+            });
+
+            // Clear reflection inputs
+            document.querySelectorAll('.reflection-input').forEach(input => {
+                input.value = '';
+            });
+        }
+
+        function loadJournalData() {
+            // Load from localStorage if available
+            const saved = localStorage.getItem('journalData');
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                Object.assign(journalData, savedData);
+            }
+            
+            updateJournalStats();
+            loadRecentEntries();
+        }
+
+        function updateJournalStats() {
+            document.getElementById('journalStreak').textContent = journalData.streak;
+            document.getElementById('totalEntries').textContent = journalData.totalEntries;
+            document.getElementById('avgMoodScore').textContent = journalData.avgMood;
+            document.getElementById('coinsEarned').textContent = journalData.coinsEarned;
+            
+            // Save to localStorage
+            localStorage.setItem('journalData', JSON.stringify(journalData));
+        }
+
+        function loadRecentEntries() {
+            const savedEntries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+            const recentEntriesContainer = document.getElementById('recentEntries');
+            
+            // Clear existing sample entry
+            recentEntriesContainer.innerHTML = '';
+            
+            if (savedEntries.length === 0) {
+                // Show sample entry if no real entries
+                recentEntriesContainer.innerHTML = `
+                    <div class="journal-entry" style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="font-weight: bold; color: #333;">Start your journaling journey!</span>
+                            <span style="font-size: 1.5em;">📝</span>
+                        </div>
+                        <p style="color: #555; margin-bottom: 8px; font-style: italic;">"Your first entry will appear here. Journaling is a powerful tool for self-reflection and mental wellness."</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#wellness</span>
+                            <span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#selfcare</span>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display recent entries
+            savedEntries.slice(0, 5).forEach(entry => {
+                const moodEmojis = {1: '😟', 2: '😐', 3: '🙂', 4: '😊', 5: '😁'};
+                const entryElement = document.createElement('div');
+                entryElement.className = 'journal-entry';
+                entryElement.style.cssText = 'background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;';
+                
+                entryElement.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: bold; color: #333;">${new Date(entry.date).toLocaleDateString()}</span>
+                        <span style="font-size: 1.5em;">${moodEmojis[entry.mood]}</span>
+                    </div>
+                    <p style="color: #555; margin-bottom: 8px; font-style: italic;">"${entry.reflections.win || entry.gratitude[0] || 'A day of reflection and growth.'}"</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#mood-${entry.mood}</span>
+                        ${entry.gratitude.length > 0 ? '<span style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">#gratitude</span>' : ''}
+                    </div>
+                `;
+                
+                recentEntriesContainer.appendChild(entryElement);
+            });
+        }
+
         // Tab switching functionality
         function switchTab(tabName) {
             // Hide all tab panels
@@ -867,6 +1268,12 @@
             
             // Add active class to clicked tab button
             event.target.classList.add('active');
+
+            // Initialize journal when journal tab is opened
+            if (tabName === 'journal') {
+                setTimeout(initializeJournal, 100); // Small delay to ensure DOM is ready
+                updateAuraMessage("📝 Welcome to your wellness journal! Consistent journaling improves mental health, emotional awareness, and personal growth. Start by selecting your mood for today!");
+            }
         }
 
         // Coin system functionality
