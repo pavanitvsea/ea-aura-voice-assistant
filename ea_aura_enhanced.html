@@ -560,114 +560,49 @@
                 <!-- Wealth Tab -->
                 <div class="tab-panel" id="wealth-tab">
                     <div class="wealth-section">
-                        <div class="wealth-title">💰 Your Wellness Wealth</div>
-                        
-                        <div class="coin-stats">
-                            <div class="coin-stat">
-                                <div class="coin-stat-value" id="totalCoins">1,247</div>
-                                <div class="coin-stat-label">Total Coins</div>
-                            </div>
-                            <div class="coin-stat">
-                                <div class="coin-stat-value" id="todayCoins">127</div>
-                                <div class="coin-stat-label">Earned Today</div>
-                            </div>
-                            <div class="coin-stat">
-                                <div class="coin-stat-value" id="weeklyCoins">843</div>
-                                <div class="coin-stat-label">This Week</div>
-                            </div>
-                            <div class="coin-stat">
-                                <div class="coin-stat-value">Level 12</div>
-                                <div class="coin-stat-label">Wellness Level</div>
-                            </div>
-                        </div>
+                        <div class="wealth-title">� Financial Wellness Resources</div>
+                        <p style="text-align: center; margin-bottom: 20px; opacity: 0.9;">Access your comprehensive financial planning tools</p>
                     </div>
 
-                    <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px;">💰 EA Financial Wellness Template</h3>
-                        <p style="margin-bottom: 15px; color: #666;">Download our comprehensive financial planning template designed for EA employees:</p>
+                    <div style="background: #f8f9fa; border-radius: 15px; padding: 30px; margin-bottom: 20px; text-align: center;">
+                        <h3 style="margin-bottom: 20px; color: #007acc;"><i class="fas fa-file-excel"></i> EA Financial Wellness Template</h3>
+                        <p style="margin-bottom: 20px; color: #666; font-size: 1.1em;">Download our comprehensive Excel-based financial planning template designed specifically for EA employees</p>
                         
-                        <div style="background: #e8f5e8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                            <h4 style="color: #28a745; margin-bottom: 10px;">"Š What's Inside:</h4>
-                            <div style="color: #333; line-height: 1.6;">
-                                <p><strong>Sheet 1 â€" Wealth Summary</strong></p>
-                                <ul style="margin: 10px 0 15px 20px;">
-                                    <li>Categories: Expense, Savings, Investments, Insurance (Health & Term)</li>
-                                    <li>Suggested allocation percentages (50/20/20/10 split)</li>
-                                    <li>Tips for tracking, reducing costs, and planning coverage</li>
-                                </ul>
+                        <div style="background: #e8f5e8; border-radius: 12px; padding: 20px; margin-bottom: 25px; text-align: left;">
+                            <h4 style="color: #28a745; margin-bottom: 15px; text-align: center;"><i class="fas fa-list-check"></i> What's Included:</h4>
+                            <div style="color: #333; line-height: 1.8;">
+                                <div style="margin-bottom: 15px;">
+                                    <p style="margin-bottom: 8px;"><strong><i class="fas fa-chart-pie"></i> Sheet 1 – Wealth Summary</strong></p>
+                                    <ul style="margin: 0 0 0 30px;">
+                                        <li>Expense, Savings, Investments, Insurance tracking</li>
+                                        <li>Suggested allocation percentages (50/20/20/10 split)</li>
+                                        <li>Built-in formulas and automated calculations</li>
+                                    </ul>
+                                </div>
                                 
-                                <p><strong>Sheet 2 â€"  Financial Health Tips</strong></p>
-                                <ul style="margin: 10px 0 0 20px;">
-                                    <li>7 actionable rules for maintaining financial wellness</li>
-                                    <li>The 50-30-20 budgeting principle</li>
-                                    <li>Building a 6-month emergency fund</li>
-                                    <li>Regular SIPs and portfolio rebalancing</li>
-                                    <li>Insurance and debt management best practices</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <button class="play-button" onclick="downloadFinancialTemplate()" style="background: linear-gradient(45deg, #28a745, #20c997);">
-                                "Š  Download CSV Template
-                            </button>
-                            <button class="play-button" onclick="downloadExcelTemplate()" style="background: linear-gradient(45deg, #007acc, #0099cc);">
-                                "ˆ  Download Excel File
-                            </button>
-                        </div>
-                    </div>
-
-                    <!--  Financial Health Tips Section -->
-                    <div style="background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #28a745;">
-                        <h3 style="color: #28a745; margin-bottom: 20px; text-align: center;">'¡  Financial Health Tips & Best Practices</h3>
-                        
-                        <!--  General Usage Tips -->
-                        <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">💡 General Usage Tips</h4>
-                            
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Keep Data Entry Consistent</h5>
-                                <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
-                                    <li>Enter numbers only (no commas or symbols) in numeric fields</li>
-                                    <li>Use consistent naming for categories (e.g., "Rent" instead of "house rent")</li>
-                                    <li>Avoid merging cells â€" it breaks formulas and charts</li>
-                                </ul>
-                            </div>
-                            
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">2. Use Drop-downs or Data Validation (Optional)</h5>
-                                <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
-                                    <li>Add data validation for expense/income categories to prevent typos</li>
-                                    <li>This ensures consistent reporting and chart updates</li>
-                                </ul>
-                            </div>
-                            
-                            <div>
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">3. Keep One Purpose per Sheet</h5>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-left: 20px;">
-                                    <div style="background: #e8f5e8; padding: 8px; border-radius: 6px; font-size: 0.9rem;">
-                                        <strong>Income:</strong> All income streams
-                                    </div>
-                                    <div style="background: #fff3e0; padding: 8px; border-radius: 6px; font-size: 0.9rem;">
-                                        <strong>Expenses:</strong> Fixed + variable costs
-                                    </div>
-                                    <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; font-size: 0.9rem;">
-                                        <strong>Investments:</strong> SIPs, mutual funds
-                                    </div>
-                                    <div style="background: #f3e5f5; padding: 8px; border-radius: 6px; font-size: 0.9rem;">
-                                        <strong>Planning:</strong> Future projections
-                                    </div>
+                                <div>
+                                    <p style="margin-bottom: 8px;"><strong><i class="fas fa-lightbulb"></i> Sheet 2 – Financial Health Tips</strong></p>
+                                    <ul style="margin: 0 0 0 30px;">
+                                        <li>7 actionable financial wellness rules</li>
+                                        <li>50-30-20 budgeting framework</li>
+                                        <li>Emergency fund and investment strategies</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+                        
+                        <button class="play-button" onclick="downloadExcelTemplate()" style="background: linear-gradient(45deg, #007acc, #0099cc); padding: 15px 30px; font-size: 1.1em;">
+                            <i class="fas fa-download"></i> Download Excel Template
+                        </button>
+                        
+                        <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                            <i class="fas fa-info-circle"></i> Compatible with Excel 2016+ and Google Sheets
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Visualization & Dashboard Tips -->
-                        <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h4 style="color: #2e7d32; margin-bottom: 15px;">📊 Visualization & Dashboard Tips</h4>
-                            
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="color: #1b5e20; margin-bottom: 8px;">1. Charts Update Automatically</h5>
-                                <ul style="color: #333; line-height: 1.6; margin-left: 20px;">
+                <!-- Games Tab -->
+
                                     <li>When you add or edit rows, charts will update within the existing range</li>
                                     <li>To extend: right-click â†' Select Data â†' adjust data range</li>
                                 </ul>
@@ -1306,121 +1241,6 @@
                     }
                 }
             };
-            
-            downloadFile(JSON.stringify(data, null, 2), 'ea_aura_data_' + new Date().toISOString().split('T')[0] + '.json', 'application/json');
-            addCoins(25, event);
-            updateGenieMessage("📊 JSON data exported! Perfect for developers who want to integrate with other tools and apps.");
-        }
-
-        function generateSampleData(days) {
-            let csv = 'Date,Steps,Sleep_Hours,Mood_Score,Stress_Level,Focus_Minutes,Coins_Earned,Gratitude_Entries,Water_Glasses,Exercise_Minutes,Screen_Time_Hours,Meditation_Minutes\n';
-            
-            const today = new Date();
-            for (let i = days - 1; i >= 0; i--) {
-                const date = new Date(today);
-                date.setDate(date.getDate() - i);
-                
-                const steps = Math.floor(Math.random() * 5000) + 5000;
-                const sleep = (Math.random() * 3 + 6).toFixed(1);
-                const mood = Math.floor(Math.random() * 3) + 8;
-                const stress = Math.floor(Math.random() * 4) + 1;
-                const focus = Math.floor(Math.random() * 120) + 60;
-                const coins = Math.floor(Math.random() * 100) + 50;
-                const gratitude = Math.floor(Math.random() * 4);
-                const water = Math.floor(Math.random() * 4) + 6;
-                const exercise = Math.floor(Math.random() * 60) + 20;
-                const screenTime = (Math.random() * 4 + 4).toFixed(1);
-                const meditation = Math.floor(Math.random() * 20) + 5;
-                
-                csv += date.toISOString().split('T')[0] + ',' + steps + ',' + sleep + ',' + mood + ',' + stress + ',' + focus + ',' + coins + ',' + gratitude + ',' + water + ',' + exercise + ',' + screenTime + ',' + meditation + '\n';
-            }
-            
-            return csv;
-        }
-
-        function downloadFile(content, filename, contentType) {
-            const blob = new Blob([content], { type: contentType });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        function downloadFinancialTemplate() {
-            // Create Excel-compatible CSV content
-            const csvContent = ` EA Financial Wellness Template - Wealth Summary
-
-Category,Suggested %,Monthly Budget,Actual Amount,Notes
-Living Expenses,50%,$2500,,Rent/Mortgage Housing Utilities Food Transportation
-Savings,20%,$1000,,Emergency Fund (6 months) Short-term Goals
-Investments,20%,$1000,,401k/RRSP Stocks/ETFs Real Estate
-Insurance,10%,$500,,Health Insurance Term Life Insurance Disability Insurance
-
-FINANCIAL ALLOCATION GUIDE:
-50% - Essential Living Expenses
-- Housing (rent/mortgage): 25-30% of income
-- Food & groceries: 10-15% of income  
-- Transportation: 10-15% of income
-- Utilities & bills: 5-10% of income
-
-20% - Savings & Emergency Fund
-- Build 6-month emergency fund first
-- High-yield savings account recommended
-- Automate transfers for consistency
-
-20% - Investments & Retirement
-- Maximize employer 401k match
-- Consider low-cost index funds
-- Diversify across asset classes
-- Regular monthly SIPs
-
-10% - Insurance & Protection
-- Health insurance (if not employer-covered)
-- Term life insurance (10x annual income)
-- Disability insurance consideration
-
-,,,,
-FINANCIAL HEALTH TIPS,,,,
-
-Rule 1: Follow the 50-30-20 Budget,,,,
-"50% needs 30% wants 20% savings/debt repayment",,,,
-
-Rule 2: Build Emergency Fund First,,,,
-"Aim for 6 months of expenses in high-yield savings",,,,
-
-Rule 3: Automate Your Finances,,,,
-"Set up automatic transfers and bill payments",,,,
-
-Rule 4: Invest Consistently,,,,
-"Dollar-cost averaging through regular SIPs",,,,
-
-Rule 5: Rebalance Portfolio Quarterly,,,,
-"Maintain target asset allocation percentages",,,,
-
-Rule 6: Review Insurance Annually,,,,
-"Update coverage based on life changes",,,,
-
-Rule 7: Track Net Worth Monthly,,,,
-"Assets minus liabilities = growing wealth",,,,
-
-,,,,
-EA EMPLOYEE SPECIFIC TIPS:,,,,
-- Maximize EA 401k matching program,,,,
-- Use EA Employee Stock Purchase Plan wisely,,,,
-- Take advantage of EA wellness benefits,,,,
-- Consider EA financial counseling services,,,,
-- Plan for gaming industry income volatility,,,,
-
-Generated by EA Aura Wellness Hub,,,,`;
-
-            downloadFile(csvContent, 'EA_Financial_Wellness_Template.csv', 'text/csv');
-            addCoins(30, event);
-            updateGenieMessage("📊 Excellent! Downloaded your EA Financial Wellness Template. This comprehensive guide will help you achieve financial wellness with the proven 50/20/20/10 allocation strategy!");
-        }
 
         function downloadExcelTemplate() {
             // Show information modal for the comprehensive Excel file
