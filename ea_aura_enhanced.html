@@ -545,7 +545,10 @@
         <div class="app-container">
             <!-- Header with Coin Jar -->
             <div class="header">
-                <div class="logo">❤️ EA Aura</div>
+                <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+                    <img src="ea_aura_logo.png" alt="EA Aura" style="height: 40px; width: auto;" onerror="this.outerHTML='<span>❤️</span>';">
+                    <span>EA Aura</span>
+                </div>
                 <div class="tagline">Your Enhanced Wellness Hub</div>
                 <div class="coin-jar" onclick="animateCoinJar()" title="Your Wellness Coins">
                     <span class="coin-count" id="coinCount">1,247</span>
