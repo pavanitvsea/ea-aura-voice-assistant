@@ -590,17 +590,13 @@
     <div class="main-container">
         <!-- Main App Container -->
         <div class="app-container">
-            <!-- Header with Coin Jar -->
+            <!-- Header -->
             <div class="header">
                 <div class="logo" style="display: flex; align-items: center; gap: 12px;">
-                    <img src="Aura_Logo.png" alt="EA Aura" style="height: 40px; width: auto;" onerror="this.outerHTML='<span>❤️</span>';">
-                    <span>EA Aura</span>
+                    <img src="Aura_Logo.png" alt="EA Aura" style="height: 45px; width: auto;" onerror="this.outerHTML='<span>❤️</span>';">
+                    <span style="font-size: 1.8em; font-weight: 600;">EA Aura</span>
                 </div>
                 <div class="tagline">Your Enhanced Wellness Hub</div>
-                <div class="coin-jar" onclick="animateCoinJar()" title="Your Wellness Coins">
-                    <span class="coin-count" id="coinCount">1,247</span>
-                    <span style="font-size: 1.5em;">🪙</span>
-                </div>
             </div>
 
             <!-- Tab Navigation -->
@@ -1534,8 +1530,7 @@
             todayCoins += amount;
             weeklyCoins += amount;
             
-            // Update displays
-            document.getElementById('coinCount').textContent = currentCoins.toLocaleString();
+            // Update displays (header coin count removed - now only jar shows coins)
             if (document.getElementById('totalCoins')) {
                 document.getElementById('totalCoins').textContent = currentCoins.toLocaleString();
             }
