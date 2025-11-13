@@ -168,6 +168,17 @@
             50% { transform: translateY(-10px); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .voice-character-card:hover {
+            transform: scale(1.03) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
         .genie-name {
             font-size: 1.3em;
             font-weight: bold;
@@ -549,7 +560,7 @@
                 <button class="tab-btn" onclick="switchTab('journal')">📝 Journal</button>
                 <button class="tab-btn" onclick="switchTab('games')">🎮 Games</button>
                 <button class="tab-btn" onclick="switchTab('reports')">📊 Reports</button>
-                <button class="tab-btn" onclick="switchTab('help')">❓ Help</button>
+                <button class="tab-btn" onclick="switchTab('help')">❓ Help and Settings</button>
             </div>
 
             <!-- Tab Content -->
@@ -936,8 +947,6 @@
 
                 <!-- Help Tab -->
                 <div class="tab-panel" id="help-tab">
-                    <h2 style="margin-bottom: 20px;">❓ Help & Settings</h2>
-                    
                     <div class="help-resources">
                         <div class="help-card">
                             <div class="help-icon">🏥</div>
@@ -963,8 +972,13 @@
                         <div class="help-card">
                             <div class="help-icon">💪</div>
                             <div class="help-title">Fitness Resources</div>
-                            <div class="help-description">Exercise routines, ergonomic tips, and movement strategies designed for game developers.</div>
-                            <a href="#" class="help-link">View Fitness Guide</a>
+                            <div class="help-description">Exercise routines, wellness videos, and movement strategies designed for game developers and office workers.</div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 15px;">
+                                <a href="https://youtu.be/FjFFasD3kr0?si=rSL61cpLCziOPvOC" target="_blank" class="help-link" style="font-size: 0.85em; padding: 8px 12px;">🧘 Yoga</a>
+                                <a href="https://youtu.be/cbKkB3POqaY?si=EajVb1jidAX6U3Ce" target="_blank" class="help-link" style="font-size: 0.85em; padding: 8px 12px;">🏠 Home Workout</a>
+                                <a href="https://youtu.be/k0PSUDvLi8E?si=B2phvxa4QFx2m9dG" target="_blank" class="help-link" style="font-size: 0.85em; padding: 8px 12px;">🧘‍♀️ Meditation</a>
+                                <a href="https://youtu.be/o5soep1e8Ik?si=YigpdDUzSUwneT9s" target="_blank" class="help-link" style="font-size: 0.85em; padding: 8px 12px;">💃 Zumba</a>
+                            </div>
                         </div>
                     </div>
 
@@ -1037,20 +1051,32 @@
                     <div style="background: #f0f8ff; border-radius: 15px; padding: 20px; margin-top: 20px;">
                         <h3 style="color: #4169e1; margin-bottom: 15px;">🔊 Aura Voice Settings</h3>
                         <div style="color: #333; line-height: 1.6;">
-                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">🎵 Voice Options</h4>
-                            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-                                <button onclick="setAuraVoice('female')" 
-                                        style="background: #ec4899; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    👩 Female Voice
-                                </button>
-                                <button onclick="setAuraVoice('male')" 
-                                        style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    👨 Male Voice
-                                </button>
-                                <button onclick="setAuraVoice('neutral')" 
-                                        style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;">
-                                    🤖 Neutral AI
-                                </button>
+                            <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">🎵 Voice Characters</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                                <div class="voice-character-card" onclick="selectVoiceCharacter('nova')" id="nova-card"
+                                     style="background: linear-gradient(135deg, #ff8c00, #ffa500); color: white; padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; transition: all 0.3s ease; border: 3px solid transparent;">
+                                    <div style="font-size: 2.5em; margin-bottom: 8px;">🏃‍♀️</div>
+                                    <h5 style="margin: 0; font-size: 1.1em;">Nova</h5>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.85em; opacity: 0.9;">Habit Tracker</p>
+                                </div>
+                                <div class="voice-character-card" onclick="selectVoiceCharacter('veda')" id="veda-card"
+                                     style="background: linear-gradient(135deg, #dc143c, #ff6347); color: white; padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; transition: all 0.3s ease; border: 3px solid transparent;">
+                                    <div style="font-size: 2.5em; margin-bottom: 8px;">💪</div>
+                                    <h5 style="margin: 0; font-size: 1.1em;">Veda</h5>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.85em; opacity: 0.9;">Focus & Energy</p>
+                                </div>
+                                <div class="voice-character-card" onclick="selectVoiceCharacter('kai')" id="kai-card"
+                                     style="background: linear-gradient(135deg, #4169e1, #6495ed); color: white; padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; transition: all 0.3s ease; border: 3px solid transparent;">
+                                    <div style="font-size: 2.5em; margin-bottom: 8px;">🧘‍♂️</div>
+                                    <h5 style="margin: 0; font-size: 1.1em;">Kai</h5>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.85em; opacity: 0.9;">Calm & Breath</p>
+                                </div>
+                                <div class="voice-character-card" onclick="selectVoiceCharacter('iris')" id="iris-card"
+                                     style="background: linear-gradient(135deg, #228b22, #32cd32); color: white; padding: 15px; border-radius: 15px; cursor: pointer; text-align: center; transition: all 0.3s ease; border: 3px solid transparent;">
+                                    <div style="font-size: 2.5em; margin-bottom: 8px;">🌿</div>
+                                    <h5 style="margin: 0; font-size: 1.1em;">Iris</h5>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.85em; opacity: 0.9;">Relax & Recover</p>
+                                </div>
                             </div>
                             
                             <h4 style="color: #1e3a8a; margin: 15px 0 10px 0;">🎛️ Voice Controls</h4>
@@ -1096,7 +1122,13 @@
                 </div>
             </div>
 
-            <input type="text" class="genie-input" id="genieInput" placeholder="Ask Aura anything about wellness..." onkeypress="handleGenieInput(event)">
+            <div style="position: relative; display: flex; gap: 10px; align-items: center;">
+                <input type="text" class="genie-input" id="genieInput" placeholder="Ask Aura anything about wellness..." onkeypress="handleGenieInput(event)" style="flex: 1;">
+                <button id="speechButton" onclick="toggleSpeechRecognition()" 
+                        style="background: #667eea; color: white; border: none; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; transition: all 0.3s ease;">
+                    🎤
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1137,7 +1169,15 @@
         // Initialize journal when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initializeJournal();
+            initializeCharacterSystem();
+            initializeSpeechRecognition();
         });
+        
+        function initializeCharacterSystem() {
+            // Load saved character or default to Nova
+            const savedCharacter = localStorage.getItem('selectedCharacter') || 'nova';
+            selectVoiceCharacter(savedCharacter);
+        }
 
         function initializeJournal() {
             // Set today's date
@@ -1583,10 +1623,159 @@
                 updateAuraMessage(`🔊 Voice feedback ${status}. ${auraVoiceEnabled ? 'I will now speak my responses!' : 'I will only show text responses.'}`);
             }
 
+            // Voice Character System
+            let currentCharacter = 'nova';
+            
+            function selectVoiceCharacter(character) {
+                // Remove selection from all cards
+                document.querySelectorAll('.voice-character-card').forEach(card => {
+                    card.style.border = '3px solid transparent';
+                    card.style.transform = 'scale(1)';
+                });
+                
+                // Highlight selected card
+                const selectedCard = document.getElementById(character + '-card');
+                selectedCard.style.border = '3px solid #fff';
+                selectedCard.style.transform = 'scale(1.05)';
+                
+                // Update character
+                currentCharacter = character;
+                
+                // Update Aura avatar and name
+                updateAuraCharacter(character);
+                
+                // Character-specific messages
+                const characterMessages = {
+                    nova: "🏃‍♀️ Hi! I'm Nova, your habit tracking companion! I'll help you build consistent wellness routines and celebrate your daily progress!",
+                    veda: "💪 Hello! I'm Veda, here to boost your focus and energy! Let's tackle challenges together and maximize your productivity!",
+                    kai: "🧘‍♂️ Greetings! I'm Kai, your calm and breath guide. I'll help you find peace, manage stress, and center yourself.",
+                    iris: "🌿 Hi there! I'm Iris, your relaxation and recovery specialist. Let's focus on rest, healing, and gentle wellness practices."
+                };
+                
+                updateAuraMessage(characterMessages[character]);
+                speakAuraMessage(characterMessages[character]);
+                
+                // Save selection
+                localStorage.setItem('selectedCharacter', character);
+            }
+            
+            function updateAuraCharacter(character) {
+                const avatarElement = document.querySelector('.genie-avatar');
+                const nameElement = document.getElementById('genieName');
+                const roleElement = document.querySelector('.genie-role');
+                
+                const characterData = {
+                    nova: {
+                        name: 'Nova',
+                        role: 'Habit Tracker Assistant',
+                        avatar: '🏃‍♀️',
+                        color: '#ff8c00'
+                    },
+                    veda: {
+                        name: 'Veda', 
+                        role: 'Focus & Energy Coach',
+                        avatar: '💪',
+                        color: '#dc143c'
+                    },
+                    kai: {
+                        name: 'Kai',
+                        role: 'Calm & Breath Guide', 
+                        avatar: '🧘‍♂️',
+                        color: '#4169e1'
+                    },
+                    iris: {
+                        name: 'Iris',
+                        role: 'Relax & Recovery Specialist',
+                        avatar: '🌿', 
+                        color: '#228b22'
+                    }
+                };
+                
+                const data = characterData[character];
+                nameElement.textContent = data.name;
+                roleElement.textContent = data.role;
+                
+                // Update avatar with character emoji
+                avatarElement.innerHTML = `<div style="color: ${data.color}; font-size: 4rem; text-align: center; line-height: 1.2; padding: 20px;">${data.avatar}</div>`;
+            }
+
             function setAuraVoice(voiceType) {
                 selectedAuraVoice = voiceType;
                 updateAuraMessage(`🎤 Voice changed to ${voiceType}. Hello! This is how I sound now.`);
                 speakAuraMessage(`Voice changed to ${voiceType}. Hello! This is how I sound now.`);
+            }
+
+            // Speech Recognition System
+            let recognition;
+            let isListening = false;
+            
+            function initializeSpeechRecognition() {
+                if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    recognition = new SpeechRecognition();
+                    recognition.continuous = false;
+                    recognition.interimResults = false;
+                    recognition.lang = 'en-US';
+                    
+                    recognition.onstart = function() {
+                        isListening = true;
+                        updateSpeechButton(true);
+                        updateAuraMessage("🎤 I'm listening... Speak now!");
+                    };
+                    
+                    recognition.onresult = function(event) {
+                        const transcript = event.results[0][0].transcript;
+                        document.getElementById('genieInput').value = transcript;
+                        updateAuraMessage(`🎤 I heard: "${transcript}"`);
+                        
+                        // Auto-process the speech input
+                        setTimeout(() => {
+                            const fakeEvent = { key: 'Enter' };
+                            handleGenieInput(fakeEvent);
+                        }, 1000);
+                    };
+                    
+                    recognition.onerror = function(event) {
+                        updateAuraMessage(`🎤 Speech recognition error: ${event.error}`);
+                        updateSpeechButton(false);
+                        isListening = false;
+                    };
+                    
+                    recognition.onend = function() {
+                        isListening = false;
+                        updateSpeechButton(false);
+                    };
+                }
+            }
+            
+            function toggleSpeechRecognition() {
+                if (!recognition) {
+                    initializeSpeechRecognition();
+                }
+                
+                if (isListening) {
+                    recognition.stop();
+                    updateAuraMessage("🎤 Stopped listening.");
+                } else {
+                    if (recognition) {
+                        recognition.start();
+                    } else {
+                        updateAuraMessage("🎤 Speech recognition not supported in your browser. Please use Chrome or Edge.");
+                    }
+                }
+            }
+            
+            function updateSpeechButton(listening) {
+                const button = document.getElementById('speechButton');
+                if (listening) {
+                    button.style.background = '#dc2626';
+                    button.innerHTML = '🔴';
+                    button.style.animation = 'pulse 1s infinite';
+                } else {
+                    button.style.background = '#667eea';
+                    button.innerHTML = '🎤';
+                    button.style.animation = 'none';
+                }
             }
 
             // Test function for voice in the app
