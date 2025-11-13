@@ -211,7 +211,7 @@
             position: absolute;
             width: 30px;
             height: 30px;
-            background: url('aura_coin.png') center/cover;
+            background: url('coin.png') center/cover;
             border-radius: 50%;
             pointer-events: none;
             z-index: 10;
@@ -593,7 +593,7 @@
             <!-- Header with Coin Jar -->
             <div class="header">
                 <div class="logo" style="display: flex; align-items: center; gap: 12px;">
-                    <img src="ea_aura_logo.png" alt="EA Aura" style="height: 40px; width: auto;" onerror="this.outerHTML='<span>❤️</span>';">
+                    <img src="Aura_Logo.png" alt="EA Aura" style="height: 40px; width: auto;" onerror="this.outerHTML='<span>❤️</span>';">
                     <span>EA Aura</span>
                 </div>
                 <div class="tagline">Your Enhanced Wellness Hub</div>
@@ -673,7 +673,7 @@
                         <!-- Coin Jar Animation -->
                         <div style="text-align: center; position: relative;">
                             <div id="coinJarContainer" style="position: relative; display: inline-block;">
-                                <img id="coinJarImage" src="aura_jar.png" alt="Wellness Coin Jar" 
+                                <img id="coinJarImage" src="Jar.png" alt="Wellness Coin Jar" 
                                      style="width: 200px; height: auto; transition: all 0.3s ease;" 
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                                 <div style="display: none; font-size: 4em; color: #667eea;">🏺</div>
@@ -1574,7 +1574,7 @@
             const jarImage = document.getElementById('coinJarImage');
             if (jarImage && currentCoins > 500) {
                 // Show jar with coins when user has collected enough
-                jarImage.src = 'aura_jar_with_coins.png';
+                jarImage.src = 'Aura_Jar_and_Coin.png';
             }
         }
 
