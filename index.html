@@ -264,12 +264,12 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="aura-image">
-                <i class="fas fa-robot"></i>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
+                <div style="width: 60px; height: 60px; background: #ff4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4em; color: white; box-shadow: 0 4px 15px rgba(255,68,68,0.4);">EA</div>
+                <div class="logo" style="margin-bottom: 0;">AURA</div>
             </div>
-            <div class="logo"><i class="fas fa-star"></i> EA Aura Enhanced</div>
-            <div class="tagline">Complete Wellness Ecosystem with AI-Powered Coaching</div>
-            <p class="description">Gamified wellness tracking with Aura AI coaching, web-based wellness games, and comprehensive health analytics</p>
+            <div class="tagline">Elevate your Well-being</div>
+            <p class="description">AI-powered wellness coaching for health, wealth, and happiness</p>
         </div>
 
         <!-- Stats -->
@@ -324,7 +324,10 @@
                 <div id="chat-container" style="max-width: 800px; margin: 0 auto;">
                     <div id="chat-messages" style="height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
                         <div class="message bot-message" style="margin-bottom: 10px;">
-                            <strong>Aura:</strong> Hello! I'm your AI wellness assistant. I can help you with questions about health, wellness, financial planning, and wealth management. How can I assist you today?
+                            <strong>Aura:</strong> 👋 Hello! I'm Aura, your wellness and wealth advisor. I can help with:<br><br>
+                            💪 <strong>Health</strong>: Stress, sleep, fitness, nutrition<br>
+                            💰 <strong>Wealth</strong>: Budgeting, saving, investing, financial planning<br><br>
+                            What would you like to explore today?
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px;">
@@ -334,8 +337,15 @@
                             <i class="fas fa-paper-plane"></i> Send
                         </button>
                     </div>
+                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+                        <button onclick="askQuickQuestion('How can I start saving money?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">💰 Saving Tips</button>
+                        <button onclick="askQuickQuestion('What is the 50/30/20 budget rule?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">📊 Budgeting</button>
+                        <button onclick="askQuickQuestion('How should I start investing?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">📈 Investing</button>
+                        <button onclick="askQuickQuestion('How can I reduce stress?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">🧘 Stress Relief</button>
+                        <button onclick="askQuickQuestion('Tips for better sleep')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">😴 Sleep Better</button>
+                    </div>
                     <div style="text-align: center; margin-top: 10px;">
-                        <small style="color: #666;">Powered by Azure OpenAI • Ask about health, fitness, nutrition, financial planning, investments, or wellness strategies</small>
+                        <small style="color: #666;">Powered by Azure OpenAI • Health & Financial Wellness Advisor</small>
                     </div>
                 </div>
             </div>
@@ -539,17 +549,23 @@
                 }
                 
                 // Wealth & Finance responses
-                if (input.includes('budget') || input.includes('spending') || input.includes('expense')) {
-                    return "💰 Smart budgeting tip: Try the 50/30/20 rule - 50% for needs (rent, utilities), 30% for wants (entertainment), and 20% for savings/debt. Track your spending for a month to see where your money actually goes!";
+                if (input.includes('budget') || input.includes('spending') || input.includes('expense') || input.includes('50/30/20')) {
+                    return "💰 <strong>The 50/30/20 Budget Rule:</strong><br><br>• <strong>50% Needs</strong>: Rent, utilities, groceries, insurance<br>• <strong>30% Wants</strong>: Entertainment, dining out, hobbies<br>• <strong>20% Savings</strong>: Emergency fund, retirement, investments<br><br>Start by tracking expenses for a month to see where your money goes!";
                 }
-                if (input.includes('save') || input.includes('saving') || input.includes('emergency fund')) {
-                    return "🏦 Building savings is crucial! Start with an emergency fund covering 3-6 months of expenses. Automate your savings - pay yourself first! Even $50/month adds up. Consider high-yield savings accounts for better returns.";
+                if (input.includes('save') || input.includes('saving') || input.includes('emergency fund') || input.includes('money')) {
+                    return "🏦 <strong>Smart Saving Strategies:</strong><br><br>1. <strong>Pay yourself first</strong> - Automate transfers to savings<br>2. <strong>Emergency fund</strong> - Build 3-6 months of expenses<br>3. <strong>High-yield savings</strong> - Get 4-5% APY vs 0.01%<br>4. <strong>The 24-hour rule</strong> - Wait before non-essential purchases<br><br>Even $25/week = $1,300/year!";
                 }
-                if (input.includes('invest') || input.includes('stock') || input.includes('retirement')) {
-                    return "📈 Investing basics: Start early to benefit from compound growth. Diversify across asset classes. For retirement, maximize any employer 401(k) match - it's free money! Consider low-cost index funds for long-term growth. Always consult a financial advisor for personalized advice.";
+                if (input.includes('invest') || input.includes('stock') || input.includes('retirement') || input.includes('401k') || input.includes('ira')) {
+                    return "📈 <strong>Investing Fundamentals:</strong><br><br>1. <strong>Start early</strong> - Compound growth is powerful<br>2. <strong>401(k) match</strong> - Always get employer match (free money!)<br>3. <strong>Diversify</strong> - Don't put all eggs in one basket<br>4. <strong>Index funds</strong> - Low-cost, broad market exposure<br>5. <strong>Time in market</strong> > Timing the market<br><br>Consider consulting a financial advisor for personalized guidance.";
                 }
                 if (input.includes('debt') || input.includes('loan') || input.includes('credit')) {
-                    return "💳 Debt management strategy: List all debts with interest rates. Consider the avalanche method (highest interest first) or snowball method (smallest balance first). Always pay more than minimums when possible. Avoid new debt while paying off existing balances.";
+                    return "💳 <strong>Debt Payoff Strategies:</strong><br><br>• <strong>Avalanche Method</strong>: Pay highest interest first (saves most money)<br>• <strong>Snowball Method</strong>: Pay smallest balance first (quick wins)<br><br>Tips:<br>- Always pay more than minimum<br>- Consider balance transfer for high-interest cards<br>- Avoid new debt while paying off existing";
+                }
+                if (input.includes('financial') || input.includes('wealth') || input.includes('rich') || input.includes('finance')) {
+                    return "💎 <strong>Building Wealth - Key Principles:</strong><br><br>1. <strong>Spend less than you earn</strong><br>2. <strong>Invest the difference</strong><br>3. <strong>Avoid lifestyle inflation</strong><br>4. <strong>Multiple income streams</strong><br>5. <strong>Continuous learning</strong><br><br>Wealth is built slowly through consistent habits, not quick schemes!";
+                }
+                if (input.includes('tax') || input.includes('taxes')) {
+                    return "📋 <strong>Tax-Smart Strategies:</strong><br><br>• Maximize 401(k) contributions (pre-tax)<br>• Use HSA for healthcare expenses<br>• Consider Roth IRA for tax-free growth<br>• Track deductible expenses<br>• Consult a tax professional for complex situations<br><br>Tax planning is wealth planning!";
                 }
                 
                 // General wellness
@@ -611,6 +627,12 @@
             chatInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') sendMessage();
             });
+
+            // Make askQuickQuestion available globally
+            window.askQuickQuestion = function(question) {
+                chatInput.value = question;
+                sendMessage();
+            };
         });
     </script>
 </body>
