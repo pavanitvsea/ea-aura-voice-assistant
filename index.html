@@ -375,45 +375,80 @@
                 
                 <!-- Wealth Tab -->
                 <div id="wealth" class="tab-panel">
-                    <h2 style="color: #667eea; margin-bottom: 20px;">💰 Financial Wellness</h2>
-                    <div style="background: linear-gradient(135deg, #ffeaa7, #fab1a0); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                        <h3 style="text-align: center; margin-bottom: 15px;">📊 50/30/20 Budget Rule</h3>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
-                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
-                                <div style="font-size: 2em; font-weight: bold; color: #2ecc71;">50%</div>
-                                <div style="font-weight: bold;">Needs</div>
-                                <div style="font-size: 0.85em; color: #555;">Rent, utilities, groceries</div>
+                    <h2 style="color: #667eea; margin-bottom: 20px;">💰 Financial Wellness Tools</h2>
+                    
+                    <!-- Budget Calculator -->
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; padding: 25px; margin-bottom: 20px; color: white;">
+                        <h3 style="text-align: center; margin-bottom: 20px;">🧮 Quick Budget Calculator (50/30/20)</h3>
+                        <div style="max-width: 400px; margin: 0 auto;">
+                            <label style="display: block; margin-bottom: 8px;">Enter Monthly Income (₹):</label>
+                            <input type="number" id="incomeInput" placeholder="e.g., 100000" value="100000" 
+                                   style="width: 100%; padding: 12px; border-radius: 8px; border: none; font-size: 1.1em; margin-bottom: 15px;"
+                                   onchange="calculateBudget()">
+                            <button onclick="calculateBudget()" style="width: 100%; padding: 12px; background: #ffd700; color: #333; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1em;">
+                                Calculate Budget Split
+                            </button>
+                        </div>
+                        <div id="budgetResult" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; text-align: center;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 0.9em; opacity: 0.9;">50% Needs</div>
+                                <div id="needsAmount" style="font-size: 1.5em; font-weight: bold;">₹50,000</div>
+                                <div style="font-size: 0.8em; opacity: 0.8;">Rent, bills, groceries</div>
                             </div>
-                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
-                                <div style="font-size: 2em; font-weight: bold; color: #3498db;">30%</div>
-                                <div style="font-weight: bold;">Wants</div>
-                                <div style="font-size: 0.85em; color: #555;">Entertainment, dining</div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 0.9em; opacity: 0.9;">30% Wants</div>
+                                <div id="wantsAmount" style="font-size: 1.5em; font-weight: bold;">₹30,000</div>
+                                <div style="font-size: 0.8em; opacity: 0.8;">Entertainment, dining</div>
                             </div>
-                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
-                                <div style="font-size: 2em; font-weight: bold; color: #9b59b6;">20%</div>
-                                <div style="font-weight: bold;">Savings</div>
-                                <div style="font-size: 0.85em; color: #555;">Emergency, retirement</div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 0.9em; opacity: 0.9;">20% Savings</div>
+                                <div id="savingsAmount" style="font-size: 1.5em; font-weight: bold;">₹20,000</div>
+                                <div style="font-size: 0.8em; opacity: 0.8;">Emergency, invest</div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Emergency Fund Calculator -->
+                    <div style="background: #f8f9fa; border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 2px solid #e9ecef;">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">🏦 Emergency Fund Goal</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; color: #555;">Monthly Expenses (₹):</label>
+                                <input type="number" id="expenseInput" value="50000" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;" onchange="calculateEmergency()">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; color: #555;">Months to Cover:</label>
+                                <select id="monthsInput" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;" onchange="calculateEmergency()">
+                                    <option value="3">3 months</option>
+                                    <option value="6" selected>6 months</option>
+                                    <option value="12">12 months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="emergencyResult" style="text-align: center; margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 10px;">
+                            <div style="font-size: 0.9em; color: #555;">Your Emergency Fund Goal:</div>
+                            <div id="emergencyGoal" style="font-size: 2em; font-weight: bold; color: #2ecc71;">₹3,00,000</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Financial Tips -->
                     <div class="help-grid">
-                        <div class="help-card">
-                            <div class="help-icon">🏦</div>
-                            <div class="help-title">Emergency Fund</div>
-                            <div class="help-desc">Build 3-6 months of expenses for financial security</div>
-                        </div>
-                        <div class="help-card">
+                        <div class="help-card" style="border-left: 4px solid #2ecc71;">
                             <div class="help-icon">📈</div>
-                            <div class="help-title">Investing Basics</div>
-                            <div class="help-desc">Start early, diversify, maximize 401(k) match</div>
+                            <div class="help-title">Compound Growth</div>
+                            <div class="help-desc">₹5,000/month at 12% = ₹50 Lakhs in 20 years!</div>
                         </div>
-                        <div class="help-card">
+                        <div class="help-card" style="border-left: 4px solid #3498db;">
+                            <div class="help-icon">🎯</div>
+                            <div class="help-title">401(k) Match</div>
+                            <div class="help-desc">Always get employer match - it's free money!</div>
+                        </div>
+                        <div class="help-card" style="border-left: 4px solid #9b59b6;">
                             <div class="help-icon">💳</div>
-                            <div class="help-title">Debt Management</div>
-                            <div class="help-desc">Avalanche or snowball method to pay off debt</div>
+                            <div class="help-title">Debt Strategy</div>
+                            <div class="help-desc">Pay highest interest first (Avalanche method)</div>
                         </div>
                     </div>
-                    <p style="text-align: center; margin-top: 20px; color: #666;">💡 Ask Aura for personalized financial wellness tips!</p>
                 </div>
                 
                 <!-- Games Tab -->
@@ -453,10 +488,10 @@
                         </div>
                         <div class="help-card">
                             <div class="help-icon">🍎</div>
-                            <div class="help-title">Food Book App</div>
-                            <div class="help-desc">Track nutrition, meals, and healthy eating habits</div>
-                            <a href="https://apps.apple.com/app/food-book/id1537498742" target="_blank" class="help-link" style="margin-right: 8px;">iOS</a>
-                            <a href="https://play.google.com/store/apps/details?id=com.foodbook.app" target="_blank" class="help-link">Android</a>
+                            <div class="help-title">FoodBook - Workplace Food</div>
+                            <div class="help-desc">Order food at work, skip queues, track meals</div>
+                            <a href="https://apps.apple.com/us/app/foodbook-workplace-food/id1567853868" target="_blank" class="help-link" style="margin-right: 8px;">iOS</a>
+                            <a href="https://play.google.com/store/search?q=Food+Book&c=apps" target="_blank" class="help-link">Android</a>
                         </div>
                         <div class="help-card">
                             <div class="help-icon">🧠</div>
@@ -530,6 +565,19 @@
                 <button class="quick-btn" onclick="askQuick('Saving tips')">💰 Saving</button>
                 <button class="quick-btn" onclick="askQuick('Budget rule')">📊 Budget</button>
                 <button class="quick-btn" onclick="askQuick('Better sleep')">😴 Sleep</button>
+            </div>
+            
+            <!-- Voice Controls -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">🎙️ Voice Controls</div>
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="toggleVoice()" id="voiceToggle" style="flex: 1; background: rgba(255,255,255,0.2); border: none; padding: 10px; border-radius: 8px; color: white; cursor: pointer; font-size: 0.85em;">
+                        🔊 Voice On
+                    </button>
+                    <button onclick="startListening()" id="micBtn" style="background: rgba(255,255,255,0.2); border: none; padding: 10px 15px; border-radius: 8px; color: white; cursor: pointer;">
+                        🎤
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -651,6 +699,102 @@
             // Default
             return "✨ I can help with both health and wealth! Ask me about:<br>• 💪 Stress, sleep, focus, exercise<br>• 💰 Budgeting, saving, investing, debt<br><br>What would you like to explore?";
         }
+        
+        // Voice synthesis
+        let voiceEnabled = true;
+        
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            const btn = document.getElementById('voiceToggle');
+            btn.textContent = voiceEnabled ? '🔊 Voice On' : '🔇 Voice Off';
+            btn.style.background = voiceEnabled ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)';
+            addBotMessage(voiceEnabled ? '🔊 Voice enabled! I will speak my responses.' : '🔇 Voice disabled. Text only mode.');
+        }
+        
+        function speakText(text) {
+            if (!voiceEnabled || !('speechSynthesis' in window)) return;
+            speechSynthesis.cancel();
+            const clean = text.replace(/<[^>]*>/g, '').replace(/[•]/g, '');
+            const utterance = new SpeechSynthesisUtterance(clean);
+            utterance.rate = 0.9;
+            utterance.pitch = 1.0;
+            speechSynthesis.speak(utterance);
+        }
+        
+        // Speech recognition
+        let recognition;
+        function startListening() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                addBotMessage('🎤 Speech recognition not supported. Please use Chrome or Edge.');
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            
+            const micBtn = document.getElementById('micBtn');
+            micBtn.style.background = '#ff4444';
+            micBtn.textContent = '🔴';
+            addBotMessage('🎤 Listening... Speak now!');
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('chatInput').value = transcript;
+                sendMessage();
+            };
+            
+            recognition.onend = function() {
+                micBtn.style.background = 'rgba(255,255,255,0.2)';
+                micBtn.textContent = '🎤';
+            };
+            
+            recognition.onerror = function() {
+                micBtn.style.background = 'rgba(255,255,255,0.2)';
+                micBtn.textContent = '🎤';
+                addBotMessage('🎤 Could not hear you. Please try again.');
+            };
+            
+            recognition.start();
+        }
+        
+        // Override addBotMessage to include voice
+        const originalAddBotMessage = addBotMessage;
+        addBotMessage = function(msg) {
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="chat-msg">${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
+            speakText(msg);
+        };
+        
+        // Budget Calculator
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('incomeInput').value) || 0;
+            const needs = income * 0.5;
+            const wants = income * 0.3;
+            const savings = income * 0.2;
+            
+            document.getElementById('needsAmount').textContent = '₹' + needs.toLocaleString('en-IN');
+            document.getElementById('wantsAmount').textContent = '₹' + wants.toLocaleString('en-IN');
+            document.getElementById('savingsAmount').textContent = '₹' + savings.toLocaleString('en-IN');
+            
+            addCoins(5);
+        }
+        
+        // Emergency Fund Calculator
+        function calculateEmergency() {
+            const expenses = parseFloat(document.getElementById('expenseInput').value) || 0;
+            const months = parseInt(document.getElementById('monthsInput').value) || 6;
+            const goal = expenses * months;
+            
+            document.getElementById('emergencyGoal').textContent = '₹' + goal.toLocaleString('en-IN');
+        }
+        
+        // Initialize calculators on load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateBudget();
+            calculateEmergency();
+        });
     </script>
 </body>
 </html>
