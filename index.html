@@ -3,637 +3,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EA Aura - Enhanced Wellness Hub</title>
-    <!-- Font Awesome Icons -->
+    <title>EA Aura - Elevate Your Well-being</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             color: #333;
-            padding: 20px;
+            padding: 15px;
         }
-
-        .container {
-            max-width: 1000px;
+        .main-container {
+            max-width: 1300px;
             margin: 0 auto;
-            background: white;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+        .app-container {
+            background: #fff;
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            padding: 25px;
             text-align: center;
-            padding: 40px 20px;
             position: relative;
         }
-
-        .aura-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.2);
+        .header-content {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px auto;
-            font-size: 2rem;
-            color: white;
+            gap: 15px;
         }
-
-        .logo {
-            font-size: 2.5em;
+        .ea-badge {
+            width: 55px;
+            height: 55px;
+            background: #ff4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            box-shadow: 0 4px 15px rgba(255,68,68,0.4);
         }
-
-        .tagline {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            opacity: 0.9;
+        .logo { font-size: 2.5em; font-weight: bold; letter-spacing: 2px; }
+        .tagline { font-size: 1.1em; opacity: 0.9; margin-top: 8px; }
+        .coin-jar {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        .description {
-            font-size: 1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 30px;
+        .coin-jar:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+        .coin-count { font-size: 1.1em; font-weight: bold; }
+        
+        .tab-nav {
+            display: flex;
             background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .stat {
-            text-align: center;
+        .tab-btn {
+            flex: 1;
             padding: 15px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
             color: #666;
-            font-size: 0.9em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
         }
-
-        .features {
+        .tab-btn:hover { background: #e9ecef; }
+        .tab-btn.active { color: #667eea; border-bottom-color: #667eea; background: #fff; }
+        
+        .tab-content { padding: 25px; min-height: 500px; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            position: sticky;
+            top: 15px;
+            height: fit-content;
+        }
+        .character-display { text-align: center; margin-bottom: 15px; }
+        .avatar {
+            width: 120px;
+            height: 150px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            border: 3px solid rgba(255,255,255,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .char-name { font-size: 1.3em; font-weight: bold; }
+        .char-role { font-size: 0.85em; opacity: 0.8; }
+        
+        .chat-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px;
+            height: 280px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+        .chat-msg {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .chat-msg.user { background: rgba(255,255,255,0.35); text-align: right; }
+        .chat-input-wrap { display: flex; gap: 8px; }
+        .chat-input {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: white;
+            outline: none;
+        }
+        .chat-input::placeholder { color: rgba(255,255,255,0.7); }
+        .send-btn {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .send-btn:hover { background: rgba(255,255,255,0.4); }
+        
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .metric-card:hover { border-color: #667eea; transform: translateY(-2px); }
+        .metric-icon { font-size: 2em; margin-bottom: 10px; }
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            background: none;
+            border: none;
+            text-align: center;
+            width: 100%;
+        }
+        .metric-label { color: #666; font-size: 0.9em; margin: 5px 0; }
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+        
+        /* Characters */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .char-card {
+            padding: 15px 10px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        .char-card:hover { transform: scale(1.03); }
+        .char-card.nova { background: #ff8c00; color: white; }
+        .char-card.veda { background: #dc143c; color: white; }
+        .char-card.kai { background: #4169e1; color: white; }
+        .char-card.iris { background: #228b22; color: white; }
+        .char-card.selected { border-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
+        .char-card-icon { font-size: 2em; margin-bottom: 8px; }
+        .char-card-name { font-weight: bold; }
+        .char-card-role { font-size: 0.75em; opacity: 0.9; }
+        
+        /* Game Hub Button */
+        .game-hub-btn {
+            display: block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        .game-hub-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102,126,234,0.4); }
+        
+        /* Quick buttons */
+        .quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .quick-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 12px;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+        }
+        .quick-btn:hover { background: rgba(255,255,255,0.35); }
+        
+        /* Help cards */
+        .help-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 30px;
-        }
-
-        .feature {
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #667eea;
-        }
-
-        .feature-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .feature-desc {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .main-content {
-            padding: 30px;
-            background: #f8f9fa;
-        }
-
-        .section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .voice-options {
-            display: flex;
             gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
         }
-
-        .voice-btn {
+        .help-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .help-card:hover { border-color: #667eea; }
+        .help-icon { font-size: 2em; margin-bottom: 10px; }
+        .help-title { font-weight: bold; margin-bottom: 8px; }
+        .help-desc { color: #666; font-size: 0.9em; margin-bottom: 12px; }
+        .help-link {
+            display: inline-block;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-
-        .voice-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .game-card {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-            text-align: center;
-        }
-
-        .game-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .game-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .game-desc {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .game-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
+            text-decoration: none;
             padding: 8px 16px;
             border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.2s;
+            font-size: 0.85em;
         }
-
-        .game-btn:hover {
-            background: #45a049;
-        }
-
-        .launch-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1em;
-            text-decoration: none;
-            display: inline-block;
-            margin: 20px auto;
-            transition: transform 0.2s;
-        }
-
-        .launch-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .features {
-                grid-template-columns: 1fr;
-            }
+        
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; }
+            .characters-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
-                <div style="width: 60px; height: 60px; background: #ff4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4em; color: white; box-shadow: 0 4px 15px rgba(255,68,68,0.4);">EA</div>
-                <div class="logo" style="margin-bottom: 0;">AURA</div>
+    <div class="main-container">
+        <!-- Main App -->
+        <div class="app-container">
+            <div class="header">
+                <div class="coin-jar" onclick="showCoins()">
+                    <span>🪙</span>
+                    <span class="coin-count" id="coinCount">1,247</span>
+                </div>
+                <div class="header-content">
+                    <div class="ea-badge">EA</div>
+                    <div class="logo">AURA</div>
+                </div>
+                <div class="tagline">Elevate Your Well-being</div>
             </div>
-            <div class="tagline">Elevate your Well-being</div>
-            <p class="description">AI-powered wellness coaching for health, wealth, and happiness</p>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-number">1,247</div>
-                <div class="stat-label">Wellness Coins</div>
+            
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="showTab('wellness')">❤️ Wellness</button>
+                <button class="tab-btn" onclick="showTab('wealth')">💰 Wealth</button>
+                <button class="tab-btn" onclick="showTab('games')">🎮 Games</button>
+                <button class="tab-btn" onclick="showTab('help')">❓ Help</button>
             </div>
-            <div class="stat">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Web Games</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Wellness Metrics</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">AI</div>
-                <div class="stat-label">Aura Assistant</div>
-            </div>
-        </div>
-
-        <!-- Features -->
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
-                <div class="feature-title">Wellness Tracking</div>
-                <div class="feature-desc">Track steps, sleep, mood, and focus with gamified coin rewards</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
-                <div class="feature-title">Web-Based Wellness Games</div>
-                <div class="feature-desc">Snake, Memory Cards, Sudoku, Zen Garden - Browser-based gaming suite</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                <div class="feature-title">AI Aura Assistant</div>
-                <div class="feature-desc">Voice-enabled coaching based on EA wellness pillars</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
-                <div class="feature-title">Analytics & Reports</div>
-                <div class="feature-desc">Export data in CSV, PDF, and JSON formats</div>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- AI Chatbot Section -->
-            <div class="section">
-                <h3 class="section-title"><i class="fas fa-comments"></i> Aura AI Assistant - Health & Wealth Advisor</h3>
-                <div id="chat-container" style="max-width: 800px; margin: 0 auto;">
-                    <div id="chat-messages" style="height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
-                        <div class="message bot-message" style="margin-bottom: 10px;">
-                            <strong>Aura:</strong> 👋 Hello! I'm Aura, your wellness and wealth advisor. I can help with:<br><br>
-                            💪 <strong>Health</strong>: Stress, sleep, fitness, nutrition<br>
-                            💰 <strong>Wealth</strong>: Budgeting, saving, investing, financial planning<br><br>
-                            What would you like to explore today?
+            
+            <div class="tab-content">
+                <!-- Wellness Tab -->
+                <div id="wellness" class="tab-panel active">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">📊 Today's Wellness Metrics</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">👣</div>
+                            <input type="number" class="metric-value" id="steps" value="8247" onchange="updateMetric('steps')">
+                            <div class="metric-label">Steps Today</div>
+                            <div class="progress-bar"><div class="progress-fill" id="stepsBar" style="width: 82%; background: linear-gradient(90deg, #4CAF50, #8BC34A);"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">😴</div>
+                            <input type="number" class="metric-value" id="sleep" value="7.5" step="0.5" onchange="updateMetric('sleep')">
+                            <div class="metric-label">Hours Sleep</div>
+                            <div class="progress-bar"><div class="progress-fill" id="sleepBar" style="width: 83%; background: linear-gradient(90deg, #2196F3, #03A9F4);"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">😊</div>
+                            <input type="number" class="metric-value" id="mood" value="8" min="1" max="10" onchange="updateMetric('mood')">
+                            <div class="metric-label">Mood (1-10)</div>
+                            <div class="progress-bar"><div class="progress-fill" id="moodBar" style="width: 80%; background: linear-gradient(90deg, #FF9800, #FFC107);"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">🎯</div>
+                            <input type="number" class="metric-value" id="focus" value="145" onchange="updateMetric('focus')">
+                            <div class="metric-label">Focus Minutes</div>
+                            <div class="progress-bar"><div class="progress-fill" id="focusBar" style="width: 72%; background: linear-gradient(90deg, #9C27B0, #E91E63);"></div></div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" id="chat-input" placeholder="Ask me about health, wellness, or wealth..." 
-                               style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; font-size: 14px;">
-                        <button id="send-btn" class="voice-btn" style="padding: 12px 20px; border-radius: 25px;">
-                            <i class="fas fa-paper-plane"></i> Send
-                        </button>
-                    </div>
-                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
-                        <button onclick="askQuickQuestion('How can I start saving money?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">💰 Saving Tips</button>
-                        <button onclick="askQuickQuestion('What is the 50/30/20 budget rule?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">📊 Budgeting</button>
-                        <button onclick="askQuickQuestion('How should I start investing?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">📈 Investing</button>
-                        <button onclick="askQuickQuestion('How can I reduce stress?')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">🧘 Stress Relief</button>
-                        <button onclick="askQuickQuestion('Tips for better sleep')" class="quick-btn" style="background: #f0f0f0; border: 1px solid #ddd; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;">😴 Sleep Better</button>
-                    </div>
-                    <div style="text-align: center; margin-top: 10px;">
-                        <small style="color: #666;">Powered by Azure OpenAI • Health & Financial Wellness Advisor</small>
+                    
+                    <h3 style="color: #667eea; margin: 25px 0 15px;">🎭 Choose Your Wellness Coach</h3>
+                    <div class="characters-grid">
+                        <div class="char-card nova selected" onclick="selectCharacter('nova')">
+                            <div class="char-card-icon">🏃‍♀️</div>
+                            <div class="char-card-name">Nova</div>
+                            <div class="char-card-role">Habit Tracker</div>
+                        </div>
+                        <div class="char-card veda" onclick="selectCharacter('veda')">
+                            <div class="char-card-icon">💪</div>
+                            <div class="char-card-name">Veda</div>
+                            <div class="char-card-role">Focus & Energy</div>
+                        </div>
+                        <div class="char-card kai" onclick="selectCharacter('kai')">
+                            <div class="char-card-icon">🧘‍♂️</div>
+                            <div class="char-card-name">Kai</div>
+                            <div class="char-card-role">Calm & Breath</div>
+                        </div>
+                        <div class="char-card iris" onclick="selectCharacter('iris')">
+                            <div class="char-card-icon">🌿</div>
+                            <div class="char-card-name">Iris</div>
+                            <div class="char-card-role">Relax & Recover</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Voice Options -->
-            <div class="section">
-                <h3 class="section-title"><i class="fas fa-microphone"></i> Aura Voice Options & Web Games</h3>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h4 style="color: #667eea; margin-bottom: 15px;"><i class="fas fa-volume-up"></i> Voice Selection</h4>
-                        <div class="voice-options">
-                            <button class="voice-btn" onclick="testVoice('female')">
-                                <i class="fas fa-female"></i> Female Voice
-                            </button>
-                            <button class="voice-btn" onclick="testVoice('male')">
-                                <i class="fas fa-male"></i> Male Voice
-                            </button>
-                            <button class="voice-btn" onclick="testVoice('neutral')">
-                                <i class="fas fa-robot"></i> Neutral AI
-                            </button>
+                <!-- Wealth Tab -->
+                <div id="wealth" class="tab-panel">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">💰 Financial Wellness</h2>
+                    <div style="background: linear-gradient(135deg, #ffeaa7, #fab1a0); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                        <h3 style="text-align: center; margin-bottom: 15px;">📊 50/30/20 Budget Rule</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 2em; font-weight: bold; color: #2ecc71;">50%</div>
+                                <div style="font-weight: bold;">Needs</div>
+                                <div style="font-size: 0.85em; color: #555;">Rent, utilities, groceries</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 2em; font-weight: bold; color: #3498db;">30%</div>
+                                <div style="font-weight: bold;">Wants</div>
+                                <div style="font-size: 0.85em; color: #555;">Entertainment, dining</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+                                <div style="font-size: 2em; font-weight: bold; color: #9b59b6;">20%</div>
+                                <div style="font-weight: bold;">Savings</div>
+                                <div style="font-size: 0.85em; color: #555;">Emergency, retirement</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="help-grid">
+                        <div class="help-card">
+                            <div class="help-icon">🏦</div>
+                            <div class="help-title">Emergency Fund</div>
+                            <div class="help-desc">Build 3-6 months of expenses for financial security</div>
+                        </div>
+                        <div class="help-card">
+                            <div class="help-icon">📈</div>
+                            <div class="help-title">Investing Basics</div>
+                            <div class="help-desc">Start early, diversify, maximize 401(k) match</div>
+                        </div>
+                        <div class="help-card">
+                            <div class="help-icon">💳</div>
+                            <div class="help-title">Debt Management</div>
+                            <div class="help-desc">Avalanche or snowball method to pay off debt</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; color: #666;">💡 Ask Aura for personalized financial wellness tips!</p>
+                </div>
+                
+                <!-- Games Tab -->
+                <div id="games" class="tab-panel">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">🎮 Wellness Games</h2>
+                    <p style="margin-bottom: 20px; color: #666;">Play cognitive wellness games to earn coins and boost your mental health!</p>
                     
-                    <div>
-                        <h4 style="color: #667eea; margin-bottom: 15px;"><i class="fas fa-gamepad"></i> Web Games Suite</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem;">
-                            <strong><i class="fas fa-check-circle" style="color: #4CAF50;"></i> Setup:</strong> No installation required - runs in web browser
-                        </p>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem;">
-                            <strong><i class="fas fa-coins" style="color: #FFD700;"></i> Rewards:</strong> Earn 20-100 wellness coins per game
-                        </p>
-                        <p style="font-size: 0.9rem;">
-                            <strong><i class="fas fa-mobile-alt" style="color: #667eea;"></i> Compatible:</strong> Desktop, tablet, and mobile devices
-                        </p>
+                    <div style="background: #f8f9fa; border-radius: 15px; padding: 30px; text-align: center; border: 2px solid #667eea;">
+                        <div style="font-size: 4em; margin-bottom: 15px;">🎮</div>
+                        <h3 style="color: #667eea; margin-bottom: 10px;">Game Hub</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Access all wellness games in one place with progress tracking</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <span style="background: #e8f5e9; padding: 8px 15px; border-radius: 20px;">🐍 Snake</span>
+                            <span style="background: #e3f2fd; padding: 8px 15px; border-radius: 20px;">🧠 Memory</span>
+                            <span style="background: #fff3e0; padding: 8px 15px; border-radius: 20px;">🧩 Sudoku</span>
+                            <span style="background: #f3e5f5; padding: 8px 15px; border-radius: 20px;">🌸 Zen Garden</span>
+                        </div>
+                        <a href="games/index.html" target="_blank" class="game-hub-btn" style="display: inline-block;">
+                            <i class="fas fa-rocket"></i> Launch Game Hub
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 10px; text-align: center;">
+                        <strong>🪙 Earn 20-50 wellness coins per game!</strong>
                     </div>
                 </div>
-
-                <!-- Games Grid -->
-                <div class="games-grid">
-                    <div class="game-card">
-                        <div class="game-icon"><i class="fas fa-seedling" style="color: #4CAF50;"></i></div>
-                        <div class="game-title">Wellness Snake</div>
-                        <div class="game-desc">Focus training with breathing exercises</div>
-                        <a href="games/wellness_snake.html" target="_blank" class="game-btn">
-                            <i class="fas fa-play"></i> Play
-                        </a>
+                
+                <!-- Help Tab -->
+                <div id="help" class="tab-panel">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">❓ Help & Resources</h2>
+                    <div class="help-grid">
+                        <div class="help-card">
+                            <div class="help-icon">🏥</div>
+                            <div class="help-title">Modern Health</div>
+                            <div class="help-desc">Professional mental health support for EA employees</div>
+                            <a href="https://www.modernhealth.com" target="_blank" class="help-link">Learn More</a>
+                        </div>
+                        <div class="help-card">
+                            <div class="help-icon">🍎</div>
+                            <div class="help-title">Nutrition Guide</div>
+                            <div class="help-desc">Healthy eating tips and meal planning resources</div>
+                            <a href="#" class="help-link">View Guide</a>
+                        </div>
+                        <div class="help-card">
+                            <div class="help-icon">🧠</div>
+                            <div class="help-title">EA Employee Assistance</div>
+                            <div class="help-desc">24/7 confidential support services</div>
+                            <a href="#" class="help-link">Get Help</a>
+                        </div>
+                        <div class="help-card">
+                            <div class="help-icon">💪</div>
+                            <div class="help-title">Fitness Resources</div>
+                            <div class="help-desc">Exercise routines for desk workers</div>
+                            <a href="#" class="help-link">Start Moving</a>
+                        </div>
                     </div>
-                    
-                    <div class="game-card">
-                        <div class="game-icon"><i class="fas fa-brain" style="color: #2196F3;"></i></div>
-                        <div class="game-title">Memory Cards</div>
-                        <div class="game-desc">Cognitive enhancement through matching</div>
-                        <a href="games/memory_cards.html" target="_blank" class="game-btn">
-                            <i class="fas fa-play"></i> Play
-                        </a>
-                    </div>
-                    
-                    <div class="game-card">
-                        <div class="game-icon"><i class="fas fa-puzzle-piece" style="color: #FF9800;"></i></div>
-                        <div class="game-title">Sudoku Puzzle</div>
-                        <div class="game-desc">Logical thinking challenges</div>
-                        <a href="games/sudoku_puzzle.html" target="_blank" class="game-btn">
-                            <i class="fas fa-play"></i> Play
-                        </a>
-                    </div>
-                    
-                    <div class="game-card">
-                        <div class="game-icon"><i class="fas fa-spa" style="color: #9C27B0;"></i></div>
-                        <div class="game-title">Zen Garden</div>
-                        <div class="game-desc">Mindfulness through digital raking</div>
-                        <a href="games/zen_garden.html" target="_blank" class="game-btn">
-                            <i class="fas fa-play"></i> Play
-                        </a>
-                    </div>
-                    
-                    <div class="game-card" style="border-left-color: #667eea;">
-                        <div class="game-icon"><i class="fas fa-th-large" style="color: #667eea;"></i></div>
-                        <div class="game-title">Game Hub</div>
-                        <div class="game-desc">Central launcher with progress tracking</div>
-                        <a href="games/index.html" target="_blank" class="game-btn" style="background: #667eea;">
-                            <i class="fas fa-rocket"></i> Launch
-                        </a>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="ea_aura_enhanced.html" class="launch-btn">
-                        <i class="fas fa-rocket"></i> Launch EA Aura Enhanced
-                    </a>
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
-                        <i class="fas fa-info-circle"></i> AI-powered wellness coaching with Azure OpenAI
-                    </p>
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p><i class="fas fa-trophy"></i> <strong>EA Hackathon 2025 Ready</strong> — Complete wellness solution with Aura AI coaching, web gaming suite, and enterprise-grade analytics</p>
+        
+        <!-- Sidebar - AI Assistant -->
+        <div class="sidebar">
+            <div class="character-display">
+                <div class="avatar" id="avatarDisplay">🏃‍♀️</div>
+                <div class="char-name" id="charName">Nova</div>
+                <div class="char-role" id="charRole">Habit Tracker Assistant</div>
+            </div>
+            
+            <div class="chat-box" id="chatBox">
+                <div class="chat-msg">👋 Hi! I'm Nova, your wellness coach. I can help with health AND wealth questions! Try asking about budgeting, saving, or stress management.</div>
+            </div>
+            
+            <div class="chat-input-wrap">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ask about health or wealth..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            
+            <div class="quick-btns">
+                <button class="quick-btn" onclick="askQuick('How to reduce stress?')">🧘 Stress</button>
+                <button class="quick-btn" onclick="askQuick('Saving tips')">💰 Saving</button>
+                <button class="quick-btn" onclick="askQuick('Budget rule')">📊 Budget</button>
+                <button class="quick-btn" onclick="askQuick('Better sleep')">😴 Sleep</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Voice testing functionality
-        function testVoice(voiceType) {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-                
-                const messages = {
-                    'female': "Hello! I'm Aura, your wellness assistant. I'm here to help you achieve your health and wellness goals.",
-                    'male': "Greetings! I'm Aura, your AI wellness coach. Let's work together to optimize your well-being.",
-                    'neutral': "Welcome to EA Aura. I am your artificial intelligence wellness assistant, ready to support your journey."
-                };
-                
-                const utterance = new SpeechSynthesisUtterance(messages[voiceType]);
-                const voices = speechSynthesis.getVoices();
-                
-                if (voiceType === 'female') {
-                    utterance.voice = voices.find(voice => voice.name.toLowerCase().includes('female') || 
-                                                          voice.name.toLowerCase().includes('zira')) || voices[0];
-                    utterance.pitch = 1.1;
-                } else if (voiceType === 'male') {
-                    utterance.voice = voices.find(voice => voice.name.toLowerCase().includes('male') || 
-                                                          voice.name.toLowerCase().includes('david')) || voices[1] || voices[0];
-                    utterance.pitch = 0.9;
-                } else {
-                    utterance.voice = voices[0];
-                    utterance.pitch = 1.0;
-                }
-                
-                utterance.rate = 0.9;
-                utterance.volume = 0.7;
-                
-                speechSynthesis.speak(utterance);
-                
-                // Visual feedback
-                const button = event.target.closest('.voice-btn');
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-volume-up"></i> Playing...';
-                button.style.background = '#4CAF50';
-                
-                utterance.onend = () => {
-                    button.innerHTML = originalText;
-                    button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
-                };
-            } else {
-                alert('Speech synthesis is not supported in your browser. Please try Chrome, Firefox, or Edge.');
-            }
+        let currentCoins = 1247;
+        let currentCharacter = 'nova';
+        
+        const characters = {
+            nova: { emoji: '🏃‍♀️', name: 'Nova', role: 'Habit Tracker Assistant' },
+            veda: { emoji: '💪', name: 'Veda', role: 'Focus & Energy Coach' },
+            kai: { emoji: '🧘‍♂️', name: 'Kai', role: 'Calm & Breath Guide' },
+            iris: { emoji: '🌿', name: 'Iris', role: 'Relax & Recovery Specialist' }
+        };
+        
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
         }
-
-        // Load voices when available
-        if ('speechSynthesis' in window) {
-            speechSynthesis.onvoiceschanged = () => {
-                console.log('Voices loaded:', speechSynthesis.getVoices().length);
-            };
+        
+        function selectCharacter(char) {
+            currentCharacter = char;
+            document.querySelectorAll('.char-card').forEach(c => c.classList.remove('selected'));
+            document.querySelector(`.char-card.${char}`).classList.add('selected');
+            
+            const c = characters[char];
+            document.getElementById('avatarDisplay').textContent = c.emoji;
+            document.getElementById('charName').textContent = c.name;
+            document.getElementById('charRole').textContent = c.role;
+            
+            addBotMessage(`Hi! I'm ${c.name}, your ${c.role.toLowerCase()}. How can I help you today?`);
         }
-
-        // Chatbot functionality with smart fallback responses
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('send-btn');
-            const chatMessages = document.getElementById('chat-messages');
-
-            function addMessage(message, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-                messageDiv.style.cssText = `
-                    margin-bottom: 10px;
-                    padding: 10px 15px;
-                    border-radius: 15px;
-                    max-width: 70%;
-                    ${isUser ? 
-                        'background: linear-gradient(45deg, #667eea, #764ba2); color: white; margin-left: auto; text-align: right;' : 
-                        'background: white; border: 1px solid #e0e0e0; margin-right: auto;'
-                    }
-                `;
-                messageDiv.innerHTML = `<strong>${isUser ? 'You' : 'Aura'}:</strong> ${message}`;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        function updateMetric(metric) {
+            addCoins(10);
+            addBotMessage(`Great job updating your ${metric}! Keep tracking for better insights. 🌟`);
+        }
+        
+        function addCoins(amount) {
+            currentCoins += amount;
+            document.getElementById('coinCount').textContent = currentCoins.toLocaleString();
+        }
+        
+        function showCoins() {
+            addBotMessage(`You have ${currentCoins.toLocaleString()} wellness coins! Earn more by tracking metrics and playing games.`);
+        }
+        
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+        
+        function askQuick(q) {
+            document.getElementById('chatInput').value = q;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            
+            addUserMessage(msg);
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = getResponse(msg);
+                addBotMessage(response);
+            }, 500);
+        }
+        
+        function addUserMessage(msg) {
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="chat-msg user">You: ${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+        
+        function addBotMessage(msg) {
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="chat-msg">${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+        
+        function getResponse(input) {
+            const q = input.toLowerCase();
+            
+            // Financial/Wealth responses
+            if (q.includes('budget') || q.includes('50/30/20') || q.includes('spending')) {
+                return "💰 <b>50/30/20 Budget Rule:</b><br>• 50% Needs (rent, utilities)<br>• 30% Wants (entertainment)<br>• 20% Savings (emergency, retirement)<br><br>Track spending for a month to see where your money goes!";
             }
-
-            function getSmartResponse(userInput) {
-                const input = userInput.toLowerCase();
-                
-                // Health & Wellness responses
-                if (input.includes('stress') || input.includes('anxious') || input.includes('anxiety')) {
-                    return "🧘 I understand you're feeling stressed. Try the 4-7-8 breathing technique: inhale for 4 counts, hold for 7, exhale for 8. This activates your parasympathetic nervous system for instant calm. Regular mindfulness practice can also help manage stress long-term.";
-                }
-                if (input.includes('sleep') || input.includes('tired') || input.includes('insomnia')) {
-                    return "😴 Quality sleep is essential! Aim for 7-9 hours nightly. Tips: Keep a consistent sleep schedule, avoid screens 1 hour before bed, keep your room cool (65-68°F), and try a relaxing bedtime routine like reading or gentle stretching.";
-                }
-                if (input.includes('exercise') || input.includes('workout') || input.includes('fitness')) {
-                    return "🏃 Great focus on fitness! Aim for 150 minutes of moderate cardio weekly plus 2 strength sessions. Start small - even 10-minute walks count! For desk workers, take breaks every 30 minutes and try the 20-20-20 rule for eye health.";
-                }
-                if (input.includes('diet') || input.includes('nutrition') || input.includes('eat') || input.includes('food')) {
-                    return "🥗 Balanced nutrition is key! Aim for 50% vegetables/fruits, 25% lean proteins, 25% whole grains. Stay hydrated with 8-10 glasses of water daily. Limit processed foods and added sugars. Small, consistent changes lead to lasting results!";
-                }
-                if (input.includes('focus') || input.includes('concentrate') || input.includes('productivity')) {
-                    return "🎯 To boost focus, try the Pomodoro Technique: 25 minutes of focused work, then a 5-minute break. Eliminate distractions, single-task instead of multitasking, and take regular breaks. Your brain needs rest to perform at its best!";
-                }
-                
-                // Wealth & Finance responses
-                if (input.includes('budget') || input.includes('spending') || input.includes('expense') || input.includes('50/30/20')) {
-                    return "💰 <strong>The 50/30/20 Budget Rule:</strong><br><br>• <strong>50% Needs</strong>: Rent, utilities, groceries, insurance<br>• <strong>30% Wants</strong>: Entertainment, dining out, hobbies<br>• <strong>20% Savings</strong>: Emergency fund, retirement, investments<br><br>Start by tracking expenses for a month to see where your money goes!";
-                }
-                if (input.includes('save') || input.includes('saving') || input.includes('emergency fund') || input.includes('money')) {
-                    return "🏦 <strong>Smart Saving Strategies:</strong><br><br>1. <strong>Pay yourself first</strong> - Automate transfers to savings<br>2. <strong>Emergency fund</strong> - Build 3-6 months of expenses<br>3. <strong>High-yield savings</strong> - Get 4-5% APY vs 0.01%<br>4. <strong>The 24-hour rule</strong> - Wait before non-essential purchases<br><br>Even $25/week = $1,300/year!";
-                }
-                if (input.includes('invest') || input.includes('stock') || input.includes('retirement') || input.includes('401k') || input.includes('ira')) {
-                    return "📈 <strong>Investing Fundamentals:</strong><br><br>1. <strong>Start early</strong> - Compound growth is powerful<br>2. <strong>401(k) match</strong> - Always get employer match (free money!)<br>3. <strong>Diversify</strong> - Don't put all eggs in one basket<br>4. <strong>Index funds</strong> - Low-cost, broad market exposure<br>5. <strong>Time in market</strong> > Timing the market<br><br>Consider consulting a financial advisor for personalized guidance.";
-                }
-                if (input.includes('debt') || input.includes('loan') || input.includes('credit')) {
-                    return "💳 <strong>Debt Payoff Strategies:</strong><br><br>• <strong>Avalanche Method</strong>: Pay highest interest first (saves most money)<br>• <strong>Snowball Method</strong>: Pay smallest balance first (quick wins)<br><br>Tips:<br>- Always pay more than minimum<br>- Consider balance transfer for high-interest cards<br>- Avoid new debt while paying off existing";
-                }
-                if (input.includes('financial') || input.includes('wealth') || input.includes('rich') || input.includes('finance')) {
-                    return "💎 <strong>Building Wealth - Key Principles:</strong><br><br>1. <strong>Spend less than you earn</strong><br>2. <strong>Invest the difference</strong><br>3. <strong>Avoid lifestyle inflation</strong><br>4. <strong>Multiple income streams</strong><br>5. <strong>Continuous learning</strong><br><br>Wealth is built slowly through consistent habits, not quick schemes!";
-                }
-                if (input.includes('tax') || input.includes('taxes')) {
-                    return "📋 <strong>Tax-Smart Strategies:</strong><br><br>• Maximize 401(k) contributions (pre-tax)<br>• Use HSA for healthcare expenses<br>• Consider Roth IRA for tax-free growth<br>• Track deductible expenses<br>• Consult a tax professional for complex situations<br><br>Tax planning is wealth planning!";
-                }
-                
-                // General wellness
-                if (input.includes('goal') || input.includes('motivation')) {
-                    return "🎯 Set SMART goals: Specific, Measurable, Achievable, Relevant, Time-bound. Break big goals into daily actions. Track progress and celebrate small wins. Remember, consistency beats perfection!";
-                }
-                if (input.includes('mental health') || input.includes('depression') || input.includes('sad')) {
-                    return "💚 Your mental health matters. Practice self-compassion, stay connected with loved ones, and maintain routines. If you're struggling, please reach out to a mental health professional. You don't have to face challenges alone. The EA Employee Assistance Program is available 24/7.";
-                }
-                if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-                    return "👋 Hello! I'm Aura, your wellness and wealth advisor. I can help with health topics (stress, sleep, nutrition, exercise) and financial wellness (budgeting, saving, investing). What would you like to explore today?";
-                }
-                
-                // Default response
-                return "✨ Great question! I'm here to help with health, wellness, and financial guidance. I can assist with stress management, sleep optimization, fitness tips, nutrition advice, budgeting, saving strategies, and investment basics. What specific area would you like to explore?";
+            if (q.includes('save') || q.includes('saving') || q.includes('money')) {
+                return "🏦 <b>Smart Saving Tips:</b><br>1. Pay yourself first - automate savings<br>2. Build 3-6 month emergency fund<br>3. Use high-yield savings (4-5% APY)<br>4. Wait 24hrs before non-essential purchases<br><br>Even $25/week = $1,300/year!";
             }
-
-            async function sendMessage() {
-                const message = chatInput.value.trim();
-                if (!message) return;
-
-                addMessage(message, true);
-                chatInput.value = '';
-
-                // Show typing indicator
-                const typingDiv = document.createElement('div');
-                typingDiv.className = 'message bot-message';
-                typingDiv.style.cssText = 'margin-bottom: 10px; padding: 10px 15px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; max-width: 70%; margin-right: auto;';
-                typingDiv.innerHTML = '<strong>Aura:</strong> <em>Thinking...</em>';
-                chatMessages.appendChild(typingDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Try backend API first, fallback to smart responses
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: message, character: 'nova' })
-                    });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
-                        chatMessages.removeChild(typingDiv);
-                        addMessage(data.response);
-                        return;
-                    }
-                } catch (e) {
-                    console.log('API not available, using smart fallback');
-                }
-
-                // Fallback to smart responses
-                setTimeout(() => {
-                    chatMessages.removeChild(typingDiv);
-                    addMessage(getSmartResponse(message));
-                }, 800);
+            if (q.includes('invest') || q.includes('stock') || q.includes('401k') || q.includes('retirement')) {
+                return "📈 <b>Investing Basics:</b><br>1. Start early - compound growth is powerful<br>2. Always get employer 401(k) match<br>3. Diversify across asset types<br>4. Consider low-cost index funds<br><br>Time in market beats timing the market!";
             }
-
-            sendBtn.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') sendMessage();
-            });
-
-            // Make askQuickQuestion available globally
-            window.askQuickQuestion = function(question) {
-                chatInput.value = question;
-                sendMessage();
-            };
-        });
+            if (q.includes('debt') || q.includes('loan') || q.includes('credit') || q.includes('reduce debt')) {
+                return "💳 <b>Debt Payoff Strategies:</b><br>• <b>Avalanche</b>: Pay highest interest first<br>• <b>Snowball</b>: Pay smallest balance first<br><br>Always pay more than minimum. Consider balance transfers for high-interest cards.";
+            }
+            
+            // Health/Wellness responses
+            if (q.includes('stress') || q.includes('anxious') || q.includes('anxiety')) {
+                return "🧘 <b>Stress Relief:</b><br>Try 4-7-8 breathing: inhale 4 counts, hold 7, exhale 8. This activates your parasympathetic nervous system for instant calm.";
+            }
+            if (q.includes('sleep') || q.includes('tired') || q.includes('insomnia')) {
+                return "😴 <b>Better Sleep Tips:</b><br>• Keep consistent schedule<br>• No screens 1hr before bed<br>• Cool room (65-68°F)<br>• Aim for 7-9 hours nightly";
+            }
+            if (q.includes('focus') || q.includes('concentrate') || q.includes('productivity')) {
+                return "🎯 <b>Focus Boost:</b><br>Try Pomodoro: 25min work, 5min break. Eliminate distractions, single-task, and take regular breaks. Your brain needs rest!";
+            }
+            if (q.includes('exercise') || q.includes('fitness') || q.includes('workout')) {
+                return "🏃 <b>Movement Tips:</b><br>• 150min moderate cardio/week<br>• 2 strength sessions/week<br>• Break every 30min at desk<br>• 8,000-10,000 steps daily";
+            }
+            if (q.includes('nutrition') || q.includes('diet') || q.includes('eat') || q.includes('food')) {
+                return "🥗 <b>Healthy Eating:</b><br>• 50% vegetables/fruits<br>• 25% lean proteins<br>• 25% whole grains<br>• 8-10 glasses water daily";
+            }
+            
+            // Default
+            return "✨ I can help with both health and wealth! Ask me about:<br>• 💪 Stress, sleep, focus, exercise<br>• 💰 Budgeting, saving, investing, debt<br><br>What would you like to explore?";
+        }
     </script>
 </body>
 </html>
