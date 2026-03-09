@@ -4,6 +4,13 @@ Azure OpenAI Configuration Module for EA Aura Wellness Assistant
 import os
 from openai import AzureOpenAI
 
+# Load .env file if present (for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 # Azure OpenAI Configuration
 AZURE_OPENAI_ENDPOINT = os.getenv(
     "AZURE_OPENAI_ENDPOINT", 
