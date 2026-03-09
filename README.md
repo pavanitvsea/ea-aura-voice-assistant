@@ -8,9 +8,13 @@
 **File:** `ea_aura_enhanced.html`  
 **New Features:** Tabbed interface (Wellness/Wealth/Games/Reports/Help), coin reward system with sound effects, AI genie assistant, mini-games collection, comprehensive help resources
 
-### **📊 Sample Wellness Data**
-**File:** `ea_aura_sample_data.csv`  
-**Content:** 30 days of sample wellness metrics for testing and demonstration
+### **� AI Chatbot Landing Page**
+**File:** `index.html`  
+**New Features:** OpenAI-powered chatbot for health and wealth questions, voice options, web games suite, wellness metrics overview
+
+### **📊 Streamlit KPI Dashboard**
+**File:** `dashboard_app.py`  
+**Features:** Interactive KPI analysis dashboard with AI insights, user metrics, feature tracking, and Aura AI chat assistant
 
 ## 🌈 Complete Feature Matrix
 

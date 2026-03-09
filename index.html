@@ -318,6 +318,28 @@
 
         <!-- Main Content -->
         <div class="main-content">
+            <!-- AI Chatbot Section -->
+            <div class="section">
+                <h3 class="section-title"><i class="fas fa-comments"></i> Aura AI Assistant - Health & Wealth Advisor</h3>
+                <div id="chat-container" style="max-width: 800px; margin: 0 auto;">
+                    <div id="chat-messages" style="height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                        <div class="message bot-message" style="margin-bottom: 10px;">
+                            <strong>Aura:</strong> Hello! I'm your AI wellness assistant. I can help you with questions about health, wellness, financial planning, and wealth management. How can I assist you today?
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="chat-input" placeholder="Ask me about health, wellness, or wealth..." 
+                               style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; font-size: 14px;">
+                        <button id="send-btn" class="voice-btn" style="padding: 12px 20px; border-radius: 25px;">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <small style="color: #666;">Powered by Azure OpenAI • Ask about health, fitness, nutrition, financial planning, investments, or wellness strategies</small>
+                    </div>
+                </div>
+            </div>
+
             <!-- Voice Options -->
             <div class="section">
                 <h3 class="section-title"><i class="fas fa-microphone"></i> Aura Voice Options & Web Games</h3>
@@ -468,6 +490,122 @@
                 console.log('Voices loaded:', speechSynthesis.getVoices().length);
             };
         }
+
+        // Chatbot functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+
+            // Azure OpenAI Configuration
+            const AZURE_OPENAI_ENDPOINT = "https://n8n-testing-api-resource.openai.azure.com/openai/v1/";
+            const AZURE_OPENAI_API_KEY = "6DxOxIAr6Ct3w4bxUUOEAm2WXUT5fA7GGFmJrInHQVJ5PfoQCMq7MJQQJ99CBACHYHv6XJ3w3AAAAACOG9sgI";
+            const AZURE_OPENAI_API_VERSION = "2025-12-11";
+            const AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-5.2-chat";
+
+            function addMessage(message, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+                messageDiv.style.cssText = `
+                    margin-bottom: 10px;
+                    padding: 10px 15px;
+                    border-radius: 15px;
+                    max-width: 70%;
+                    ${isUser ? 
+                        'background: linear-gradient(45deg, #667eea, #764ba2); color: white; margin-left: auto; text-align: right;' : 
+                        'background: white; border: 1px solid #e0e0e0; margin-right: auto;'
+                    }
+                `;
+                messageDiv.innerHTML = `<strong>${isUser ? 'You' : 'Aura'}:</strong> ${message}`;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            async function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                // Add user message
+                addMessage(message, true);
+                chatInput.value = '';
+
+                // Show typing indicator
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message bot-message';
+                typingDiv.style.cssText = 'margin-bottom: 10px; padding: 10px 15px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; max-width: 70%; margin-right: auto;';
+                typingDiv.innerHTML = '<strong>Aura:</strong> <em>Thinking...</em>';
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                try {
+                    const response = await fetch(`${AZURE_OPENAI_ENDPOINT}chat/completions`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'api-key': AZURE_OPENAI_API_KEY
+                        },
+                        body: JSON.stringify({
+                            model: AZURE_OPENAI_DEPLOYMENT_NAME,
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: `You are Aura, an AI assistant specializing in health, wellness, and wealth management. You provide helpful, accurate advice on:
+
+HEALTH & WELLNESS:
+- Physical fitness and exercise routines
+- Nutrition and healthy eating
+- Mental health and stress management
+- Sleep and recovery
+- Preventive healthcare
+
+WEALTH & FINANCE:
+- Personal finance management
+- Investment strategies
+- Retirement planning
+- Budgeting and saving
+- Financial goal setting
+
+Keep responses concise, practical, and encouraging. Always emphasize that you're not a substitute for professional medical or financial advice. Be friendly and supportive.`
+                                },
+                                {
+                                    role: "user",
+                                    content: message
+                                }
+                            ],
+                            max_tokens: 500,
+                            temperature: 0.7
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const aiResponse = data.choices[0].message.content;
+
+                    // Remove typing indicator
+                    chatMessages.removeChild(typingDiv);
+
+                    // Add AI response
+                    addMessage(aiResponse);
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Remove typing indicator
+                    chatMessages.removeChild(typingDiv);
+                    addMessage("Sorry, I'm having trouble connecting right now. Please try again later.");
+                }
+            }
+
+            // Event listeners
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
     </script>
 </body>
 </html>

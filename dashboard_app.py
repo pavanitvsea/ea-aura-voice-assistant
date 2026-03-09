@@ -6,6 +6,8 @@ from datetime import datetime
 import numpy as np
 from PIL import Image
 from pathlib import Path
+import openai
+import config
 
 print("DEBUG: dashboard.py starting. cwd=", Path.cwd())
 
@@ -30,6 +32,12 @@ def load_data():
     return df.astype({'Daily Active Users': 'int64'})
 
 df = load_data()
+
+# Azure OpenAI Setup
+openai.api_type = "azure"
+openai.api_base = config.AZURE_OPENAI_ENDPOINT
+openai.api_version = config.AZURE_OPENAI_API_VERSION
+openai.api_key = config.AZURE_OPENAI_API_KEY
 
 # Sidebar Filters
 st.sidebar.title("🔍 Filters")
@@ -99,7 +107,7 @@ with col4:
 st.markdown("---")
 
 # Tab Navigation
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📈 Overview", "👥 User Metrics", "🎯 Feature Analysis", "💬 Feedback", "📚 Documentation"])
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["📈 Overview", "👥 User Metrics", "🎯 Feature Analysis", "💬 Feedback", "📚 Documentation", "🤖 AI Insights", "💬 Aura Assistant"])
 
 with tab1:
     st.subheader("✅ Key Performance Trends - ALL POSITIVE")
@@ -377,6 +385,96 @@ with tab5:
     st.markdown("---")
     st.info("✅ **EA Aura Status**: ALL METRICS POSITIVE - GROWING HEALTHY")
     st.markdown("**Dashboard Last Updated**: " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+
+with tab6:
+    st.subheader("🤖 AI-Generated Insights")
+    
+    if st.button("Generate AI Insights"):
+        try:
+            # Prepare data summary for AI
+            data_summary = f"""
+            EA Aura KPI Summary:
+            - Average DAU: {avg_dau:.0f}
+            - DAU Growth: {dau_change:.1f}%
+            - Average MAU: {avg_mau:.0f}
+            - Satisfaction Rate: {satisfaction_rate:.1f}%
+            - Voice Adoption: {voice_adoption:.1f}%
+            - Average Rating: {avg_rating:.2f}
+            - Retention: {retention_pct:.1f}%
+            """
+            
+            response = openai.ChatCompletion.create(
+                engine=config.AZURE_OPENAI_DEPLOYMENT_NAME,
+                messages=[
+                    {"role": "system", "content": "You are an AI analyst for EA Aura platform. Provide insightful analysis based on the KPIs provided."},
+                    {"role": "user", "content": f"Analyze the following KPI data and provide key insights, recommendations, and predictions: {data_summary}"}
+                ],
+                max_tokens=500
+            )
+            ai_insights = response.choices[0].message.content
+            st.write(ai_insights)
+        except Exception as e:
+            st.error(f"Error generating AI insights: {e}")
+
+with tab7:
+    st.subheader("💬 Aura Assistant Chat")
+    
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+    
+    # Accept user input
+    if prompt := st.chat_input("Ask me anything about EA Aura..."):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            try:
+                # Prepare context about EA Aura
+                context = f"""
+                You are Aura, an AI assistant for the EA Aura platform. You help users with questions about:
+                - EA Aura features and capabilities
+                - KPI analysis and insights
+                - User engagement metrics
+                - Voice assistant functionality
+                - Gaming and wellness features
+                
+                Current platform stats:
+                - Average DAU: {avg_dau:.0f}
+                - DAU Growth: {dau_change:.1f}%
+                - Satisfaction Rate: {satisfaction_rate:.1f}%
+                - Voice Adoption: {voice_adoption:.1f}%
+                - Average Rating: {avg_rating:.2f}
+                
+                Be helpful, friendly, and provide accurate information about EA Aura.
+                """
+                
+                response = openai.ChatCompletion.create(
+                    engine=config.AZURE_OPENAI_DEPLOYMENT_NAME,
+                    messages=[
+                        {"role": "system", "content": context},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=500,
+                    temperature=0.7
+                )
+                ai_response = response.choices[0].message.content
+                st.markdown(ai_response)
+                # Add assistant response to chat history
+                st.session_state.messages.append({"role": "assistant", "content": ai_response})
+            except Exception as e:
+                error_msg = f"Sorry, I encountered an error: {e}"
+                st.error(error_msg)
+                st.session_state.messages.append({"role": "assistant", "content": error_msg})
 
 st.markdown("---")
 st.subheader("📋 Detailed Data Export")
