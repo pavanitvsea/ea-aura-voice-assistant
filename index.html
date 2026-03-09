@@ -423,7 +423,7 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
-                    <a href="/aura" class="launch-btn">
+                    <a href="ea_aura_enhanced.html" class="launch-btn">
                         <i class="fas fa-rocket"></i> Launch EA Aura Enhanced
                     </a>
                     <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
@@ -494,17 +494,11 @@
             };
         }
 
-        // Chatbot functionality
+        // Chatbot functionality with smart fallback responses
         document.addEventListener('DOMContentLoaded', function() {
             const chatInput = document.getElementById('chat-input');
             const sendBtn = document.getElementById('send-btn');
             const chatMessages = document.getElementById('chat-messages');
-
-            // Azure OpenAI Configuration
-            const AZURE_OPENAI_ENDPOINT = "https://n8n-testing-api-resource.openai.azure.com/openai/v1/";
-            const AZURE_OPENAI_API_KEY = "6DxOxIAr6Ct3w4bxUUOEAm2WXUT5fA7GGFmJrInHQVJ5PfoQCMq7MJQQJ99CBACHYHv6XJ3w3AAAAACOG9sgI";
-            const AZURE_OPENAI_API_VERSION = "2025-12-11";
-            const AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-5.2-chat";
 
             function addMessage(message, isUser = false) {
                 const messageDiv = document.createElement('div');
@@ -524,11 +518,59 @@
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
 
+            function getSmartResponse(userInput) {
+                const input = userInput.toLowerCase();
+                
+                // Health & Wellness responses
+                if (input.includes('stress') || input.includes('anxious') || input.includes('anxiety')) {
+                    return "🧘 I understand you're feeling stressed. Try the 4-7-8 breathing technique: inhale for 4 counts, hold for 7, exhale for 8. This activates your parasympathetic nervous system for instant calm. Regular mindfulness practice can also help manage stress long-term.";
+                }
+                if (input.includes('sleep') || input.includes('tired') || input.includes('insomnia')) {
+                    return "😴 Quality sleep is essential! Aim for 7-9 hours nightly. Tips: Keep a consistent sleep schedule, avoid screens 1 hour before bed, keep your room cool (65-68°F), and try a relaxing bedtime routine like reading or gentle stretching.";
+                }
+                if (input.includes('exercise') || input.includes('workout') || input.includes('fitness')) {
+                    return "🏃 Great focus on fitness! Aim for 150 minutes of moderate cardio weekly plus 2 strength sessions. Start small - even 10-minute walks count! For desk workers, take breaks every 30 minutes and try the 20-20-20 rule for eye health.";
+                }
+                if (input.includes('diet') || input.includes('nutrition') || input.includes('eat') || input.includes('food')) {
+                    return "🥗 Balanced nutrition is key! Aim for 50% vegetables/fruits, 25% lean proteins, 25% whole grains. Stay hydrated with 8-10 glasses of water daily. Limit processed foods and added sugars. Small, consistent changes lead to lasting results!";
+                }
+                if (input.includes('focus') || input.includes('concentrate') || input.includes('productivity')) {
+                    return "🎯 To boost focus, try the Pomodoro Technique: 25 minutes of focused work, then a 5-minute break. Eliminate distractions, single-task instead of multitasking, and take regular breaks. Your brain needs rest to perform at its best!";
+                }
+                
+                // Wealth & Finance responses
+                if (input.includes('budget') || input.includes('spending') || input.includes('expense')) {
+                    return "💰 Smart budgeting tip: Try the 50/30/20 rule - 50% for needs (rent, utilities), 30% for wants (entertainment), and 20% for savings/debt. Track your spending for a month to see where your money actually goes!";
+                }
+                if (input.includes('save') || input.includes('saving') || input.includes('emergency fund')) {
+                    return "🏦 Building savings is crucial! Start with an emergency fund covering 3-6 months of expenses. Automate your savings - pay yourself first! Even $50/month adds up. Consider high-yield savings accounts for better returns.";
+                }
+                if (input.includes('invest') || input.includes('stock') || input.includes('retirement')) {
+                    return "📈 Investing basics: Start early to benefit from compound growth. Diversify across asset classes. For retirement, maximize any employer 401(k) match - it's free money! Consider low-cost index funds for long-term growth. Always consult a financial advisor for personalized advice.";
+                }
+                if (input.includes('debt') || input.includes('loan') || input.includes('credit')) {
+                    return "💳 Debt management strategy: List all debts with interest rates. Consider the avalanche method (highest interest first) or snowball method (smallest balance first). Always pay more than minimums when possible. Avoid new debt while paying off existing balances.";
+                }
+                
+                // General wellness
+                if (input.includes('goal') || input.includes('motivation')) {
+                    return "🎯 Set SMART goals: Specific, Measurable, Achievable, Relevant, Time-bound. Break big goals into daily actions. Track progress and celebrate small wins. Remember, consistency beats perfection!";
+                }
+                if (input.includes('mental health') || input.includes('depression') || input.includes('sad')) {
+                    return "💚 Your mental health matters. Practice self-compassion, stay connected with loved ones, and maintain routines. If you're struggling, please reach out to a mental health professional. You don't have to face challenges alone. The EA Employee Assistance Program is available 24/7.";
+                }
+                if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
+                    return "👋 Hello! I'm Aura, your wellness and wealth advisor. I can help with health topics (stress, sleep, nutrition, exercise) and financial wellness (budgeting, saving, investing). What would you like to explore today?";
+                }
+                
+                // Default response
+                return "✨ Great question! I'm here to help with health, wellness, and financial guidance. I can assist with stress management, sleep optimization, fitness tips, nutrition advice, budgeting, saving strategies, and investment basics. What specific area would you like to explore?";
+            }
+
             async function sendMessage() {
                 const message = chatInput.value.trim();
                 if (!message) return;
 
-                // Add user message
                 addMessage(message, true);
                 chatInput.value = '';
 
@@ -540,73 +582,34 @@
                 chatMessages.appendChild(typingDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
 
+                // Try backend API first, fallback to smart responses
                 try {
-                    const response = await fetch(`${AZURE_OPENAI_ENDPOINT}chat/completions`, {
+                    const response = await fetch('/api/chat', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'api-key': AZURE_OPENAI_API_KEY
-                        },
-                        body: JSON.stringify({
-                            model: AZURE_OPENAI_DEPLOYMENT_NAME,
-                            messages: [
-                                {
-                                    role: "system",
-                                    content: `You are Aura, an AI assistant specializing in health, wellness, and wealth management. You provide helpful, accurate advice on:
-
-HEALTH & WELLNESS:
-- Physical fitness and exercise routines
-- Nutrition and healthy eating
-- Mental health and stress management
-- Sleep and recovery
-- Preventive healthcare
-
-WEALTH & FINANCE:
-- Personal finance management
-- Investment strategies
-- Retirement planning
-- Budgeting and saving
-- Financial goal setting
-
-Keep responses concise, practical, and encouraging. Always emphasize that you're not a substitute for professional medical or financial advice. Be friendly and supportive.`
-                                },
-                                {
-                                    role: "user",
-                                    content: message
-                                }
-                            ],
-                            max_tokens: 500,
-                            temperature: 0.7
-                        })
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: message, character: 'nova' })
                     });
-
-                    if (!response.ok) {
-                        throw new Error(`API request failed: ${response.status}`);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        chatMessages.removeChild(typingDiv);
+                        addMessage(data.response);
+                        return;
                     }
-
-                    const data = await response.json();
-                    const aiResponse = data.choices[0].message.content;
-
-                    // Remove typing indicator
-                    chatMessages.removeChild(typingDiv);
-
-                    // Add AI response
-                    addMessage(aiResponse);
-
-                } catch (error) {
-                    console.error('Error:', error);
-                    // Remove typing indicator
-                    chatMessages.removeChild(typingDiv);
-                    addMessage("Sorry, I'm having trouble connecting right now. Please try again later.");
+                } catch (e) {
+                    console.log('API not available, using smart fallback');
                 }
+
+                // Fallback to smart responses
+                setTimeout(() => {
+                    chatMessages.removeChild(typingDiv);
+                    addMessage(getSmartResponse(message));
+                }, 800);
             }
 
-            // Event listeners
             sendBtn.addEventListener('click', sendMessage);
             chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
+                if (e.key === 'Enter') sendMessage();
             });
         });
     </script>
