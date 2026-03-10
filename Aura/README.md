@@ -21,6 +21,7 @@ This folder contains a **standalone version** of the Aura Wellness Hub that work
 Aura/
 ├── aura_wellness_hub.html    # Standalone wellness app
 ├── games/                    # Wellness game collection
+│   ├── index.html
 │   ├── wellness_snake.html
 │   ├── memory_cards.html
 │   ├── sudoku_puzzle.html
@@ -49,10 +50,18 @@ Use the main project in the root folder:
 ```bash
 cd ..
 pip install -r requirements.txt
-python app.py
-```
 
-Access at http://localhost:5000
+# Generate dashboard data first
+python Hackathon_Dashboard.py
+
+# Run Flask app (main wellness hub)
+python app.py
+# Access at http://localhost:5000
+
+# Run Streamlit dashboard (in separate terminal)
+streamlit run dashboard_app.py
+# Access at http://localhost:8501
+```
 
 ---
 
