@@ -275,7 +275,7 @@
         .char-card.kai { background: #4169e1; color: white; }
         .char-card.iris { background: #228b22; color: white; }
         .char-card.selected { border-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
-        .char-card-icon { font-size: 2em; margin-bottom: 8px; }
+        .char-card-icon { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 8px; border: 3px solid rgba(255,255,255,0.5); }
         .char-card-name { font-weight: bold; }
         .char-card-role { font-size: 0.75em; opacity: 0.9; }
         
@@ -416,22 +416,22 @@
                     <h3 style="color: #667eea; margin: 25px 0 15px;">🎭 Choose Your Wellness Coach</h3>
                     <div class="characters-grid">
                         <div class="char-card nova selected" onclick="selectCharacter('nova')">
-                            <div class="char-card-icon">🏃‍♀️</div>
+                            <img src="nova_orange.png" alt="Nova" class="char-card-icon">
                             <div class="char-card-name">Nova</div>
                             <div class="char-card-role">Habit Tracker</div>
                         </div>
                         <div class="char-card veda" onclick="selectCharacter('veda')">
-                            <div class="char-card-icon">💪</div>
+                            <img src="veda_red.png" alt="Veda" class="char-card-icon">
                             <div class="char-card-name">Veda</div>
                             <div class="char-card-role">Focus & Energy</div>
                         </div>
                         <div class="char-card kai" onclick="selectCharacter('kai')">
-                            <div class="char-card-icon">🧘‍♂️</div>
+                            <img src="kai_blue.png" alt="Kai" class="char-card-icon">
                             <div class="char-card-name">Kai</div>
                             <div class="char-card-role">Calm & Breath</div>
                         </div>
                         <div class="char-card iris" onclick="selectCharacter('iris')">
-                            <div class="char-card-icon">🌿</div>
+                            <img src="iris_green.png" alt="Iris" class="char-card-icon">
                             <div class="char-card-name">Iris</div>
                             <div class="char-card-role">Relax & Recover</div>
                         </div>
@@ -633,7 +633,7 @@
         <!-- Sidebar - AI Assistant -->
         <div class="sidebar">
             <div class="character-display">
-                <div class="avatar" id="avatarDisplay">🏃‍♀️</div>
+                <img src="nova_orange.png" alt="Nova" class="avatar" id="avatarDisplay" style="width: 100px; height: 100px; object-fit: cover;">
                 <div class="char-name" id="charName">Nova</div>
                 <div class="char-role" id="charRole">Habit Tracker Assistant</div>
             </div>
@@ -685,11 +685,39 @@
         let currentCharacter = 'nova';
         
         const characters = {
-            nova: { emoji: '🏃‍♀️', name: 'Nova', role: 'Habit Tracker Assistant' },
-            veda: { emoji: '💪', name: 'Veda', role: 'Focus & Energy Coach' },
-            kai: { emoji: '🧘‍♂️', name: 'Kai', role: 'Calm & Breath Guide' },
-            iris: { emoji: '🌿', name: 'Iris', role: 'Relax & Recovery Specialist' }
+            nova: { img: 'nova_orange.png', name: 'Nova', role: 'Habit Tracker Assistant' },
+            veda: { img: 'veda_red.png', name: 'Veda', role: 'Focus & Energy Coach' },
+            kai: { img: 'kai_blue.png', name: 'Kai', role: 'Calm & Breath Guide' },
+            iris: { img: 'iris_green.png', name: 'Iris', role: 'Relax & Recovery Specialist' }
         };
+        
+        // Coin Sound Effect using Web Audio API
+        let audioContext;
+        function playCoinSound() {
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(987.77, audioContext.currentTime); // B5
+                oscillator.frequency.setValueAtTime(1318.51, audioContext.currentTime + 0.1); // E6
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.type = 'sine';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
         
         function showTab(tabId) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -704,7 +732,8 @@
             document.querySelector(`.char-card.${char}`).classList.add('selected');
             
             const c = characters[char];
-            document.getElementById('avatarDisplay').textContent = c.emoji;
+            document.getElementById('avatarDisplay').src = c.img;
+            document.getElementById('avatarDisplay').alt = c.name;
             document.getElementById('charName').textContent = c.name;
             document.getElementById('charRole').textContent = c.role;
             
@@ -719,6 +748,12 @@
         function addCoins(amount) {
             currentCoins += amount;
             document.getElementById('coinCount').textContent = currentCoins.toLocaleString();
+            playCoinSound();
+            
+            // Animate coin jar
+            const jar = document.querySelector('.coin-jar');
+            jar.style.transform = 'scale(1.1)';
+            setTimeout(() => { jar.style.transform = 'scale(1)'; }, 200);
         }
         
         function showCoins() {
