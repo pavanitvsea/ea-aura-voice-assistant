@@ -2,112 +2,184 @@
 
 ## EA Hackathon 2025
 
-### Overview
+---
 
-EA Aura is an AI-powered wellness platform combining health coaching, financial wellness tools, gamification, and analytics in one seamless experience.
+## Executive Summary
+
+EA Aura is an AI-powered wellness platform that combines health coaching, financial wellness tools, gamification, and analytics to support EA employees' holistic well-being.
+
+### Innovation Highlights
+
+- **Azure OpenAI Integration** - GPT-4 powered wellness coaching
+- **Voice Interaction** - Speech recognition with customizable voices
+- **Animated Coin System** - Gamified rewards with visual feedback
+- **Real-time Analytics** - Streamlit dashboard with KPI tracking
+- **Multi-Character AI** - Nova, Kai, Veda, Iris personalized coaches
 
 ---
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    EA AURA PLATFORM                      │
-├─────────────────────────────────────────────────────────┤
-│                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
-│  │  index.html  │  │   app.py     │  │ dashboard_   │   │
-│  │  (Frontend)  │  │   (Flask)    │  │  app.py      │   │
-│  │              │  │              │  │  (Streamlit) │   │
-│  │ • AI Chat    │  │ • API Server │  │ • KPI Charts │   │
-│  │ • Voice      │  │ • OpenAI     │  │ • Analytics  │   │
-│  │ • Budget     │  │ • Wellness   │  │ • Export     │   │
-│  │ • Games      │  │   Tips       │  │              │   │
-│  └──────────────┘  └──────────────┘  └──────────────┘   │
-│                           │                              │
-│                    ┌──────┴──────┐                       │
-│                    │ config_     │                       │
-│                    │ openAI.py   │                       │
-│                    │ (Azure AI)  │                       │
-│                    └─────────────┘                       │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                      EA AURA PLATFORM                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│   ┌────────────────┐   ┌────────────────┐   ┌────────────┐  │
+│   │   index.html   │   │    app.py      │   │ dashboard  │  │
+│   │   (Frontend)   │   │    (Flask)     │   │  _app.py   │  │
+│   │                │   │                │   │ (Streamlit)│  │
+│   │ • AI Chat      │   │ • REST API     │   │            │  │
+│   │ • Voice        │   │ • OpenAI       │   │ • KPIs     │  │
+│   │ • Calculators  │   │ • Sessions     │   │ • Charts   │  │
+│   │ • Games        │   │                │   │ • Export   │  │
+│   │ • Coin Jar     │   │                │   │            │  │
+│   └───────┬────────┘   └───────┬────────┘   └─────┬──────┘  │
+│           │                    │                   │         │
+│           └────────────────────┼───────────────────┘         │
+│                                │                             │
+│                    ┌───────────┴───────────┐                 │
+│                    │   config_openAI.py    │                 │
+│                    │   (Azure OpenAI)      │                 │
+│                    └───────────────────────┘                 │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Core Features
+## Core Components
 
-### Wellness Hub (`index.html`)
+### 1. Wellness Hub (`index.html`)
 
-| Tab | Features |
-|-----|----------|
-| **Wellness** | Track steps, sleep, mood, focus; earn coins |
-| **Wealth** | Budget calculator, emergency fund planner |
-| **Games** | Link to cognitive wellness game hub |
-| **Help** | Medical insurance, FoodBook app, fitness videos |
+**Features:**
+| Tab | Functionality |
+|-----|---------------|
+| Wellness | Track steps, sleep, mood, focus; select AI coach |
+| Wealth | Budget calculator, emergency fund planner |
+| Games | Snake, Memory, Sudoku, Zen Garden (embedded) |
+| Help | Medical insurance, FoodBook, fitness videos |
 
-### Voice Controls
-- **🔊 Voice On/Off** - Toggle spoken AI responses
-- **🎤 Speech Input** - Ask questions by voice
+**Interactive Elements:**
+- Animated coin jar with falling coins
+- Voice controls (Male/Female/Other)
+- Character selection with real images
+- Quick action buttons
 
-### Financial Tools
-- **Budget Calculator** - Enter income, see 50/30/20 split
-- **Emergency Fund** - Calculate 3/6/12 month savings goal
+### 2. Flask Backend (`app.py`)
 
-### AI Assistant (Aura)
-- Health and wellness advice
-- Financial wellness guidance
-- Smart fallback when offline
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/` | GET | Serve main app |
+| `/api/chat` | POST | AI conversation |
+| `/api/chat/clear` | POST | Reset session |
+| `/api/wellness/tips` | GET | Get tips by category |
+| `/api/health` | GET | Health check |
+
+### 3. Streamlit Dashboard (`dashboard_app.py`)
+
+| Tab | Visualizations |
+|-----|----------------|
+| Overview | DAU/MAU area charts, session distribution |
+| User Metrics | Retention funnel, interaction histogram |
+| Feedback | Satisfaction gauge, rating scatter |
+| About | Documentation, metrics guide |
+
+### 4. Data Generator (`Hackathon_Dashboard.py`)
+
+Generates 30 days of realistic KPI data:
+- Daily/Monthly Active Users
+- Satisfaction & Ratings
+- Voice Feature Adoption
+- User Retention
+- Session Metrics
 
 ---
 
-## Streamlit Dashboard
+## AI Wellness Coaches
 
-Run: `streamlit run dashboard_app.py`
+| Coach | Focus | Style |
+|-------|-------|-------|
+| **Nova** | Habits & Goals | Energetic, motivational |
+| **Veda** | Focus & Energy | Analytical, strategic |
+| **Kai** | Calm & Breath | Peaceful, mindful |
+| **Iris** | Rest & Recovery | Gentle, nurturing |
 
-| Tab | Content |
-|-----|---------|
-| Overview | DAU/MAU trends, session activity |
-| User Metrics | Retention funnel, interaction stats |
-| Feedback | Satisfaction gauge, rating distribution |
-| About | Platform documentation |
+### 5 Wellness Pillars
+
+1. **Physical** - Movement, nutrition, sleep
+2. **Mental** - Stress management, mindfulness
+3. **Productivity** - Focus, time management
+4. **Social** - Connection, relationships
+5. **Purpose** - Goals, growth, meaning
+
+---
+
+## Gamification
+
+### Coin Rewards
+
+| Action | Coins |
+|--------|-------|
+| Update wellness metric | 10 |
+| Use budget calculator | 5 |
+| Play wellness game | 20-50 |
+| Complete breathing exercise | 5/cycle |
+
+### Visual Effects
+
+- Coins animate falling into jar
+- Jar shakes on coin collection
+- Golden glow effect
+- Sound effect plays
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
+| Category | Technologies |
+|----------|--------------|
 | Frontend | HTML5, CSS3, JavaScript ES6+ |
 | Voice | Web Speech API |
-| Backend | Python, Flask |
+| Audio | Web Audio API |
+| Backend | Python 3.9+, Flask, Flask-CORS |
 | AI | Azure OpenAI (GPT-4o) |
 | Dashboard | Streamlit, Plotly |
-| Data | Pandas, NumPy |
+| Data | Pandas, NumPy, OpenPyXL |
 
 ---
 
-## Files
+## File Reference
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Main wellness app (all features) |
-| `app.py` | Flask API server |
-| `config_openAI.py` | Azure OpenAI config |
-| `dashboard_app.py` | Streamlit KPI dashboard |
-| `Hackathon_Dashboard.py` | Generate sample data |
-| `requirements.txt` | Python dependencies |
-| `games/index.html` | Game Hub |
+| File | Purpose | Key Functions |
+|------|---------|---------------|
+| `index.html` | Main app | UI, voice, games |
+| `app.py` | Backend | API endpoints |
+| `config_openAI.py` | AI config | OpenAI client, prompts |
+| `dashboard_app.py` | Analytics | KPI visualization |
+| `Hackathon_Dashboard.py` | Data gen | Generate test data |
+| `requirements.txt` | Dependencies | Python packages |
 
 ---
 
 ## Quick Demo
 
 1. **Open** `index.html` in browser
-2. **Try** the Budget Calculator in Wealth tab
-3. **Chat** with Aura AI assistant
-4. **Use Voice** - click 🎤 to speak
-5. **Run Dashboard** - `streamlit run dashboard_app.py`
+2. **Try** Budget Calculator → See coins fall
+3. **Select** different AI coaches
+4. **Use Voice** → Click 🎤 to speak
+5. **Play Games** → Embedded in Games tab
+6. **View Dashboard** → `python -m streamlit run dashboard_app.py`
+
+---
+
+## Future Enhancements
+
+- [ ] Team wellness leaderboards
+- [ ] Wearable device integration
+- [ ] Slack/Teams bot
+- [ ] Mobile PWA
+- [ ] ML-based predictions
 
 ---
 
