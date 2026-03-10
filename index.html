@@ -521,47 +521,68 @@
                 <!-- Games Tab -->
                 <div id="games" class="tab-panel">
                     <h2 style="color: #667eea; margin-bottom: 15px;">🎮 Wellness Games</h2>
-                    <p style="margin-bottom: 20px; color: #666;">Play cognitive wellness games to earn coins and boost your mental health!</p>
+                    <p style="margin-bottom: 25px; color: #666;">Play cognitive wellness games to earn coins and boost your mental health!</p>
                     
-                    <!-- Game Selection -->
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                        <button onclick="loadGame('snake')" class="game-select-btn active" id="btn-snake" style="padding: 12px 20px; border-radius: 25px; border: 2px solid #667eea; background: #667eea; color: white; cursor: pointer; font-weight: 600;">🐍 Snake</button>
-                        <button onclick="loadGame('memory')" class="game-select-btn" id="btn-memory" style="padding: 12px 20px; border-radius: 25px; border: 2px solid #667eea; background: white; color: #667eea; cursor: pointer; font-weight: 600;">🧠 Memory</button>
-                        <button onclick="loadGame('sudoku')" class="game-select-btn" id="btn-sudoku" style="padding: 12px 20px; border-radius: 25px; border: 2px solid #667eea; background: white; color: #667eea; cursor: pointer; font-weight: 600;">🔢 Sudoku</button>
-                        <button onclick="loadGame('zen')" class="game-select-btn" id="btn-zen" style="padding: 12px 20px; border-radius: 25px; border: 2px solid #667eea; background: white; color: #667eea; cursor: pointer; font-weight: 600;">🌸 Zen Garden</button>
+                    <!-- Game Cards Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <!-- Snake Game Card -->
+                        <div onclick="openGamePopup('snake')" style="background: linear-gradient(135deg, #4CAF50, #8BC34A); border-radius: 20px; padding: 30px; color: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(76,175,80,0.3);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3.5em; margin-bottom: 15px;">🐍</div>
+                            <h3 style="font-size: 1.4em; margin-bottom: 8px;">Wellness Snake</h3>
+                            <p style="opacity: 0.9; font-size: 0.95em; margin-bottom: 15px;">Focus training with breathing exercises</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="background: rgba(255,255,255,0.25); padding: 6px 12px; border-radius: 15px; font-size: 0.85em;">🪙 50 coins</span>
+                                <span style="font-size: 1.5em;">▶️</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Memory Game Card -->
+                        <div onclick="openGamePopup('memory')" style="background: linear-gradient(135deg, #2196F3, #03A9F4); border-radius: 20px; padding: 30px; color: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(33,150,243,0.3);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3.5em; margin-bottom: 15px;">🧠</div>
+                            <h3 style="font-size: 1.4em; margin-bottom: 8px;">Memory Cards</h3>
+                            <p style="opacity: 0.9; font-size: 0.95em; margin-bottom: 15px;">Cognitive enhancement & memory boost</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="background: rgba(255,255,255,0.25); padding: 6px 12px; border-radius: 15px; font-size: 0.85em;">🪙 30 coins</span>
+                                <span style="font-size: 1.5em;">▶️</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sudoku Game Card -->
+                        <div onclick="openGamePopup('sudoku')" style="background: linear-gradient(135deg, #FF9800, #FFC107); border-radius: 20px; padding: 30px; color: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(255,152,0,0.3);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3.5em; margin-bottom: 15px;">🔢</div>
+                            <h3 style="font-size: 1.4em; margin-bottom: 8px;">Sudoku Puzzle</h3>
+                            <p style="opacity: 0.9; font-size: 0.95em; margin-bottom: 15px;">Logic & problem-solving skills</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="background: rgba(255,255,255,0.25); padding: 6px 12px; border-radius: 15px; font-size: 0.85em;">🪙 40 coins</span>
+                                <span style="font-size: 1.5em;">▶️</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Zen Garden Card -->
+                        <div onclick="openGamePopup('zen')" style="background: linear-gradient(135deg, #9C27B0, #E91E63); border-radius: 20px; padding: 30px; color: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(156,39,176,0.3);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3.5em; margin-bottom: 15px;">🌸</div>
+                            <h3 style="font-size: 1.4em; margin-bottom: 8px;">Zen Garden</h3>
+                            <p style="opacity: 0.9; font-size: 0.95em; margin-bottom: 15px;">Mindfulness & relaxation</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="background: rgba(255,255,255,0.25); padding: 6px 12px; border-radius: 15px; font-size: 0.85em;">🪙 25 coins</span>
+                                <span style="font-size: 1.5em;">▶️</span>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Game Frame -->
-                    <div id="gameContainer" style="background: #f8f9fa; border-radius: 15px; overflow: hidden; border: 2px solid #667eea;">
-                        <iframe id="gameFrame" src="games/wellness_snake.html" style="width: 100%; height: 550px; border: none;"></iframe>
+                    <div style="margin-top: 25px; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; text-align: center; color: white;">
+                        <strong>🪙 Earn wellness coins while improving mental health!</strong>
                     </div>
-                    
-                    <!-- Game Info Cards -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
-                        <div style="background: #e8f5e9; padding: 12px; border-radius: 10px; text-align: center;">
-                            <div style="font-size: 1.5em;">🐍</div>
-                            <div style="font-weight: 600; font-size: 0.85em;">Snake</div>
-                            <div style="font-size: 0.75em; color: #666;">Focus Training</div>
+                </div>
+                
+                <!-- Game Popup Modal -->
+                <div id="gameModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+                    <div style="background: white; border-radius: 20px; width: 90%; max-width: 900px; height: 85%; max-height: 700px; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                        <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 id="gameModalTitle" style="color: white; margin: 0;">🎮 Wellness Game</h3>
+                            <button onclick="closeGamePopup()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.3em; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">✕</button>
                         </div>
-                        <div style="background: #e3f2fd; padding: 12px; border-radius: 10px; text-align: center;">
-                            <div style="font-size: 1.5em;">🧠</div>
-                            <div style="font-weight: 600; font-size: 0.85em;">Memory</div>
-                            <div style="font-size: 0.75em; color: #666;">Cognitive Boost</div>
-                        </div>
-                        <div style="background: #fff3e0; padding: 12px; border-radius: 10px; text-align: center;">
-                            <div style="font-size: 1.5em;">🔢</div>
-                            <div style="font-weight: 600; font-size: 0.85em;">Sudoku</div>
-                            <div style="font-size: 0.75em; color: #666;">Logic Puzzle</div>
-                        </div>
-                        <div style="background: #f3e5f5; padding: 12px; border-radius: 10px; text-align: center;">
-                            <div style="font-size: 1.5em;">🌸</div>
-                            <div style="font-weight: 600; font-size: 0.85em;">Zen Garden</div>
-                            <div style="font-size: 0.75em; color: #666;">Mindfulness</div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 15px; padding: 12px; background: #e8f5e9; border-radius: 10px; text-align: center;">
-                        <strong>🪙 Earn 20-50 wellness coins per game!</strong>
+                        <iframe id="gamePopupFrame" src="" style="width: 100%; height: calc(100% - 60px); border: none;"></iframe>
                     </div>
                 </div>
                 
@@ -1010,29 +1031,54 @@
             calculateEmergency();
         });
         
-        // Load existing games into iframe
+        // Game popup functions
         const gameFiles = {
-            snake: 'games/wellness_snake.html',
-            memory: 'games/memory_cards.html',
-            sudoku: 'games/sudoku_puzzle.html',
-            zen: 'games/zen_garden.html'
+            snake: { url: 'games/wellness_snake.html', title: '🐍 Wellness Snake', coins: 50 },
+            memory: { url: 'games/memory_cards.html', title: '🧠 Memory Cards', coins: 30 },
+            sudoku: { url: 'games/sudoku_puzzle.html', title: '🔢 Sudoku Puzzle', coins: 40 },
+            zen: { url: 'games/zen_garden.html', title: '🌸 Zen Garden', coins: 25 }
         };
         
-        function loadGame(game) {
-            const frame = document.getElementById('gameFrame');
-            frame.src = gameFiles[game];
+        function openGamePopup(game) {
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gamePopupFrame');
+            const title = document.getElementById('gameModalTitle');
             
-            // Update button styles
-            document.querySelectorAll('.game-select-btn').forEach(b => {
-                b.style.background = 'white';
-                b.style.color = '#667eea';
-            });
-            document.getElementById('btn-' + game).style.background = '#667eea';
-            document.getElementById('btn-' + game).style.color = 'white';
+            const gameInfo = gameFiles[game];
+            frame.src = gameInfo.url;
+            title.textContent = gameInfo.title;
             
-            const gameNames = { snake: 'Wellness Snake', memory: 'Memory Cards', sudoku: 'Sudoku Puzzle', zen: 'Zen Garden' };
-            addBotMessage(`🎮 Loading ${gameNames[game]}! Have fun and earn coins!`);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            addCoins(5); // Bonus for opening game
+            addBotMessage(`🎮 ${gameInfo.title} opened! Earn up to ${gameInfo.coins} coins. Have fun!`);
         }
+        
+        function closeGamePopup() {
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gamePopupFrame');
+            
+            modal.style.display = 'none';
+            frame.src = '';
+            document.body.style.overflow = 'auto';
+            
+            addBotMessage('🎮 Great gaming session! Keep playing to earn more wellness coins.');
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGamePopup();
+            }
+        });
+        
+        // Close modal on backdrop click
+        document.getElementById('gameModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGamePopup();
+            }
+        });
     </script>
 </body>
 </html>
