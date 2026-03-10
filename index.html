@@ -71,58 +71,65 @@
         .coin-jar:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
         .jar-container {
             position: relative;
-            width: 45px;
-            height: 55px;
+            width: 50px;
+            height: 60px;
         }
-        .jar-body {
+        .jar-image {
             width: 100%;
-            height: 45px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-            border-radius: 0 0 15px 15px;
-            position: absolute;
-            bottom: 0;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-top: none;
-            overflow: hidden;
-        }
-        .jar-lid {
-            width: 90%;
-            height: 12px;
-            background: linear-gradient(135deg, #ffd700, #ffb700);
-            border-radius: 5px 5px 0 0;
-            position: absolute;
-            top: 0;
-            left: 5%;
-            border: 2px solid #cc9900;
-        }
-        .jar-coins {
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2px;
-            width: 35px;
-        }
-        .mini-coin {
-            width: 12px;
-            height: 12px;
-            background: linear-gradient(135deg, #ffd700, #ffb700);
-            border-radius: 50%;
-            border: 1px solid #cc9900;
-            animation: coinBounce 2s ease-in-out infinite;
-        }
-        .mini-coin:nth-child(2) { animation-delay: 0.2s; }
-        .mini-coin:nth-child(3) { animation-delay: 0.4s; }
-        .mini-coin:nth-child(4) { animation-delay: 0.6s; }
-        .mini-coin:nth-child(5) { animation-delay: 0.8s; }
-        @keyframes coinBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            height: auto;
+            transition: all 0.3s ease;
         }
         .coin-count { font-size: 1.3em; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        /* Flying Coin Animation */
+        @keyframes coinDrop {
+            0% { 
+                transform: translateY(-80px) scale(1.2) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(20px) scale(1) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(60px) scale(0.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes jarShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-3px) rotate(-2deg); }
+            75% { transform: translateX(3px) rotate(2deg); }
+        }
+        @keyframes jarGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+            100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+        }
+        .flying-coin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            border-radius: 50%;
+            border: 2px solid #cc9900;
+            pointer-events: none;
+            z-index: 100;
+            animation: coinDrop 1s ease-in forwards;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+        }
+        .flying-coin::after {
+            content: '₹';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: bold;
+            color: #8b7d00;
+        }
+        .jar-shake { animation: jarShake 0.5s ease-in-out; }
+        .jar-glow { animation: jarGlow 0.8s ease-in-out; }
         
         .tab-nav {
             display: flex;
@@ -353,18 +360,13 @@
         <!-- Main App -->
         <div class="app-container">
             <div class="header">
-                <div class="coin-jar" onclick="showCoins()">
-                    <div class="jar-container">
-                        <div class="jar-lid"></div>
-                        <div class="jar-body">
-                            <div class="jar-coins" id="jarCoins">
-                                <div class="mini-coin"></div>
-                                <div class="mini-coin"></div>
-                                <div class="mini-coin"></div>
-                                <div class="mini-coin"></div>
-                                <div class="mini-coin"></div>
-                            </div>
-                        </div>
+                <div class="coin-jar" onclick="showCoins()" id="coinJar">
+                    <div class="jar-container" id="jarContainer">
+                        <img src="Jar.png" alt="Coin Jar" class="jar-image" id="jarImage" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; font-size: 2.5em; width: 50px; height: 60px; align-items: center; justify-content: center;">🏺</div>
+                        <!-- Flying coins appear here -->
+                        <div id="flyingCoinsContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible;"></div>
                     </div>
                     <span class="coin-count" id="coinCount">1,247</span>
                 </div>
@@ -750,10 +752,53 @@
             document.getElementById('coinCount').textContent = currentCoins.toLocaleString();
             playCoinSound();
             
-            // Animate coin jar
-            const jar = document.querySelector('.coin-jar');
-            jar.style.transform = 'scale(1.1)';
-            setTimeout(() => { jar.style.transform = 'scale(1)'; }, 200);
+            // Animate flying coins into jar
+            animateFlyingCoins(amount);
+            
+            // Shake and glow jar
+            const jarImage = document.getElementById('jarImage');
+            if (jarImage) {
+                jarImage.classList.add('jar-shake', 'jar-glow');
+                setTimeout(() => {
+                    jarImage.classList.remove('jar-shake', 'jar-glow');
+                }, 800);
+            }
+            
+            // Update jar image when enough coins
+            if (currentCoins > 500) {
+                jarImage.src = 'Aura_Jar_and_Coin.png';
+            }
+        }
+        
+        function animateFlyingCoins(amount) {
+            const container = document.getElementById('flyingCoinsContainer');
+            if (!container) return;
+            
+            // Create 1-5 coins based on amount
+            const coinCount = Math.min(Math.ceil(amount / 5), 5);
+            
+            for (let i = 0; i < coinCount; i++) {
+                setTimeout(() => {
+                    createFlyingCoin(container, i);
+                }, i * 120);
+            }
+        }
+        
+        function createFlyingCoin(container, index) {
+            const coin = document.createElement('div');
+            coin.className = 'flying-coin';
+            
+            // Random starting position
+            coin.style.left = (20 + Math.random() * 60) + '%';
+            coin.style.top = '-30px';
+            coin.style.animationDelay = (index * 0.08) + 's';
+            
+            container.appendChild(coin);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (coin.parentNode) coin.parentNode.removeChild(coin);
+            }, 1200);
         }
         
         function showCoins() {
